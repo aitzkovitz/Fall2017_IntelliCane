@@ -1,0 +1,55 @@
+{
+  "project_info": {
+    "project_number": "424301987053",
+    "firebase_url": "https://icane-41ce5.firebaseio.com",
+    "project_id": "icane-41ce5",
+    "storage_bucket": "icane-41ce5.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:424301987053:android:3bbd6e395684f26f",
+        "android_client_info": {
+          "package_name": "project2017.intellic"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "424301987053-crba2q9g5gk7fm4itmn8qntapq0ah0l8.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "project2017.intellic",
+            "certificate_hash": "e56d4897f54f3494a4089d0bbdaa4c571a5703a5"
+          }
+        },
+        {
+          "client_id": "424301987053-q93k6b7fo5eqrllq5p6uojdum97ovelj.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDckdAchPkiEDv_VOm3ObEPy6s93l5g1TM"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 2,
+          "other_platform_oauth_client": [
+            {
+              "client_id": "424301987053-q93k6b7fo5eqrllq5p6uojdum97ovelj.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
