@@ -8,7 +8,9 @@ package project2017.intellic;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
+import android.support.v4.app.NavUtils;
 import android.support.v7.app.AppCompatActivity;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.RadioButton;
@@ -33,6 +35,18 @@ public class NewUserActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_new_user);
+    }
+
+    // Navigates back to .AdminActivity
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()) {
+            // Respond to the action bar's Up/Home button
+            case android.R.id.home:
+                NavUtils.navigateUpFromSameTask(this);
+                return true;
+        }
+        return super.onOptionsItemSelected(item);
     }
 
     public void createNewUser(View view) {
@@ -82,7 +96,7 @@ public class NewUserActivity extends AppCompatActivity {
     private void addNewUser(String uid, String fName, String lName, String email, String role){
         FirebaseDatabase.getInstance().setPersistenceEnabled(true); // allows data to be cached and availbale locally when internet is lost
         final FirebaseDatabase database = FirebaseDatabase.getInstance();
-        DatabaseReference myRef = database.getReference("new users");
+        DatabaseReference myRef = database.getReference("users");
 
         //writing data into the database
         myRef.child(uid).child("email").setValue(email);

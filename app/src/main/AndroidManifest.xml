@@ -8,15 +8,30 @@
         android:label="@string/app_name"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".LoginActivity">
+
+        <activity
+            android:name="project2017.intellic.LoginActivity" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
-
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".AdminActivity" />
-        <activity android:name=".NewUserActivity" />
+
+        <activity
+            android:name="project2017.intellic.AdminActivity"
+            android:parentActivityName="project2017.intellic.LoginActivity" >
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="project2017.intellic.LoginActivity" />
+        </activity>
+
+        <activity
+            android:name="project2017.intellic.NewUserActivity"
+            android:parentActivityName="project2017.intellic.AdminActivity" >
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="project2017.intellic.AdminActivity" />
+        </activity>
     </application>
 
 </manifest>
