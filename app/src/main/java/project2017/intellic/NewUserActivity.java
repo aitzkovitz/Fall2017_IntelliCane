@@ -96,12 +96,13 @@ public class NewUserActivity extends AppCompatActivity {
     private void addNewUser(String uid, String fName, String lName, String email, String role){
         FirebaseDatabase.getInstance().setPersistenceEnabled(true); // allows data to be cached and availbale locally when internet is lost
         final FirebaseDatabase database = FirebaseDatabase.getInstance();
-        DatabaseReference myRef = database.getReference("Users");
+        DatabaseReference userRef = database.getReference("Users");
+        DatabaseReference roleRef = database.getReference("Roles");
 
         //writing data into the database
-        myRef.child(role).child(uid).child("email").setValue(email);
-        myRef.child(role).child(uid).child("fname").setValue(fName);
-        myRef.child(role).child(uid).child("lname").setValue(lName);
-        //myRef.child(uid).child("role").setValue(role);
+        userRef.child(role).child(uid).child("email").setValue(email);
+        userRef.child(role).child(uid).child("fname").setValue(fName);
+        userRef.child(role).child(uid).child("lname").setValue(lName);
+        roleRef.child(uid).setValue(role);
     }
 }

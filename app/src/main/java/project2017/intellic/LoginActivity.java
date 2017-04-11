@@ -88,8 +88,8 @@ public class LoginActivity extends AppCompatActivity {
                             // TO-DO: call a function that determine user role
                             //
                             Toast.makeText(LoginActivity.this, "WELCOME!", Toast.LENGTH_SHORT).show();
-                            //Intent intent = new Intent(LoginActivity.this, AdminActivity.class);
-                            Intent intent = new Intent(LoginActivity.this, PatientSelectActivity.class);
+                            Intent intent = new Intent(LoginActivity.this, AdminActivity.class);
+                            //Intent intent = new Intent(LoginActivity.this, PatientSelectActivity.class);
                             startActivity(intent);
                         }
                     }
