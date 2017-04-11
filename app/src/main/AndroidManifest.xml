@@ -1,6 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     package="project2017.intellic">
+
+    <uses-sdk tools:overrideLibrary="com.firebase.ui, com.firebase.ui.auth" />
 
     <application
         android:allowBackup="true"
@@ -8,29 +11,47 @@
         android:label="@string/app_name"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-
-        <activity
-            android:name="project2017.intellic.LoginActivity" >
+        <activity android:name=".LoginActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
+
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-
         <activity
-            android:name="project2017.intellic.AdminActivity"
-            android:parentActivityName="project2017.intellic.LoginActivity" >
+            android:name=".AdminActivity"
+            android:parentActivityName=".LoginActivity">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="project2017.intellic.LoginActivity" />
         </activity>
-
         <activity
-            android:name="project2017.intellic.NewUserActivity"
-            android:parentActivityName="project2017.intellic.AdminActivity" >
+            android:name=".NewUserActivity"
+            android:parentActivityName=".AdminActivity">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="project2017.intellic.AdminActivity" />
+        </activity>
+        <activity
+            android:name=".PatientSelectActivity"
+            android:parentActivityName=".LoginActivity">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="project2017.intellic.LoginActivity" />
+        </activity>
+        <activity
+            android:name=".SessionSelectActivity"
+            android:parentActivityName=".PatientSelectActivity">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="project2017.intellic.PatientSelectActivity" />
+        </activity>
+        <activity
+            android:name=".SessionDataActivity"
+            android:parentActivityName=".SessionSelectActivity">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="project2017.intellic.SessionSelectActivity" />
         </activity>
     </application>
 

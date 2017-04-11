@@ -85,7 +85,7 @@ public class NewUserActivity extends AppCompatActivity {
                             addNewUser (uid, fname, lname, email, role);
 
                             Toast.makeText(NewUserActivity.this, "user creation successful", Toast.LENGTH_SHORT).show();
-                            Intent intent = new Intent(NewUserActivity.this, AdminActivity.class);
+                            Intent intent = new Intent(NewUserActivity.this, PatientSelectActivity.class);
                             startActivity(intent);
                             finish();
                         }
@@ -96,12 +96,12 @@ public class NewUserActivity extends AppCompatActivity {
     private void addNewUser(String uid, String fName, String lName, String email, String role){
         FirebaseDatabase.getInstance().setPersistenceEnabled(true); // allows data to be cached and availbale locally when internet is lost
         final FirebaseDatabase database = FirebaseDatabase.getInstance();
-        DatabaseReference myRef = database.getReference("users");
+        DatabaseReference myRef = database.getReference("Users");
 
         //writing data into the database
-        myRef.child(uid).child("email").setValue(email);
-        myRef.child(uid).child("fname").setValue(fName);
-        myRef.child(uid).child("lname").setValue(lName);
-        myRef.child(uid).child("role").setValue(role);
+        myRef.child(role).child(uid).child("email").setValue(email);
+        myRef.child(role).child(uid).child("fname").setValue(fName);
+        myRef.child(role).child(uid).child("lname").setValue(lName);
+        //myRef.child(uid).child("role").setValue(role);
     }
 }
