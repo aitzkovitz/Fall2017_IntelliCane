@@ -85,7 +85,7 @@ public class NewUserActivity extends AppCompatActivity {
                             addNewUser (uid, fname, lname, email, role);
 
                             Toast.makeText(NewUserActivity.this, "user creation successful", Toast.LENGTH_SHORT).show();
-                            Intent intent = new Intent(NewUserActivity.this, PatientSelectActivity.class);
+                            Intent intent = new Intent(NewUserActivity.this, AdminActivity.class);
                             startActivity(intent);
                             finish();
                         }
