@@ -28,6 +28,8 @@ public class PatientSelectActivity extends AppCompatActivity {
     private FirebaseAuth firebaseAuth;
     private FirebaseUser user;
     private String uid;
+    private String name = "PATIENT_NAME";
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -82,5 +84,24 @@ public class PatientSelectActivity extends AppCompatActivity {
                 startActivity(intent);
             }
         });
+    }
+
+    protected String getUsername(final String pID) {
+        String role = "Patient";
+
+        DatabaseReference userRef = database.getReference("Users").child(role).child(pID);
+
+        userRef.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                Map<String,Object> map = (Map<String,Object>)dataSnapshot.getValue();
+                name = map.get("fname").toString() + map.get("lname").toString();
+            }
+
+            @Override
+            public void onCancelled(DatabaseError databaseError) { }
+        });
+
+        return name;
     }
 }
