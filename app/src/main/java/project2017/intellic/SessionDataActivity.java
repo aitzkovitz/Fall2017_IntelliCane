@@ -18,6 +18,7 @@ import com.jjoe64.graphview.series.LineGraphSeries;
 import com.jjoe64.graphview.series.BarGraphSeries;
 import com.jjoe64.graphview.ValueDependentColor;
 
+import java.sql.Time;
 import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -25,6 +26,7 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.Date;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -32,6 +34,8 @@ import static java.lang.Math.PI;
 import static java.lang.Math.sqrt;
 
 public class SessionDataActivity extends AppCompatActivity {
+
+    private FirebaseDatabase database;
 
     double HAx, HAy, HAz, BAx, BAy, BAz, Gx, Gy, Gz, f0, f1, f2, f3, f4, f5, f6, f7;
 
@@ -99,19 +103,74 @@ public class SessionDataActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_session_data);
 
+        // Grab patientID from Intent
+        String sid = getIntent().getStringExtra("SESSION_ID");
 
-        GraphView graph = (GraphView) findViewById(R.id.graph);
-        DataPoint[] points = new DataPoint[9000];
-        for(int i = 0 ; i < points.length; i++){
-            points[i] = new DataPoint(i,Math.sin(i*0.5) * 20*(Math.random()*10+1));
+        // Reference session list under selected Patient user
+        database = FirebaseDatabase.getInstance();
+        DatabaseReference ref = database.getReferenceFromUrl("https://icane-41ce5.firebaseio.com/");
+        DatabaseReference sessionRef = ref.child("Sessions").child(sid);
 
-        }
-        LineGraphSeries<DataPoint> series = new LineGraphSeries<>(points);
-        graph.addSeries(series);
-        graph.getViewport().setScrollable(true);
-        graph.getViewport().setScrollableY(true);
-        graph.getViewport().setScalable(true);
-        graph.getViewport().setScalableY(true);
+        sessionRef.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                // Map to hold Session Data
+                Map<String, Object> session = (Map<String, Object>) dataSnapshot.getValue();
+                // List of timestamps that will be ordered
+                ArrayList<Time> timeStamps = new ArrayList<Time>();
+                // Format of timestamps
+                DateFormat sdf = new SimpleDateFormat("HH:mm:ss:SSS");
+
+                // Cast each String timestamp to Time Object and sort
+                for (String strTime : session.keySet()) {
+                    try {
+                        Time time = new Time(sdf.parse(strTime).getTime());
+                        timeStamps.add(time);
+                    } catch (ParseException e) {
+                        e.printStackTrace();
+                    }
+                }
+                Collections.sort(timeStamps);
+
+                // Access each timestamp in chronological order
+                // Each timestamp will hold its data values in a Map (datapts)
+                // To access an individual data value use:
+                //      datapts.get(<Name_of_Data_Value>);
+                //      datapts.get("f7");
+                // datapts.keySet() holds the names of all data values (not ordered)
+                for (Time time : timeStamps) {
+                    // Cast timestampt to String for Map access
+                    String timeKey = sdf.format(time);
+                    // Gets next timestamp dataset in order
+                    Map<String,Double> datapts = (Map<String,Double>)session.get(timeKey);
+
+                    //
+                    // LOAD DATA SEQUENTIALLY HERE
+                    //
+                    // Log statement will output values of each data value
+                    // for debugging purposes
+                    for (String key : datapts.keySet()) {
+                        Log.v("E_VALUE", key + " : " + datapts.get(key));
+                    }
+                }
+            }
+
+            @Override
+            public void onCancelled(DatabaseError databaseError) {}
+        });
+
+//        GraphView graph = (GraphView) findViewById(R.id.graph);
+//        DataPoint[] points = new DataPoint[9000];
+//        for(int i = 0 ; i < points.length; i++){
+//            points[i] = new DataPoint(i,Math.sin(i*0.5) * 20*(Math.random()*10+1));
+//
+//        }
+//        LineGraphSeries<DataPoint> series = new LineGraphSeries<>(points);
+//        graph.addSeries(series);
+//        graph.getViewport().setScrollable(true);
+//        graph.getViewport().setScrollableY(true);
+//        graph.getViewport().setScalable(true);
+//        graph.getViewport().setScalableY(true);
 /*
         GraphView graph2 = (GraphView) findViewById(R.id.graph2);
         BarGraphSeries<DataPoint> series2 = new BarGraphSeries<>(new DataPoint[]{
@@ -138,50 +197,4 @@ public class SessionDataActivity extends AppCompatActivity {
         series2.setValuesOnTopColor(Color.RED);
         //series.setValuesOnTopSize(50);
   */  }
-
-//    private FirebaseDatabase database;
-//
-//    @Override
-//    protected void onCreate(Bundle savedInstanceState) {
-//        super.onCreate(savedInstanceState);
-//        setContentView(R.layout.activity_session_data);
-//
-//        // Grab patientID from Intent
-//        String sid = getIntent().getStringExtra("SESSION_ID");
-//
-//        // Reference session list under selected Patient user
-//        database = FirebaseDatabase.getInstance();
-//        DatabaseReference ref = database.getReferenceFromUrl("https://icane-41ce5.firebaseio.com/");
-//        DatabaseReference sessionRef = ref.child("Sessions").child(sid);
-//
-//        sessionRef.addValueEventListener(new ValueEventListener() {
-//            @Override
-//            public void onDataChange(DataSnapshot dataSnapshot) {
-//                Map<String, Object> map = (Map<String, Object>) dataSnapshot.getValue();
-//                ArrayList<Date> times = new ArrayList<Date>();
-//                for (String key : map.keySet()) {
-//                    SimpleDateFormat sdf = new SimpleDateFormat("HH:mm:ss.SSS");
-//                    try {
-//                        Date time = sdf.parse(key);
-//                        times.add(time);
-//                    } catch (ParseException e) {
-//                        e.printStackTrace();
-//                    }
-//                }
-//                Collections.sort(times, new Comparator<Date>() {
-//                    @Override
-//                    public int compare(Date o1, Date o2) {
-//                        return o1.compareTo(o2);
-//                    }
-//                });
-//
-//                for (Date time : times) {
-//                    Log.v("E_VALUE", "Time : " + time.toString());
-//                }
-//            }
-//
-//            @Override
-//            public void onCancelled(DatabaseError databaseError) {}
-//        });
-//    }
 }
