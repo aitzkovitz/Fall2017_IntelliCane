@@ -1,12 +1,18 @@
 package project2017.intellic;
 
+import android.content.Intent;
 import android.graphics.Color;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
+import android.widget.Toast;
 
+import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -99,6 +105,31 @@ public class SessionDataActivity extends AppCompatActivity {
     }
 
     @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        MenuInflater inflater = getMenuInflater();
+        inflater.inflate(R.menu.menu, menu);
+        return true;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()) {
+            // action with ID action_logout was selected
+            case R.id.action_logout:
+                FirebaseAuth.getInstance().signOut();
+                Toast.makeText(this, "Logging Out", Toast.LENGTH_SHORT)
+                        .show();
+                Intent intent = new Intent(SessionDataActivity.this, LoginActivity.class);
+                startActivity(intent);
+                finish();
+                break;
+            default:
+                break;
+        }
+        return true;
+    }
+
+    @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_session_data);
@@ -139,7 +170,7 @@ public class SessionDataActivity extends AppCompatActivity {
                 //      datapts.get("f7");
                 // datapts.keySet() holds the names of all data values (not ordered)
                 for (Time time : timeStamps) {
-                    // Cast timestampt to String for Map access
+                    // Cast timestamps to String for Map access
                     String timeKey = sdf.format(time);
                     // Gets next timestamp dataset in order
                     Map<String,Double> datapts = (Map<String,Double>)session.get(timeKey);
@@ -149,9 +180,23 @@ public class SessionDataActivity extends AppCompatActivity {
                     //
                     // Log statement will output values of each data value
                     // for debugging purposes
-                    for (String key : datapts.keySet()) {
-                        Log.v("E_VALUE", key + " : " + datapts.get(key));
-                    }
+                    Log.v("E_VALUE", "HAx : " + datapts.get("HAx"));
+                    Log.v("E_VALUE", "HAy : " + datapts.get("HAy"));
+                    Log.v("E_VALUE", "HAz : " + datapts.get("HAz"));
+                    Log.v("E_VALUE", "BAx : " + datapts.get("BAx"));
+                    Log.v("E_VALUE", "BAy : " + datapts.get("BAy"));
+                    Log.v("E_VALUE", "BAz : " + datapts.get("BAz"));
+                    Log.v("E_VALUE", "Gx : " + datapts.get("Gx"));
+                    Log.v("E_VALUE", "Gy : " + datapts.get("Gy"));
+                    Log.v("E_VALUE", "Gz : " + datapts.get("Gz"));
+                    Log.v("E_VALUE", "f0 : " + datapts.get("f0"));
+                    Log.v("E_VALUE", "f1 : " + datapts.get("f1"));
+                    Log.v("E_VALUE", "f2 : " + datapts.get("f2"));
+                    Log.v("E_VALUE", "f3 : " + datapts.get("f3"));
+                    Log.v("E_VALUE", "f4 : " + datapts.get("f4"));
+                    Log.v("E_VALUE", "f5 : " + datapts.get("f5"));
+                    Log.v("E_VALUE", "f6 : " + datapts.get("f6"));
+                    Log.v("E_VALUE", "f7 : " + datapts.get("f7"));
                 }
             }
 

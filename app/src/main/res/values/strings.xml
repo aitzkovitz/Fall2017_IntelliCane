@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">intelliC</string>
+    <string name="app_name">intelliCane</string>
     <string name="email">Email</string>
     <string name="password">Password</string>
     <string name="login">Login</string>
@@ -8,4 +8,5 @@
     <string name="minimum_password">Enter at least 6 characters!</string>
     <string name="admin">Adminstrator</string>
     <string name="add_user">Add new user</string>
+    <string name="logout">Logout</string>
 </resources>

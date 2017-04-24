@@ -3,10 +3,14 @@ package project2017.intellic;
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
+import android.widget.Toast;
 
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
@@ -17,6 +21,7 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.Map;
 
 import static project2017.intellic.R.id.patient;
@@ -28,8 +33,32 @@ public class PatientSelectActivity extends AppCompatActivity {
     private FirebaseAuth firebaseAuth;
     private FirebaseUser user;
     private String uid;
-    private String name = "PATIENT_NAME";
+    private Map<String,String> patientIDs = new HashMap<String,String>();
 
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        MenuInflater inflater = getMenuInflater();
+        inflater.inflate(R.menu.menu, menu);
+        return true;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()) {
+            // action with ID action_logout was selected
+            case R.id.action_logout:
+                FirebaseAuth.getInstance().signOut();
+                Toast.makeText(this, "Logging Out", Toast.LENGTH_SHORT)
+                        .show();
+                Intent intent = new Intent(PatientSelectActivity.this, LoginActivity.class);
+                startActivity(intent);
+                finish();
+                break;
+            default:
+                break;
+        }
+        return true;
+    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -53,9 +82,15 @@ public class PatientSelectActivity extends AppCompatActivity {
             public void onDataChange(DataSnapshot dataSnapshot) {
                 // Create object to hold list of patients
                 Map<String,Object> map = (Map<String,Object>)dataSnapshot.getValue();
-                ArrayList<String> keys = new ArrayList<String>();
+                ArrayList<String> patients = new ArrayList<String>();
                 for (String key : map.keySet()) {
-                    keys.add(key);
+                    // Use PatientID to get LastName, FirstName
+                    Map<String,Object> patient = (Map<String,Object>)map.get(key);
+                    String patientName = patient.get("lname").toString()
+                            + ", "
+                            + patient.get("fname").toString();
+                    patientIDs.put(patientName,key);
+                    patients.add(patientName);
                 }
 
                 // Populate ListView with list of patients
@@ -63,7 +98,7 @@ public class PatientSelectActivity extends AppCompatActivity {
                 ArrayAdapter<String> arrayAdapter = new ArrayAdapter<String>(
                         PatientSelectActivity.this,
                         android.R.layout.simple_list_item_1,
-                        keys);
+                        patients);
                 patientListView.setAdapter(arrayAdapter);
             }
 
@@ -80,28 +115,9 @@ public class PatientSelectActivity extends AppCompatActivity {
                 // Grab selected patientID and pass along with the Intent for next Activity
                 String patientID = (String) patientListView.getItemAtPosition(position);
                 Intent intent = new Intent(view.getContext(), SessionSelectActivity.class);
-                intent.putExtra("PATIENT_ID", patientID);
+                intent.putExtra("PATIENT_ID", patientIDs.get(patientID));
                 startActivity(intent);
             }
         });
-    }
-
-    protected String getUsername(final String pID) {
-        String role = "Patient";
-
-        DatabaseReference userRef = database.getReference("Users").child(role).child(pID);
-
-        userRef.addValueEventListener(new ValueEventListener() {
-            @Override
-            public void onDataChange(DataSnapshot dataSnapshot) {
-                Map<String,Object> map = (Map<String,Object>)dataSnapshot.getValue();
-                name = map.get("fname").toString() + map.get("lname").toString();
-            }
-
-            @Override
-            public void onCancelled(DatabaseError databaseError) { }
-        });
-
-        return name;
     }
 }
