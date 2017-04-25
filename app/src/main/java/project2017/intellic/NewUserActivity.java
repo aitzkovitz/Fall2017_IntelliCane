@@ -10,6 +10,8 @@ import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.v4.app.NavUtils;
 import android.support.v7.app.AppCompatActivity;
+import android.view.Menu;
+import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.EditText;
@@ -37,16 +39,29 @@ public class NewUserActivity extends AppCompatActivity {
         setContentView(R.layout.activity_new_user);
     }
 
-    // Navigates back to .AdminActivity
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        MenuInflater inflater = getMenuInflater();
+        inflater.inflate(R.menu.menu, menu);
+        return true;
+    }
+
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
-            // Respond to the action bar's Up/Home button
-            case android.R.id.home:
-                NavUtils.navigateUpFromSameTask(this);
-                return true;
+            // action with ID action_logout was selected
+            case R.id.action_logout:
+                FirebaseAuth.getInstance().signOut();
+                Toast.makeText(this, "Logging Out", Toast.LENGTH_SHORT)
+                        .show();
+                Intent intent = new Intent(NewUserActivity.this, LoginActivity.class);
+                startActivity(intent);
+                finish();
+                break;
+            default:
+                break;
         }
-        return super.onOptionsItemSelected(item);
+        return true;
     }
 
     public void createNewUser(View view) {
@@ -94,7 +109,6 @@ public class NewUserActivity extends AppCompatActivity {
     }
 
     private void addNewUser(String uid, String fName, String lName, String email, String role){
-        FirebaseDatabase.getInstance().setPersistenceEnabled(true); // allows data to be cached and availbale locally when internet is lost
         final FirebaseDatabase database = FirebaseDatabase.getInstance();
         DatabaseReference userRef = database.getReference("Users");
         DatabaseReference roleRef = database.getReference("Roles");
@@ -103,6 +117,12 @@ public class NewUserActivity extends AppCompatActivity {
         userRef.child(role).child(uid).child("email").setValue(email);
         userRef.child(role).child(uid).child("fname").setValue(fName);
         userRef.child(role).child(uid).child("lname").setValue(lName);
+        if (role == "Therapist") {
+            userRef.child(role).child(uid).child("patients").setValue(true);
+        }
+        if (role == "Patient") {
+            userRef.child(role).child(uid).child("sessions").setValue(true);
+        }
         roleRef.child(uid).setValue(role);
     }
 }

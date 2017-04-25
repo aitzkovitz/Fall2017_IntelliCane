@@ -18,12 +18,12 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity
-            android:name=".AdminActivity">
-            <!--android:parentActivityName=".LoginActivity">-->
-            <!--<meta-data-->
-                <!--android:name="android.support.PARENT_ACTIVITY"-->
-                <!--android:value="project2017.intellic.LoginActivity" />-->
+        <activity android:name=".AdminActivity">
+
+            <!-- android:parentActivityName=".LoginActivity"> -->
+            <!-- <meta-data -->
+            <!-- android:name="android.support.PARENT_ACTIVITY" -->
+            <!-- android:value="project2017.intellic.LoginActivity" /> -->
         </activity>
         <activity
             android:name=".NewUserActivity"
@@ -32,12 +32,12 @@
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="project2017.intellic.AdminActivity" />
         </activity>
-        <activity
-            android:name=".PatientSelectActivity">
-            <!--android:parentActivityName=".LoginActivity">-->
-            <!--<meta-data-->
-                <!--android:name="android.support.PARENT_ACTIVITY"-->
-                <!--android:value="project2017.intellic.LoginActivity" />-->
+        <activity android:name=".PatientSelectActivity">
+
+            <!-- android:parentActivityName=".LoginActivity"> -->
+            <!-- <meta-data -->
+            <!-- android:name="android.support.PARENT_ACTIVITY" -->
+            <!-- android:value="project2017.intellic.LoginActivity" /> -->
         </activity>
         <activity
             android:name=".SessionSelectActivity"
@@ -52,6 +52,20 @@
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="project2017.intellic.SessionSelectActivity" />
+        </activity>
+        <activity
+            android:name=".AssociateUserActivity"
+            android:parentActivityName=".AdminActivity">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="project2017.intellic.AdminActivity" />
+        </activity>
+        <activity
+            android:name=".AssociateSessionActivity"
+            android:parentActivityName=".AdminActivity">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="project2017.intellic.AdminActivity" />
         </activity>
     </application>
 

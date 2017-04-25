@@ -7,6 +7,8 @@
     tools:context="project2017.intellic.SessionDataActivity">
     android:orientation="vertical">
 
+
+
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
@@ -41,6 +43,17 @@
 
                     <TableRow
                         android:layout_width="match_parent"
+                        android:layout_height="match_parent" >
+
+                        <Spinner
+                            android:id="@+id/spinner4"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content">
+                        </Spinner>
+                    </TableRow>
+
+                    <TableRow
+                        android:layout_width="match_parent"
                         android:layout_height="match_parent"
                         android:layout_weight="1"
                         android:background="@color/colorPrimary">
@@ -50,10 +63,11 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_weight="1"
-                            android:text="TextView"
+                            android:text="Overview"
                             android:textAlignment="center"
                             android:textSize="24sp"
                             android:textStyle="bold" />
+
                     </TableRow>
 
                     <TableRow
@@ -66,16 +80,16 @@
                             android:id="@+id/textView23"
                             android:layout_width="match_parent"
                             android:layout_height="match_parent"
-                            android:text="HA"
                             android:layout_weight="1"
-                            android:textAlignment="center"
-                            android:background="@drawable/textview_border" />
+                            android:background="@drawable/textview_border"
+                            android:text="TimeStamp"
+                            android:textAlignment="center" />
 
                         <TextView
                             android:id="@+id/textView22"
                             android:layout_width="match_parent"
                             android:layout_height="match_parent"
-                            android:text="7.96"
+                            android:text="@+string/time"
                             android:layout_weight="1"
                             android:textAlignment="center"
                             android:background="@drawable/textview_border"/>
@@ -92,7 +106,7 @@
                             android:layout_height="match_parent"
                             android:layout_weight="1"
                             android:background="@drawable/textview_border"
-                            android:text="BA"
+                            android:text="Max"
                             android:textAlignment="center" />
 
                         <TextView
@@ -116,7 +130,7 @@
                             android:layout_height="match_parent"
                             android:layout_weight="1"
                             android:background="@drawable/textview_border"
-                            android:text="G"
+                            android:text="Min"
                             android:textAlignment="center" />
 
                         <TextView
@@ -140,7 +154,7 @@
                             android:layout_height="match_parent"
                             android:layout_weight="1"
                             android:background="@drawable/textview_border"
-                            android:text="F"
+                            android:text="Mean"
                             android:textAlignment="center" />
 
                         <TextView
@@ -164,7 +178,7 @@
                             android:layout_height="match_parent"
                             android:layout_weight="1"
                             android:background="@drawable/textview_border"
-                            android:text="GT"
+                            android:text="Standard Deviation"
                             android:textAlignment="center" />
 
                         <TextView
@@ -177,54 +191,8 @@
                             android:textAlignment="center" />
                     </TableRow>
 
-                    <TableRow
-                        android:layout_width="match_parent"
-                        android:layout_height="match_parent"
-                        android:layout_weight="1">
-
-                        <TextView
-                            android:id="@+id/textView16"
-                            android:layout_width="match_parent"
-                            android:layout_height="match_parent"
-                            android:layout_weight="1"
-                            android:background="@drawable/textview_border"
-                            android:text="HAt"
-                            android:textAlignment="center" />
-
-                        <TextView
-                            android:id="@+id/textView15"
-                            android:layout_width="match_parent"
-                            android:layout_height="match_parent"
-                            android:layout_weight="1"
-                            android:background="@drawable/textview_border"
-                            android:text="12.68"
-                            android:textAlignment="center" />
-                    </TableRow>
-
-                    <TableRow
-                        android:layout_width="match_parent"
-                        android:layout_height="match_parent"
-                        android:layout_weight="1">
-
-                        <TextView
-                            android:id="@+id/textView18"
-                            android:layout_width="match_parent"
-                            android:layout_height="match_parent"
-                            android:layout_weight="1"
-                            android:background="@drawable/textview_border"
-                            android:text="BAt"
-                            android:textAlignment="center" />
-
-                        <TextView
-                            android:id="@+id/textView17"
-                            android:layout_width="match_parent"
-                            android:layout_height="match_parent"
-                            android:layout_weight="1"
-                            android:background="@drawable/textview_border"
-                            android:text="89.12"
-                            android:textAlignment="center" />
-                    </TableRow>
                 </TableLayout>
+
             </LinearLayout>
 
         </LinearLayout>

@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     android:orientation="vertical" android:layout_width="match_parent"
     android:layout_height="match_parent">
     android:orientation="vertical"
@@ -21,8 +22,9 @@
         android:layout_gravity="center"
         android:layout_margin="16dp"
         android:layout_weight=".1"
-        android:hint="add new User"
+        android:hint="Add New User"
         android:onClick="newUser" />
+
     <Button
         android:id="@+id/buttonDeleteUser"
         android:layout_width="400dp"
@@ -30,17 +32,18 @@
         android:layout_gravity="center"
         android:layout_margin="16dp"
         android:layout_weight=".1"
-        android:hint="delete existing user"
-        android:onClick="deleteUser" />
+        android:hint="Associate Patient/Therapist"
+        android:onClick="associateUser" />
+
     <Button
         android:id="@+id/buttonDeleteData"
         android:layout_width="400dp"
         android:layout_height="wrap_content"
         android:layout_gravity="center"
-        android:layout_marginTop="16dp"
         android:layout_marginBottom="30dp"
+        android:layout_marginTop="16dp"
         android:layout_weight=".1"
-        android:hint="delete user data"
-        android:onClick="deleteData" />
+        android:hint="Associate Patient/Session"
+        android:onClick="associateSession" />
 
 </LinearLayout>
