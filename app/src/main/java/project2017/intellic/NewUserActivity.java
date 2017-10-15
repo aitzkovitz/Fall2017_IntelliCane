@@ -10,6 +10,8 @@ import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.v4.app.NavUtils;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
+import android.util.Pair;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
@@ -25,6 +27,7 @@ import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.auth.GetTokenResult;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
@@ -64,6 +67,61 @@ public class NewUserActivity extends AppCompatActivity {
         return true;
     }
 
+    public void createNewUserRequest( View view ) {
+        RadioGroup radioGroup;
+        RadioButton radioButton;
+
+        FirebaseAuth mAuth = FirebaseAuth.getInstance();
+
+        EditText editTextEmail = (EditText) findViewById(R.id.newUserEmail);
+        EditText editTextPassword = (EditText) findViewById(R.id.newUserPassword);
+        EditText editTextFName = (EditText) findViewById(R.id.fName);
+        EditText editTextLName = (EditText) findViewById(R.id.lName);
+        radioGroup = (RadioGroup) findViewById(R.id.radio);
+
+        int selectedId = radioGroup.getCheckedRadioButtonId();
+        radioButton = (RadioButton) findViewById(selectedId);
+
+        final String email = editTextEmail.getText().toString();
+        final String password = editTextPassword.getText().toString();
+        final String fname = editTextFName.getText().toString();
+        final String lname = editTextLName.getText().toString();
+        final String role = radioButton.getText().toString();
+
+        // TBI: remove password as this can be done on server more securely
+        // once
+        FirebaseUser currUser = mAuth.getCurrentUser();
+        currUser.getIdToken(true)
+                .addOnCompleteListener(this, new OnCompleteListener<GetTokenResult>() {
+
+                    public void onComplete(@NonNull Task<GetTokenResult> task) {
+                        if (task.isSuccessful()) {
+                            try {
+                                String tok = task.getResult().getToken();
+                                // send the token as part of the request
+                                AdminRequest adminRequest = new AdminRequest();
+                                adminRequest.addPost(
+                                        new Pair<String, String>("role", role),
+                                        new Pair<String, String>("email", email),
+                                        new Pair<String, String>("fname", fname),
+                                        new Pair<String, String>("lname", lname));
+                                adminRequest.addToken(tok);
+                                adminRequest.execute("newUser");
+
+                                Toast.makeText(NewUserActivity.this, "user creation successful", Toast.LENGTH_SHORT).show();
+                                Intent intent = new Intent(NewUserActivity.this, AdminActivity.class);
+                                startActivity(intent);
+                                finish();
+
+                            } catch(Exception e){
+                                Log.v("AMI", e.toString());
+                            }
+                        }
+                    }
+                });
+    }
+
+    /*
     public void createNewUser(View view) {
         RadioGroup radioGroup;
         RadioButton radioButton;
@@ -106,6 +164,7 @@ public class NewUserActivity extends AppCompatActivity {
                         }
                     }
                 });
+
     }
 
     private void addNewUser(String uid, String fName, String lName, String email, String role){
@@ -125,4 +184,6 @@ public class NewUserActivity extends AppCompatActivity {
         }
         roleRef.child(uid).setValue(role);
     }
+    */
+
 }

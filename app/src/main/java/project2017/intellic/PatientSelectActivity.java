@@ -11,6 +11,7 @@ import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
 import android.widget.Toast;
+import android.util.Log;
 
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
@@ -81,6 +82,7 @@ public class PatientSelectActivity extends AppCompatActivity {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
                 // Create object to hold list of patients
+                Log.v("tag", "test");
                 Map<String,Object> map = (Map<String,Object>)dataSnapshot.getValue();
                 ArrayList<String> patients = new ArrayList<String>();
                 for (String key : map.keySet()) {
