@@ -19,6 +19,7 @@ import com.google.firebase.auth.FirebaseAuth;
 
 public class AdminActivity extends AppCompatActivity {
 
+
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         MenuInflater inflater = getMenuInflater();
@@ -49,12 +50,13 @@ public class AdminActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_admin);
     }
+
+
     //opens NewUserActivity when user clicks button
     public void newUser(View view) {
         Intent intent = new Intent(AdminActivity.this, NewUserActivity.class);
         startActivity(intent);
         finish();
-
     }
 
     protected void associateUser(View View) {

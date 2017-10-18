@@ -67,6 +67,7 @@ public class NewUserActivity extends AppCompatActivity {
         return true;
     }
 
+    // called on click event
     public void createNewUserRequest( View view ) {
         RadioGroup radioGroup;
         RadioButton radioButton;
@@ -74,7 +75,6 @@ public class NewUserActivity extends AppCompatActivity {
         FirebaseAuth mAuth = FirebaseAuth.getInstance();
 
         EditText editTextEmail = (EditText) findViewById(R.id.newUserEmail);
-        EditText editTextPassword = (EditText) findViewById(R.id.newUserPassword);
         EditText editTextFName = (EditText) findViewById(R.id.fName);
         EditText editTextLName = (EditText) findViewById(R.id.lName);
         radioGroup = (RadioGroup) findViewById(R.id.radio);
@@ -83,13 +83,11 @@ public class NewUserActivity extends AppCompatActivity {
         radioButton = (RadioButton) findViewById(selectedId);
 
         final String email = editTextEmail.getText().toString();
-        final String password = editTextPassword.getText().toString();
         final String fname = editTextFName.getText().toString();
         final String lname = editTextLName.getText().toString();
         final String role = radioButton.getText().toString();
 
-        // TBI: remove password as this can be done on server more securely
-        // once
+        // TBI: use cookies instead of requesting a token to send each time
         FirebaseUser currUser = mAuth.getCurrentUser();
         currUser.getIdToken(true)
                 .addOnCompleteListener(this, new OnCompleteListener<GetTokenResult>() {
@@ -106,7 +104,8 @@ public class NewUserActivity extends AppCompatActivity {
                                         new Pair<String, String>("fname", fname),
                                         new Pair<String, String>("lname", lname));
                                 adminRequest.addToken(tok);
-                                adminRequest.execute("newUser");
+                                adminRequest.execute("addUser");
+
 
                                 Toast.makeText(NewUserActivity.this, "user creation successful", Toast.LENGTH_SHORT).show();
                                 Intent intent = new Intent(NewUserActivity.this, AdminActivity.class);
@@ -120,70 +119,5 @@ public class NewUserActivity extends AppCompatActivity {
                     }
                 });
     }
-
-    /*
-    public void createNewUser(View view) {
-        RadioGroup radioGroup;
-        RadioButton radioButton;
-
-        FirebaseAuth mAuth = FirebaseAuth.getInstance();
-
-        EditText editTextEmail = (EditText) findViewById(R.id.newUserEmail);
-        EditText editTextPassword = (EditText) findViewById(R.id.newUserPassword);
-        EditText editTextFName = (EditText) findViewById(R.id.fName);
-        EditText editTextLName = (EditText) findViewById(R.id.lName);
-        radioGroup = (RadioGroup) findViewById(R.id.radio);
-
-        int selectedId = radioGroup.getCheckedRadioButtonId();
-        radioButton = (RadioButton) findViewById(selectedId);
-
-        final String email = editTextEmail.getText().toString();
-        final String password = editTextPassword.getText().toString();
-        final String fname = editTextFName.getText().toString();
-        final String lname = editTextLName.getText().toString();
-        final String role = radioButton.getText().toString();
-
-        mAuth.createUserWithEmailAndPassword(email, password)
-                .addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
-
-                    public void onComplete(@NonNull Task<AuthResult> task) {
-                        if (!task.isSuccessful()) {
-                            Toast.makeText(NewUserActivity.this, "user already exists",
-                                    Toast.LENGTH_SHORT).show();
-                        } else {
-
-                            firebaseAuth = FirebaseAuth.getInstance();
-                            final FirebaseUser user = firebaseAuth.getCurrentUser();
-                            uid = user.getUid();
-                            addNewUser (uid, fname, lname, email, role);
-
-                            Toast.makeText(NewUserActivity.this, "user creation successful", Toast.LENGTH_SHORT).show();
-                            Intent intent = new Intent(NewUserActivity.this, AdminActivity.class);
-                            startActivity(intent);
-                            finish();
-                        }
-                    }
-                });
-
-    }
-
-    private void addNewUser(String uid, String fName, String lName, String email, String role){
-        final FirebaseDatabase database = FirebaseDatabase.getInstance();
-        DatabaseReference userRef = database.getReference("Users");
-        DatabaseReference roleRef = database.getReference("Roles");
-
-        //writing data into the database
-        userRef.child(role).child(uid).child("email").setValue(email);
-        userRef.child(role).child(uid).child("fname").setValue(fName);
-        userRef.child(role).child(uid).child("lname").setValue(lName);
-        if (role == "Therapist") {
-            userRef.child(role).child(uid).child("patients").setValue(true);
-        }
-        if (role == "Patient") {
-            userRef.child(role).child(uid).child("sessions").setValue(true);
-        }
-        roleRef.child(uid).setValue(role);
-    }
-    */
 
 }

@@ -3,8 +3,9 @@
     <string name="email">Email</string>
     <string name="password">Password</string>
     <string name="login">Login</string>
+    <string name="signup">Sign Up</string>
     <string name="login_error">Authentication failed</string>
-    <string name="welcome_message">Hello, Your are sign in!</string>
+    <string name="welcome_message">Hello, Your are signed in!</string>
     <string name="minimum_password">Enter at least 6 characters!</string>
     <string name="admin">Adminstrator</string>
     <string name="add_user">Add new user</string>
