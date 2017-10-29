@@ -18,6 +18,7 @@ import java.io.OutputStream;
 import java.io.OutputStreamWriter;
 import java.net.URL;
 import java.util.HashMap;
+import java.util.Map;
 
 import javax.net.ssl.ExtendedSSLSession;
 import javax.net.ssl.HttpsURLConnection;
@@ -32,14 +33,19 @@ public class AdminRequest extends
     // firebase endpoints
     private final String addUserURL = "https://us-central1-icane-41ce5.cloudfunctions.net/app/admin/addUser";
     private final String deleteUserURL = "https://us-central1-icane-41ce5.cloudfunctions.net/app/admin/deleteUser";
-    private final String editUserURL = "https://us-central1-icane-41ce5.cloudfunctions.net/editUser";
-
+    private final String getUserURL = "https://us-central1-icane-41ce5.cloudfunctions.net/app/admin/getUser";
+    private final String updateUserURL = "https://us-central1-icane-41ce5.cloudfunctions.net/app/admin/updateUser";
     // for logging
     private final String TAG = "post json example";
 
     // to hold post data
     private String post;
     private String token;
+
+    // hold response
+    private HashMap<String, Object> resBody;
+    private String strResBody;
+    private int responseCode;
 
     @Override
     protected void onPreExecute() {
@@ -57,7 +63,11 @@ public class AdminRequest extends
         } else if(adminAction == "deleteUser"){
             resp = getServerResponse(deleteUserURL);
         } else if(adminAction == "editUser"){
-            resp = getServerResponse(editUserURL);
+            resp = getServerResponse(getUserURL);
+        } else if(adminAction == "getUser"){
+            resp = getServerResponse(updateUserURL);
+        } else if(adminAction == "updateUser"){
+            resp = getServerResponse(updateUserURL);
         } else {
             resp = "no action was entered";
         }
@@ -88,14 +98,17 @@ public class AdminRequest extends
             // make the connection
             urlConnection.connect();
 
-            Class[] classes = { InputStream.class };
-
             // get content from connection
-            if (urlConnection.getContent(classes) instanceof String){
+            if (urlConnection.getContent() instanceof String){
                 returnedType = "string";
             } else {
                 returnedType = "not a string";
             }
+
+            // set properties with reponse info
+            resBody = (HashMap<String,Object>) urlConnection.getContent();
+            strResBody = (String) urlConnection.getContent();
+            responseCode = urlConnection.getResponseCode();
 
             // log the type of content returned
             urlConnection.disconnect();
@@ -123,16 +136,15 @@ public class AdminRequest extends
             conn.setRequestMethod("POST");
             conn.setRequestProperty("Authorization", "Bearer " + token);
             conn.setRequestProperty("Content-Type", "application/json");
-            //conn.setChunkedStreamingMode(0);
+            conn.setRequestProperty("Accept", "application/json, text/plain");
 
             out = new BufferedOutputStream(conn.getOutputStream());
             BufferedWriter writer = new BufferedWriter(new OutputStreamWriter(out, "UTF-8"));
-            writer.write(post);
+            writer.write( post );
             writer.close();
             out.close();
 
-            Log.v(TAG, "response code is "+conn.getResponseCode());
-
+            Log.v(TAG, "response code is " + conn.getResponseCode());
 
         } catch( Exception e ){
             Log.v(TAG, e.toString());
@@ -140,12 +152,12 @@ public class AdminRequest extends
     }
 
     // adds post data to object
-    void addPost(Pair<String, String>... params) throws Exception {
+    void addPost(Pair<String, ?>... params) throws Exception {
 
         final JSONObject root = new JSONObject();
 
         // add data to the post
-        for (Pair<String,String> x : params) {
+        for (Pair<String,?> x : params) {
             try {
                 root.put(x.first, x.second);
             } catch (JSONException e) {
@@ -157,9 +169,19 @@ public class AdminRequest extends
         Log.v("JSON TEST", post);
     }
 
+
     // add auth token to object
     void addToken(String tok){
         token = tok;
+    }
+
+    // get request data
+    HashMap<String, Object> getResponseBody(){ return resBody; }
+    int getResponseCode(){
+        return responseCode;
+    }
+    String getStrResBody(){
+        return strResBody;
     }
 
 }

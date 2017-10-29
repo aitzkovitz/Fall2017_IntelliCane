@@ -1,8 +1,3 @@
-
-/**
- * Created by bk_conazole on 4/5/17.
- */
-
 package project2017.intellic;
 
 import android.content.Intent;
@@ -16,10 +11,11 @@ import android.widget.Toast;
 
 import com.google.firebase.auth.FirebaseAuth;
 
+/**
+ * Created by aaronitzkovitz on 10/28/17.
+ */
 
-public class AdminActivity extends AppCompatActivity {
-
-
+public class TherapistActivity extends AppCompatActivity {
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         MenuInflater inflater = getMenuInflater();
@@ -35,7 +31,7 @@ public class AdminActivity extends AppCompatActivity {
                 FirebaseAuth.getInstance().signOut();
                 Toast.makeText(this, "Logging Out", Toast.LENGTH_SHORT)
                         .show();
-                Intent intent = new Intent(AdminActivity.this, LoginActivity.class);
+                Intent intent = new Intent(TherapistActivity.this, LoginActivity.class);
                 startActivity(intent);
                 finish();
                 break;
@@ -48,51 +44,24 @@ public class AdminActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_admin);
+        setContentView(R.layout.activity_therapist);
     }
 
 
-    // five activities for 5 different admin options
+    // 2 activities for 2 different therapist options
     //-------------------
     // add new user
     public void newUser(View view) {
-        Intent intent = new Intent(AdminActivity.this, NewUserActivity.class);
+        Intent intent = new Intent(TherapistActivity.this, NewPatientActivity.class);
         startActivity(intent);
         finish();
     }
 
     // delete user
     public void deleteUser(View view) {
-        Intent intent = new Intent(AdminActivity.this, DeleteUserActivity.class);
+        Intent intent = new Intent(TherapistActivity.this, PatientSelectActivity.class);
         startActivity(intent);
         finish();
     }
 
-    // edit user
-    public void editUser(View view) {
-        Intent intent = new Intent(AdminActivity.this, EditUserActivity.class);
-        startActivity(intent);
-        finish();
-    }
-
-    // delete session data
-    public void deleteData(View view) {
-        Intent intent = new Intent(AdminActivity.this, DeleteDataActivity.class);
-        startActivity(intent);
-        finish();
-    }
-
-    // assoicate patient and sessions
-    public void associatePT(View View) {
-        Intent intent = new Intent(AdminActivity.this, AssociateUserActivity.class);
-        startActivity(intent);
-        finish();
-    }
-
-    // associate patient and therapist
-    public void associatePS(View view) {
-        Intent intent = new Intent(AdminActivity.this, AssociateSessionActivity.class);
-        startActivity(intent);
-        finish();
-    }
 }

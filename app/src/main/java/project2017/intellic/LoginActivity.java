@@ -142,7 +142,7 @@ public class LoginActivity extends AppCompatActivity {
                 // invokes Therapist activity
                 else if(role.equals(Therapist))
                 {
-                    Intent intent = new Intent(LoginActivity.this, PatientSelectActivity.class);
+                    Intent intent = new Intent(LoginActivity.this, TherapistActivity.class);
                     startActivity(intent);
                     finish();
                 }

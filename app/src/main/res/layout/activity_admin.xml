@@ -12,7 +12,7 @@
         android:layout_height="wrap_content"
         android:layout_gravity="center"
         android:padding="36dp"
-        android:text="Adminstrator"
+        android:text="Administrator"
         android:textSize="36dp"
         />
     <Button
@@ -32,11 +32,41 @@
         android:layout_gravity="center"
         android:layout_margin="16dp"
         android:layout_weight=".1"
-        android:hint="Associate Patient/Therapist"
-        android:onClick="associateUser" />
+        android:hint="Add New User"
+        android:onClick="deleteUser" />
+
+    <Button
+        android:id="@+id/buttonEditUser"
+        android:layout_width="400dp"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:layout_margin="16dp"
+        android:layout_weight=".1"
+        android:hint="Add New User"
+        android:onClick="editUser" />
 
     <Button
         android:id="@+id/buttonDeleteData"
+        android:layout_width="400dp"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:layout_margin="16dp"
+        android:layout_weight=".1"
+        android:hint="Add New User"
+        android:onClick="deleteData" />
+
+    <Button
+        android:id="@+id/buttonAssociatePT"
+        android:layout_width="400dp"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:layout_margin="16dp"
+        android:layout_weight=".1"
+        android:hint="Associate Patient/Therapist"
+        android:onClick="associatePT" />
+
+    <Button
+        android:id="@+id/buttonAssociatePS"
         android:layout_width="400dp"
         android:layout_height="wrap_content"
         android:layout_gravity="center"
@@ -44,6 +74,6 @@
         android:layout_marginTop="16dp"
         android:layout_weight=".1"
         android:hint="Associate Patient/Session"
-        android:onClick="associateSession" />
+        android:onClick="associatePS" />
 
 </LinearLayout>

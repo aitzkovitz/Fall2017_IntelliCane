@@ -241,10 +241,10 @@ app.post('/admin/editUser', (req, res) => {
 
 
 /////////////// GET USER INFO //////////////////////////
-app.get('/admin/getUser/:id', (req, res) => {
+app.get('/admin/getUser', (req, res) => {
 
 	// id will be the uid of the person we want
-	var uid = req.params.id
+	var uid = req.params.id;
 	
 
 

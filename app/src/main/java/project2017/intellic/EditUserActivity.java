@@ -2,7 +2,6 @@ package project2017.intellic;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.util.Pair;
@@ -15,27 +14,23 @@ import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.Toast;
 
-import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.auth.GetTokenResult;
 
-import bolts.Task;
+import java.util.HashMap;
 
 /**
- * Created by aaronitzkovitz on 10/17/17.
+ * Created by aaronitzkovitz on 10/18/17.
  */
 
-// TBI: add to manifest!
-// used to delete users
-public class DeleteUserActivity extends AppCompatActivity {
-
+public class EditUserActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_delete_user);
+        setContentView(R.layout.activity_edit_user);
     }
 
     @Override
@@ -53,7 +48,7 @@ public class DeleteUserActivity extends AppCompatActivity {
                 FirebaseAuth.getInstance().signOut();
                 Toast.makeText(this, "Logging Out", Toast.LENGTH_SHORT)
                         .show();
-                Intent intent = new Intent(DeleteUserActivity.this, LoginActivity.class);
+                Intent intent = new Intent(EditUserActivity.this, LoginActivity.class);
                 startActivity(intent);
                 finish();
                 break;
@@ -63,18 +58,19 @@ public class DeleteUserActivity extends AppCompatActivity {
         return true;
     }
 
-    // TBI: use cookies instead of requesting a token to send each time?
-    public void deleteUserRequest() {
+    // on button click listener
+    public void editUserRequest(){
 
         // get info of user to delete
-        EditText editTextEmail = (EditText) findViewById(R.id.deleteUserEmail);
-        final String email = editTextEmail.getText().toString();
+        final EditText editTextEmailToDelete = (EditText) findViewById(R.id.EditUserEmail);
+        final String email = editTextEmailToDelete.getText().toString();
 
         // get current user
         FirebaseAuth mAuth = FirebaseAuth.getInstance();
         FirebaseUser currUser = mAuth.getCurrentUser();
 
-        // if a patient is deleted, all the associated sessions must be deleted in DB
+        // TBI: add to manifest
+        // TBI: use cookies so we don't have to get token every time
         // TBI: in this activity, possibly lookup patients by therapist
         currUser.getIdToken(true).addOnSuccessListener(new OnSuccessListener<GetTokenResult>() {
             @Override
@@ -82,19 +78,41 @@ public class DeleteUserActivity extends AppCompatActivity {
                 // we got the token
                 try {
                     String tok = getTokenResult.getToken();
-                    // send the token as part of the request
-                    AdminRequest adminRequest = new AdminRequest();
-                    adminRequest.addPost(
+                    HashMap<String, Object> response;
+                    int code;
+
+                    AdminRequest adminInfoRequest = new AdminRequest();
+                    // add data to send
+                    adminInfoRequest.addPost(
                             new Pair<String, String>("email", email)
                     );
-                    adminRequest.addToken(tok);
-                    adminRequest.execute("deleteUser");
+                    adminInfoRequest.addToken(tok);
+                    adminInfoRequest.execute("getInfo");
 
+                    // get the user info sent back and pass to next intent
+                    response = adminInfoRequest.getResponseBody();
+                    code = adminInfoRequest.getResponseCode();
+                    if (code == 200){
+                        if (response.isEmpty()){
+                            Toast.makeText(EditUserActivity.this, "This user has no data.", Toast.LENGTH_SHORT).show();
+                        }
+                        else{
+                            // get a user object from the response
+                            User returnedUser = parseUser(response);
 
-                    Toast.makeText(DeleteUserActivity.this, "user creation successful", Toast.LENGTH_SHORT).show();
-                    Intent intent = new Intent(DeleteUserActivity.this, AdminActivity.class);
-                    startActivity(intent);
-                    finish();
+                            // make intent and add the user data to it's bundle
+                            Intent intent = new Intent(EditUserActivity.this, UpdateUserActivity.class);
+                            Bundle extraInfo = new Bundle();
+                            extraInfo.putParcelable("userData", returnedUser);
+                            intent.putExtras(extraInfo);
+                            startActivity(intent);
+                            finish();
+
+                        }
+                    }else{
+                        throw new Exception("Server sent bad response");
+                    }
+
 
                 } catch(Exception e){
                     Log.v("AMI", e.toString());
@@ -107,6 +125,10 @@ public class DeleteUserActivity extends AppCompatActivity {
             }
         });
 
-
     }
+
+    private User parseUser( HashMap<String,Object> reponse ){
+        // if role is patient, return patient object
+    }
+
 }
