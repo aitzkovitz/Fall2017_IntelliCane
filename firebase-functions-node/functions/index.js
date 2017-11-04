@@ -63,7 +63,7 @@ const validateFirebaseIdToken = (req, res, next) => {
 // hook up all middleware parts of app
 app.use(cors);
 app.use(cookieParser);
-//app.use(validateFirebaseIdToken);
+app.use(validateFirebaseIdToken);
 
 /////////////////// ADD NEW USER TO AUTH AND DB ///////////////////
 app.post('/admin/addUser', (req, res) => {
@@ -204,20 +204,17 @@ app.post('/admin/deleteUser', (req, res) => {
 	});
 });
 
-///////////////// EDIT USER/DELETE USER DATA //////////////////
-app.post('/admin/editUser', (req, res) => {
+///////////////// GET USER //////////////////
+app.post('/admin/getUser', (req, res) => {
   	// grab original body
   	const original = req.body;
   	
   	// parse json body request for user info
   	var email = req.body.email;
-  	var uid,role,sessions;
+  	var uid, role, sessions;
 
   	// get UID from email info
-  	admin.auth().getUserByEmail( "itzkovitza@gmail.com" ).then(function(userRecord) {
-    		
-  		res.send(typeof userRecord);
-  		return;
+  	admin.auth().getUserByEmail( email ).then(function(userRecord) {
 
 		// now we have the user
 		console.log("Successfully fetched user data:", userRecord.toJSON());
@@ -231,6 +228,25 @@ app.post('/admin/editUser', (req, res) => {
   				console.error('Trying to delete an admin account');
 				res.status(400).send("Can't delete this account.");
 				return;
+  			}else {
+  				// call database for fname and lname
+  				var ref1 = admin.database().ref('/Users/' + role).child(uid);
+  				ref1.once("value", function( data1 ) {
+  					var user = data1.val();
+
+  					// make user response object
+	  				var resp = { "email": userRecord.email,
+	  							 "fname": user.fname,
+	  							 "lname": user.lname, 
+	  							 "displayName": userRecord.displayName, 
+	  							 "phone": userRecord.phoneNumber,
+	  							 "photoURL": userRecord.photoURL,
+	  							 "emailVerified": userRecord.emailVerified,
+	  							 "disabled": userRecord.disabled };
+  				}
+  				
+	  			res.status(200).send(resp);
+	  			return;
   			}
 		}, function( errObj ){
 			console.log('Error trying to get user role.', errObj);
@@ -243,21 +259,42 @@ app.post('/admin/editUser', (req, res) => {
     	return;
   	});
 
-  	// make changes to this user
-  	// ...
-
 });
 
 
-/////////////// GET USER INFO //////////////////////////
-app.get('/admin/getUser', (req, res) => {
+/////////////// UPDATE USER INFO //////////////////////////
+app.get('/admin/updateUser', (req, res) => {
 
-	// id will be the uid of the person we want
-	var uid = req.params.id;
-	
+	// get the new info
+	var uid = req.body.uid;
+	var newFname = req.body.newFname;
+	var newLname = req.body.newLname;
+	var newEmail = req.body.newEmail;
+	var newPhone = req.body.newPhone;
+	var newPhotoURL = req.body.newPhotoURL;
+	var newDisplayName = req.body.newDisplayName;
+	var newDisabled = req.body.newDisabled;
+	var newVerified = req.body.newVerified;
+
+	// update DB and AUTH with new info
+	admin.auth().updateUser( uid, {
+		""
+	}).then
+
+
 
 
 });
 
 // use the app at the new endpoint root '/'
 exports.app = functions.https.onRequest(app);
+
+
+
+
+
+
+
+
+
+

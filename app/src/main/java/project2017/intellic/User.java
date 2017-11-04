@@ -49,8 +49,9 @@ public class User implements Parcelable {
     // construct from JSON
     public User(JSONObject json){
         try{
+
             if (json.has( "uid" )){
-                email = json.getString( "uid" );
+                uid = json.getString( "uid" );
             }
             if (json.has( "email" )){
                 email = json.getString( "email" );
@@ -124,7 +125,6 @@ public class User implements Parcelable {
         out.writeString(photoURL);
         out.writeInt((int) (emailVerified ? 1 : 0));
         out.writeInt((int) (disabled ? 1 : 0));
-
 
     }
 

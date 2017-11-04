@@ -50,8 +50,7 @@ public class EditUserActivity extends AppCompatActivity{
             // action with ID action_logout was selected
             case R.id.action_logout:
                 FirebaseAuth.getInstance().signOut();
-                Toast.makeText(this, "Logging Out", Toast.LENGTH_SHORT)
-                        .show();
+                Toast.makeText(this, "Logging Out", Toast.LENGTH_SHORT).show();
                 Intent intent = new Intent(EditUserActivity.this, LoginActivity.class);
                 startActivity(intent);
                 finish();
@@ -62,24 +61,6 @@ public class EditUserActivity extends AppCompatActivity{
         return true;
     }
 
-/*
-    public void onTaskCompleted(JSONObject res){
-        if (res.length() == 0){
-            Toast.makeText(EditUserActivity.this, "This user has no data.", Toast.LENGTH_SHORT).show();
-        }
-        else{
-            // get a user object from the response
-            User returnedUser = new User(res);
-
-            // make intent and add the user data to it's bundle
-            Intent intent = new Intent(EditUserActivity.this, UpdateUserActivity.class);
-            Bundle extraInfo = new Bundle();
-            extraInfo.putParcelable("userData", returnedUser);
-            intent.putExtras(extraInfo);
-            startActivity(intent);
-            finish();
-        }
-    }*/
 
     // on button click listener
     public void editUserRequest(View view){
@@ -129,13 +110,16 @@ public class EditUserActivity extends AppCompatActivity{
                     };
 
                     // pass complete listener into constructor
-                    AdminRequest adminInfoRequest = new AdminRequest(listener);
+                    AdminRequest adminInfoRequest = new AdminRequest( listener );
                     // add data to send
                     adminInfoRequest.addPost(
                             new Pair<String, String>("email", email)
                     );
                     adminInfoRequest.addToken(tok);
                     adminInfoRequest.execute("getUser");
+
+
+
 
                 } catch(Exception e){
                     Log.v("AMI", e.toString());
