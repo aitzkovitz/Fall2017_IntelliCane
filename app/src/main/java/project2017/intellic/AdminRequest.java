@@ -81,7 +81,7 @@ public class AdminRequest extends
     protected void onPostExecute(Boolean success) {
         if ( success ) {
             Log.v(TAG, "The Request Completed." );
-            listener.onTaskCompleted(resBody);
+            listener.onTaskCompleted(resBody, responseCode);
         } else{
             Log.v(TAG, "The Request failed." );
         }

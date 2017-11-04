@@ -8,5 +8,5 @@ import org.json.JSONObject;
 
 // interface to handle async event completion
 public interface OnTaskCompleted {
-    void onTaskCompleted(JSONObject user);
+    void onTaskCompleted(JSONObject user, int code);
 }

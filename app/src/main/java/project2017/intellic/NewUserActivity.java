@@ -31,6 +31,8 @@ import com.google.firebase.auth.GetTokenResult;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
+import org.json.JSONObject;
+
 public class NewUserActivity extends AppCompatActivity {
     private FirebaseAuth firebaseAuth;
     String uid = "";
@@ -94,10 +96,26 @@ public class NewUserActivity extends AppCompatActivity {
 
                     public void onComplete(@NonNull Task<GetTokenResult> task) {
                         if (task.isSuccessful()) {
-                            /*try {
+                            try {
+                                // make callback for task completion
+                                OnTaskCompleted listener = new OnTaskCompleted() {
+                                    @Override
+                                    public void onTaskCompleted(JSONObject res, int code) {
+                                        Log.v("LISTENER", res.toString());
+                                        if (code == 200){
+                                            Toast.makeText(NewUserActivity.this, "User creation successful", Toast.LENGTH_SHORT).show();
+                                            Intent intent = new Intent(NewUserActivity.this, AdminActivity.class);
+                                            startActivity(intent);
+                                            finish();
+                                        }
+                                    }
+                                };
+
+                                // get token from promise
                                 String tok = task.getResult().getToken();
-                                // send the token as part of the request
-                                AdminRequest adminRequest = new AdminRequest();
+
+                                // pass listener in request constructor
+                                AdminRequest adminRequest = new AdminRequest( listener );
                                 adminRequest.addPost(
                                         new Pair<String, String>("role", role),
                                         new Pair<String, String>("email", email),
@@ -106,19 +124,10 @@ public class NewUserActivity extends AppCompatActivity {
                                 adminRequest.addToken(tok);
                                 adminRequest.execute("addUser");
 
-                                // get reponse body
-
-
-
-                                Toast.makeText(NewUserActivity.this, "user creation successful", Toast.LENGTH_SHORT).show();
-                                Intent intent = new Intent(NewUserActivity.this, AdminActivity.class);
-                                startActivity(intent);
-                                finish();
-
                             } catch(Exception e){
                                 Log.v("AMI", e.toString());
                             }
-                            */
+
                         }
                     }
                 });

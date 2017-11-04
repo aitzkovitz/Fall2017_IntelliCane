@@ -100,12 +100,15 @@ public class EditUserActivity extends AppCompatActivity{
             public void onSuccess(GetTokenResult getTokenResult) {
                 // we got the token
                 try {
+                    // get token from promise
                     String tok = getTokenResult.getToken();
                     JSONObject response;
                     int code;
+
+                    // define listener for when the operation completes
                     OnTaskCompleted listener = new OnTaskCompleted() {
                         @Override
-                        public void onTaskCompleted(JSONObject res) {
+                        public void onTaskCompleted(JSONObject res, int code) {
                             Log.v("LISTENER", res.toString());
                             if (res.length() == 0){
                                 Toast.makeText(EditUserActivity.this, "This user has no data.", Toast.LENGTH_SHORT).show();
@@ -124,6 +127,8 @@ public class EditUserActivity extends AppCompatActivity{
                             }
                         }
                     };
+
+                    // pass complete listener into constructor
                     AdminRequest adminInfoRequest = new AdminRequest(listener);
                     // add data to send
                     adminInfoRequest.addPost(
@@ -132,34 +137,6 @@ public class EditUserActivity extends AppCompatActivity{
                     adminInfoRequest.addToken(tok);
                     adminInfoRequest.execute("getUser");
 
-
-                    // get the user info sent back and pass to next intent
-                    response = adminInfoRequest.getResponseBody();
-                    code = adminInfoRequest.getResponseCode();
-/*
-                    if (code == 200){
-                        if (response.length() == 0){
-                            Toast.makeText(EditUserActivity.this, "This user has no data.", Toast.LENGTH_SHORT).show();
-                        }
-                        else{
-                            // get a user object from the response
-                            User returnedUser = new User(response);
-
-
-
-                            // make intent and add the user data to it's bundle
-                            Intent intent = new Intent(EditUserActivity.this, UpdateUserActivity.class);
-                            Bundle extraInfo = new Bundle();
-                            extraInfo.putParcelable("userData", returnedUser);
-                            intent.putExtras(extraInfo);
-                            startActivity(intent);
-                            finish();
-                        }
-                    }else{
-                        throw new Exception("Server sent bad response");
-                    }
-
-*/
                 } catch(Exception e){
                     Log.v("AMI", e.toString());
                 }

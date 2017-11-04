@@ -45,6 +45,7 @@ public class UpdateUserActivity extends AppCompatActivity {
     private EditText editTextLname;
 
     private FirebaseAuth mAuth;
+    private String uid;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -70,9 +71,9 @@ public class UpdateUserActivity extends AppCompatActivity {
 
             User userToUpdate = extraInfo.getParcelable("userData");
 
+            uid = userToUpdate.getUid();
             editTextFname.setText(userToUpdate.getFname());
             editTextLname.setText(userToUpdate.getLname());
-
             editTextEmail.setText(userToUpdate.getEmail());
             editTextPhone.setText(userToUpdate.getPhone());
             editTextPhotoURL.setText(userToUpdate.getPhotoURL());
@@ -129,14 +130,30 @@ public class UpdateUserActivity extends AppCompatActivity {
 
                     public void onComplete(@NonNull Task<GetTokenResult> task) {
                         if (task.isSuccessful()) {
-                           /* try {
+                            try {
                                 JSONObject response;
                                 int code;
+
+                                // make completion listener callback
+                                OnTaskCompleted listener = new OnTaskCompleted() {
+                                    @Override
+                                    public void onTaskCompleted(JSONObject res, int code) {
+                                        Log.v("LISTENER", res.toString());
+                                        if (code == 200){
+                                            Toast.makeText(UpdateUserActivity.this, "User update successful", Toast.LENGTH_SHORT).show();
+                                            Intent intent = new Intent(UpdateUserActivity.this, AdminActivity.class);
+                                            startActivity(intent);
+                                            finish();
+                                        }
+                                    }
+                                };
+
                                 String tok = task.getResult().getToken();
                                 // construct update request
-                                AdminRequest updateRequest = new AdminRequest();
+                                AdminRequest updateRequest = new AdminRequest( listener );
                                 // add post data to request
                                 updateRequest.addPost(
+                                        new Pair<String, String>("uid", uid),
                                         new Pair<String, String>("newFname", newFname),
                                         new Pair<String, String>("newLname", newLname),
                                         new Pair<String, String>("newEmail", newEmail),
@@ -169,7 +186,7 @@ public class UpdateUserActivity extends AppCompatActivity {
                             } catch(Exception e){
                                 Log.v("AMI", e.toString());
                             }
-                            */
+
                         }
                     }
                 });

@@ -49,6 +49,9 @@ public class User implements Parcelable {
     // construct from JSON
     public User(JSONObject json){
         try{
+            if (json.has( "uid" )){
+                email = json.getString( "uid" );
+            }
             if (json.has( "email" )){
                 email = json.getString( "email" );
             }
@@ -98,6 +101,7 @@ public class User implements Parcelable {
     }
 
     private User(Parcel in) {
+        uid = in.readString();
         fname = in.readString();
         lname = in.readString();
         email = in.readString();
@@ -110,6 +114,7 @@ public class User implements Parcelable {
     }
 
     public void writeToParcel(Parcel out, int flags) {
+        out.writeString(uid);
         out.writeString(fname);
         out.writeString(lname);
         out.writeString(email);
