@@ -78,11 +78,11 @@ public class NewUserSignupActivity extends AppCompatActivity {
     public void userSignup(View view) {
         firebaseAuth = FirebaseAuth.getInstance();
 
-        editTextEmail = (EditText) findViewById(R.id.newUserEmail);
-        editTextPassword = (EditText) findViewById(R.id.newUserPassword);
-        editTextFName = (EditText) findViewById(R.id.newUserFname);
-        editTextLName = (EditText) findViewById(R.id.newUserLname);
-        radioGroup = (RadioGroup) findViewById(R.id.newUserRoleRadio);
+        editTextEmail = (EditText) findViewById(R.id.signUpUserEmail);
+        editTextPassword = (EditText) findViewById(R.id.signUpUserPassword);
+        editTextFName = (EditText) findViewById(R.id.signUpUserFname);
+        editTextLName = (EditText) findViewById(R.id.signUpUserLname);
+        radioGroup = (RadioGroup) findViewById(R.id.signUpUserRoleRadio);
 
         int selectedId = radioGroup.getCheckedRadioButtonId();
         radioButton = (RadioButton) findViewById(selectedId);

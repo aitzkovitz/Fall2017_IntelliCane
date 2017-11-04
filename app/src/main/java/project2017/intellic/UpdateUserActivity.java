@@ -20,6 +20,8 @@ import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.auth.GetTokenResult;
 
+import org.json.JSONObject;
+
 import java.util.HashMap;
 
 /**
@@ -30,12 +32,18 @@ import java.util.HashMap;
 // TBI: add activity to manifest!
 public class UpdateUserActivity extends AppCompatActivity {
 
+    // auth info
     private EditText editTextEmail;
     private EditText editTextPhone;
-    private EditText editTextPass;
     private EditText editTextPhotoURL;
     private EditText editTextDisplayName;
     private CheckBox checkboxDisabled;
+    private CheckBox checkboxEmailVerified;
+
+    // database userinfo
+    private EditText editTextFname;
+    private EditText editTextLname;
+
     private FirebaseAuth mAuth;
 
     @Override
@@ -44,13 +52,17 @@ public class UpdateUserActivity extends AppCompatActivity {
         setContentView(R.layout.activity_update_user);
 
         // grab the fields and fill them with info from last activity
-        // get editUser fields to populate with response info later
+        // get auth info fields to populate with response info later
         editTextEmail = (EditText) findViewById(R.id.editUserEmail);
         editTextPhone = (EditText) findViewById(R.id.editUserPhone);
-        editTextPass = (EditText) findViewById(R.id.editUserPassword);
         editTextPhotoURL = (EditText) findViewById(R.id.editUserPhotoURL);
         editTextDisplayName = (EditText) findViewById(R.id.editUserDisplayName);
         checkboxDisabled = (CheckBox) findViewById(R.id.editUserDisabled );
+        checkboxEmailVerified = (CheckBox) findViewById(R.id.editUserVerified);
+
+        // get database userinfo fields to populate with response info later
+        editTextFname = (EditText) findViewById(R.id.editUserFname);
+        editTextLname = (EditText) findViewById(R.id.editUserLname);
 
         // get user info from extra
         Bundle extraInfo = this.getIntent().getExtras();
@@ -58,16 +70,18 @@ public class UpdateUserActivity extends AppCompatActivity {
 
             User userToUpdate = extraInfo.getParcelable("userData");
 
+            editTextFname.setText(userToUpdate.getFname());
+            editTextLname.setText(userToUpdate.getLname());
+
             editTextEmail.setText(userToUpdate.getEmail());
             editTextPhone.setText(userToUpdate.getPhone());
-            editTextPass.setText(userToUpdate.getPassword());
             editTextPhotoURL.setText(userToUpdate.getPhotoURL());
             editTextDisplayName.setText(userToUpdate.getDisplayName());
             checkboxDisabled.setSelected(userToUpdate.isDisabled());
+            checkboxEmailVerified.setSelected(userToUpdate.isEmailVerified());
 
         }else {
-            Toast.makeText(this, "No data found", Toast.LENGTH_SHORT)
-                    .show();
+            Toast.makeText(this, "No data found", Toast.LENGTH_SHORT).show();
         }
     }
 
@@ -84,8 +98,7 @@ public class UpdateUserActivity extends AppCompatActivity {
             // action with ID action_logout was selected
             case R.id.action_logout:
                 FirebaseAuth.getInstance().signOut();
-                Toast.makeText(this, "Logging Out", Toast.LENGTH_SHORT)
-                        .show();
+                Toast.makeText(this, "Logging Out", Toast.LENGTH_SHORT).show();
                 Intent intent = new Intent(UpdateUserActivity.this, LoginActivity.class);
                 startActivity(intent);
                 finish();
@@ -99,12 +112,14 @@ public class UpdateUserActivity extends AppCompatActivity {
     // send new info to server
     void updateUserRequest(View view){
         // get new info from text fields
+        final String newFname = editTextFname.getText().toString();
+        final String newLname = editTextLname.getText().toString();
         final String newEmail = editTextEmail.getText().toString();
         final String newPhone = editTextPhone.getText().toString();
-        final String newPass = editTextPass.getText().toString();
         final String newPhotoURL = editTextPhotoURL.getText().toString();
         final String newDisplayName = editTextDisplayName.getText().toString();
         final boolean newDisabled = checkboxDisabled.isChecked();
+        final boolean newVerified = checkboxEmailVerified.isChecked();
 
         // TBI: use cookies instead of requesting a token to send each time
         mAuth = FirebaseAuth.getInstance();
@@ -114,22 +129,29 @@ public class UpdateUserActivity extends AppCompatActivity {
 
                     public void onComplete(@NonNull Task<GetTokenResult> task) {
                         if (task.isSuccessful()) {
-                            try {
-                                HashMap<String, Object> response;
-                                String tok = task.getResult().getToken();
+                           /* try {
+                                JSONObject response;
                                 int code;
-                                // send the token as part of the request
+                                String tok = task.getResult().getToken();
+                                // construct update request
                                 AdminRequest updateRequest = new AdminRequest();
+                                // add post data to request
                                 updateRequest.addPost(
+                                        new Pair<String, String>("newFname", newFname),
+                                        new Pair<String, String>("newLname", newLname),
                                         new Pair<String, String>("newEmail", newEmail),
                                         new Pair<String, String>("newPhone", newPhone),
-                                        new Pair<String, String>("newPass", newPass),
                                         new Pair<String, String>("newPhotoURL", newPhotoURL),
                                         new Pair<String, String>("newDisplayName", newDisplayName),
-                                        new Pair<String, Boolean>("newDisabled", newDisabled));
+                                        new Pair<String, Boolean>("newDisabled", newDisabled),
+                                        new Pair<String, Boolean>("newVerified", newVerified)
+                                );
+                                // add token to request
                                 updateRequest.addToken(tok);
+                                // send request
                                 updateRequest.execute("updateUser");
 
+                                // get response data
                                 response = updateRequest.getResponseBody();
                                 code = updateRequest.getResponseCode();
 
@@ -137,7 +159,7 @@ public class UpdateUserActivity extends AppCompatActivity {
                                     Toast.makeText(UpdateUserActivity.this, "Update Successful", Toast.LENGTH_SHORT).show();
                                 }else{
                                     Toast.makeText(UpdateUserActivity.this, "Update Failed", Toast.LENGTH_SHORT).show();
-                                    Log.v("UPDATE RESPONSE", code + response.toString());
+                                    Log.v("UPDATE RESPONSE", code + response.toString(4));
                                 }
 
                                 Intent intent = new Intent(UpdateUserActivity.this, AdminActivity.class);
@@ -147,6 +169,7 @@ public class UpdateUserActivity extends AppCompatActivity {
                             } catch(Exception e){
                                 Log.v("AMI", e.toString());
                             }
+                            */
                         }
                     }
                 });

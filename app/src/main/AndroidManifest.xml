@@ -74,6 +74,20 @@
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="project2017.intellic.AdminActivity" />
         </activity>
+        <activity
+            android:name=".EditUserActivity"
+            android:parentActivityName=".AdminActivity">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="project2017.intellic.AdminActivity" />
+        </activity>
+        <activity
+            android:name=".UpdateUserActivity"
+            android:parentActivityName=".EditUserActivity">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="project2017.intellic.AdminActivity" />
+        </activity>
     </application>
 
 </manifest>

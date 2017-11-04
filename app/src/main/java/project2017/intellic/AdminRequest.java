@@ -2,6 +2,7 @@ package project2017.intellic;
 
 import android.content.Context;
 import android.os.AsyncTask;
+import android.os.Parcelable;
 import android.util.Log;
 import android.util.Pair;
 
@@ -28,7 +29,9 @@ import javax.net.ssl.HttpsURLConnection;
  */
 
 public class AdminRequest extends
-        AsyncTask<String, Void, String> {
+        AsyncTask<String, Void, Boolean> {
+
+    private OnTaskCompleted listener;
 
     // firebase endpoints
     private final String addUserURL = "https://us-central1-icane-41ce5.cloudfunctions.net/app/admin/addUser";
@@ -43,8 +46,7 @@ public class AdminRequest extends
     private String token;
 
     // hold response
-    private HashMap<String, Object> resBody;
-    private String strResBody;
+    private JSONObject resBody;
     private int responseCode;
 
     @Override
@@ -53,39 +55,44 @@ public class AdminRequest extends
     }
 
     @Override
-    protected String doInBackground(String... adminFuncs) {
-        boolean status = false;
-        String resp, adminAction;
+    protected Boolean doInBackground(String... adminFuncs) {
+        String adminAction;
+        Boolean success = false;
         adminAction = adminFuncs[0];
 
         if (adminAction == "addUser"){
-            resp = getServerResponse(addUserURL);
+            success = getServerResponse( addUserURL );
         } else if(adminAction == "deleteUser"){
-            resp = getServerResponse(deleteUserURL);
-        } else if(adminAction == "editUser"){
-            resp = getServerResponse(getUserURL);
+            success = getServerResponse( deleteUserURL );
         } else if(adminAction == "getUser"){
-            resp = getServerResponse(updateUserURL);
+            success = getServerResponse( getUserURL );
         } else if(adminAction == "updateUser"){
-            resp = getServerResponse(updateUserURL);
+            success = getServerResponse( updateUserURL );
         } else {
-            resp = "no action was entered";
+            success = false;
         }
 
         Log.e(TAG, "2 - pre Request to response...");
 
-        return resp;
+        return success;
     }
 
     @Override
-    protected void onPostExecute(String result) {
+    protected void onPostExecute(Boolean success) {
+        if ( success ) {
+            Log.v(TAG, "The Request Completed." );
+            listener.onTaskCompleted(resBody);
+        } else{
+            Log.v(TAG, "The Request failed." );
+        }
+    }
 
-        Log.v(TAG, "7 - onPostExecute returned " + result );
-
+    public AdminRequest(OnTaskCompleted listener){
+        this.listener=listener;
     }
 
     // get server response
-    private String getServerResponse(String urlString){
+    private Boolean getServerResponse(String urlString){
         String returnedType;
         try {
 
@@ -98,21 +105,25 @@ public class AdminRequest extends
             // make the connection
             urlConnection.connect();
 
-            // get content from connection
-            if (urlConnection.getContent() instanceof String){
-                returnedType = "string";
-            } else {
-                returnedType = "not a string";
+            // read from input stream
+            BufferedReader reader;
+            reader = new BufferedReader(new InputStreamReader(urlConnection.getInputStream(),"UTF-8"));
+            StringBuilder stringBuilder = new StringBuilder();
+            String line = null;
+            while( (line = reader.readLine()) != null ){
+                stringBuilder.append( line );
             }
 
+            // read string into JSON
+            resBody = new JSONObject(stringBuilder.toString());
+
             // set properties with reponse info
-            resBody = (HashMap<String,Object>) urlConnection.getContent();
-            strResBody = (String) urlConnection.getContent();
             responseCode = urlConnection.getResponseCode();
+            Log.v("CODE", "" + responseCode);
 
             // log the type of content returned
             urlConnection.disconnect();
-            return returnedType;
+            return true;
 
         } catch (Exception e) {
 
@@ -176,12 +187,9 @@ public class AdminRequest extends
     }
 
     // get request data
-    HashMap<String, Object> getResponseBody(){ return resBody; }
+    JSONObject getResponseBody(){ return resBody; }
     int getResponseCode(){
         return responseCode;
-    }
-    String getStrResBody(){
-        return strResBody;
     }
 
 }

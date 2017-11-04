@@ -9,6 +9,7 @@ import android.util.Pair;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
+import android.view.View;
 import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.RadioButton;
@@ -64,7 +65,7 @@ public class DeleteUserActivity extends AppCompatActivity {
     }
 
     // TBI: use cookies instead of requesting a token to send each time?
-    public void deleteUserRequest() {
+    public void deleteUserRequest(View view) {
 
         // get info of user to delete
         EditText editTextEmail = (EditText) findViewById(R.id.deleteUserEmail);
@@ -80,7 +81,7 @@ public class DeleteUserActivity extends AppCompatActivity {
             @Override
             public void onSuccess(GetTokenResult getTokenResult) {
                 // we got the token
-                try {
+               /* try {
                     String tok = getTokenResult.getToken();
                     // send the token as part of the request
                     AdminRequest adminRequest = new AdminRequest();
@@ -99,6 +100,7 @@ public class DeleteUserActivity extends AppCompatActivity {
                 } catch(Exception e){
                     Log.v("AMI", e.toString());
                 }
+                */
 
             }
         }).addOnFailureListener( new OnFailureListener() {

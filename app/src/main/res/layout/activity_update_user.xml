@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <EditText
+        android:id="@+id/editUserFname"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="15dp"
+        android:hint="Fname"
+        android:inputType="textEmailAddress" />
+    <EditText
+        android:id="@+id/editUserLname"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="15dp"
+        android:hint="Lname"
+        android:inputType="text" />
+    <EditText
+        android:id="@+id/editUserEmail"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="15dp"
+        android:hint="Email"
+        android:inputType="textEmailAddress" />
+    <EditText
+        android:id="@+id/editUserPhone"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="15dp"
+        android:hint="Phone"
+        android:inputType="phone" />
+    <EditText
+        android:id="@+id/editUserPhotoURL"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="15dp"
+        android:hint="Photo URL"
+        android:inputType="textUri" />
+    <EditText
+        android:id="@+id/editUserDisplayName"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="15dp"
+        android:hint="Display Name"
+        android:inputType="text" />
+    <CheckBox
+        android:id="@+id/editUserDisabled"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Disabled" />
+    <CheckBox
+        android:id="@+id/editUserVerified"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Verified" />
+
+</LinearLayout>

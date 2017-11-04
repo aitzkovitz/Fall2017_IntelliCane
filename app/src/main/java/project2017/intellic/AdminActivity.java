@@ -52,7 +52,7 @@ public class AdminActivity extends AppCompatActivity {
     }
 
 
-    // five activities for 5 different admin options
+    // 6 activities for 6 different admin options
     //-------------------
     // add new user
     public void newUser(View view) {
@@ -69,6 +69,12 @@ public class AdminActivity extends AppCompatActivity {
     }
 
     // edit user
+    // 1. Send HTTP request to get that users info, show it in a new activity
+    // Admin can edit auth info:
+    // - disabled, displayName, email, emailVerified, password, phoneNumber, photoURL
+    // or database user info:
+    // - fname, lname, any other info we want to store
+    // 2. Edit that info then send it back in new intent
     public void editUser(View view) {
         Intent intent = new Intent(AdminActivity.this, EditUserActivity.class);
         startActivity(intent);
@@ -76,6 +82,8 @@ public class AdminActivity extends AppCompatActivity {
     }
 
     // delete session data
+    //1. pick a patient
+    //2. delete whichever of the sessions
     public void deleteData(View view) {
         Intent intent = new Intent(AdminActivity.this, DeleteDataActivity.class);
         startActivity(intent);
@@ -96,3 +104,4 @@ public class AdminActivity extends AppCompatActivity {
         finish();
     }
 }
+

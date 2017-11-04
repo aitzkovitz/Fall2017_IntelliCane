@@ -2,6 +2,10 @@ package project2017.intellic;
 
 import android.os.Parcel;
 import android.os.Parcelable;
+import android.util.Log;
+
+import org.json.JSONException;
+import org.json.JSONObject;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -13,15 +17,21 @@ import java.util.HashMap;
 
 public class User implements Parcelable {
 
+    // user id
+    private String uid;
+
+    // database userinfo
     private String fname;
     private String lname;
-    private String password;
-    private String phone;
-    private String displayName;
-    private String uid;
-    private boolean disabled;
-    private String photoURL;
+
+    // auth userinfo
     private String email;
+    private String password;
+    private String displayName;
+    private String phone;
+    private String photoURL;
+    private boolean disabled;
+    private boolean emailVerified;
 
     // TBI: add copy constructor
     // TBI: add variadic constructor
@@ -33,6 +43,42 @@ public class User implements Parcelable {
 
     // default needed for constructor for snapshot.getValue
     public User(){
+
+    }
+
+    // construct from JSON
+    public User(JSONObject json){
+        try{
+            if (json.has( "email" )){
+                email = json.getString( "email" );
+            }
+            if (json.has( "fname" )){
+                fname = json.getString( "fname" );
+            }
+            if (json.has( "lname" )){
+                lname = json.getString( "lname" );
+            }
+            if (json.has( "password" )){
+                password = json.getString( "password" );
+            }
+            if (json.has( "displayName" )){
+                displayName = json.getString( "displayName" );
+            }
+            if (json.has( "phone" )){
+                phone = json.getString( "phone" );
+            }
+            if (json.has( "photoURL" )){
+                photoURL = json.getString( "photoURL" );
+            }
+            if (json.has( "disabled" )){
+                disabled = json.optBoolean( "disabled", false );
+            }
+            if (json.has( "emailVerified" )){
+                emailVerified = json.optBoolean( "emailVerified" );
+            }
+        } catch (JSONException e){
+            Log.v("JSON CONSTRUCTOR", e.toString());
+        }
 
     }
 
@@ -54,23 +100,27 @@ public class User implements Parcelable {
     private User(Parcel in) {
         fname = in.readString();
         lname = in.readString();
+        email = in.readString();
         password = in.readString();
         phone = in.readString();
         displayName = in.readString();
-        disabled = in.readByte() != 0;
         photoURL = in.readString();
-        email = in.readString();
+        emailVerified = in.readByte() != 0;
+        disabled = in.readByte() != 0;
     }
 
     public void writeToParcel(Parcel out, int flags) {
         out.writeString(fname);
         out.writeString(lname);
+        out.writeString(email);
         out.writeString(password);
         out.writeString(phone);
         out.writeString(displayName);
-        out.writeInt((int) (disabled ? 1 : 0));
         out.writeString(photoURL);
-        out.writeString(email);
+        out.writeInt((int) (emailVerified ? 1 : 0));
+        out.writeInt((int) (disabled ? 1 : 0));
+
+
     }
 
     public String getEmail() {
@@ -135,6 +185,14 @@ public class User implements Parcelable {
 
     public void setDisabled(boolean disabled) {
         this.disabled = disabled;
+    }
+
+    public boolean isEmailVerified(){
+        return emailVerified;
+    }
+
+    public void setEmailVerified( boolean verified ){
+        emailVerified = verified;
     }
 
     public String getPhotoURL() {

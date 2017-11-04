@@ -35,7 +35,6 @@ public class LoginActivity extends AppCompatActivity {
 
     private EditText editTextEmail;
     private EditText editTextPassword;
-    private Button buttonSignIN;
     private FirebaseAuth firebaseAuth;
     private ProgressDialog progressDialog;
     private FirebaseDatabase database;
@@ -56,7 +55,6 @@ public class LoginActivity extends AppCompatActivity {
 
         editTextEmail = (EditText) findViewById(R.id.editTextEmail);
         editTextPassword = (EditText) findViewById(R.id.editTextPassword);
-        buttonSignIN = (Button) findViewById(R.id.buttonLogin);
         progressDialog = new ProgressDialog(this);
         String email = editTextEmail.getText().toString();
         final String password = editTextPassword.getText().toString();

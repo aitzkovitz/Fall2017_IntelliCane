@@ -42,7 +42,7 @@
         android:layout_gravity="center"
         android:layout_margin="16dp"
         android:layout_weight=".1"
-        android:hint="Add New User"
+        android:hint="Edit User"
         android:onClick="editUser" />
 
     <Button
@@ -52,7 +52,7 @@
         android:layout_gravity="center"
         android:layout_margin="16dp"
         android:layout_weight=".1"
-        android:hint="Add New User"
+        android:hint="Delete Data"
         android:onClick="deleteData" />
 
     <Button

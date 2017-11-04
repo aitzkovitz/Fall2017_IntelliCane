@@ -94,7 +94,7 @@ public class NewUserActivity extends AppCompatActivity {
 
                     public void onComplete(@NonNull Task<GetTokenResult> task) {
                         if (task.isSuccessful()) {
-                            try {
+                            /*try {
                                 String tok = task.getResult().getToken();
                                 // send the token as part of the request
                                 AdminRequest adminRequest = new AdminRequest();
@@ -106,6 +106,9 @@ public class NewUserActivity extends AppCompatActivity {
                                 adminRequest.addToken(tok);
                                 adminRequest.execute("addUser");
 
+                                // get reponse body
+
+
 
                                 Toast.makeText(NewUserActivity.this, "user creation successful", Toast.LENGTH_SHORT).show();
                                 Intent intent = new Intent(NewUserActivity.this, AdminActivity.class);
@@ -115,6 +118,7 @@ public class NewUserActivity extends AppCompatActivity {
                             } catch(Exception e){
                                 Log.v("AMI", e.toString());
                             }
+                            */
                         }
                     }
                 });

@@ -57,13 +57,13 @@ const validateFirebaseIdToken = (req, res, next) => {
 		console.error('Error while verifying Firebase ID token:', error);
 		res.status(403).send('Unauthorized');
 	});
-
 };
+
 
 // hook up all middleware parts of app
 app.use(cors);
 app.use(cookieParser);
-app.use(validateFirebaseIdToken);
+//app.use(validateFirebaseIdToken);
 
 /////////////////// ADD NEW USER TO AUTH AND DB ///////////////////
 app.post('/admin/addUser', (req, res) => {
@@ -76,6 +76,8 @@ app.post('/admin/addUser', (req, res) => {
   	var email = req.body.email;
   	var role = req.body.role;
   	var uid, field4;
+  	
+
 
   	// add user to authentication
 	admin.auth().createUser({
@@ -108,7 +110,11 @@ app.post('/admin/addUser', (req, res) => {
   		});
 	}).catch(function(error) {
 		console.log("Error creating new user:", error);
+		res.status(500).send( "Internal Server Error" );
 	});
+
+
+
 });
 
 
@@ -180,7 +186,7 @@ app.post('/admin/deleteUser', (req, res) => {
   						}).catch(function(err){
   							// couldn't remove session from sessions node
   							console.log("couldn't delete a session");
-  							continue;
+  							//continue;
   						});
 					});
 					console.log("made it to the end of delete");
@@ -208,8 +214,11 @@ app.post('/admin/editUser', (req, res) => {
   	var uid,role,sessions;
 
   	// get UID from email info
-  	admin.auth().getUserByEmail( email ).then(function(userRecord) {
+  	admin.auth().getUserByEmail( "itzkovitza@gmail.com" ).then(function(userRecord) {
     		
+  		res.send(typeof userRecord);
+  		return;
+
 		// now we have the user
 		console.log("Successfully fetched user data:", userRecord.toJSON());
 		uid = userRecord.uid;
