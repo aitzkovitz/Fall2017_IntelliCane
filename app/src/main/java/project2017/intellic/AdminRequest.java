@@ -30,8 +30,8 @@ public class AdminRequest extends
         AsyncTask<String, Void, String> {
 
     // firebase endpoints
-    private final String addUserURL = "https://us-central1-icane-41ce5.cloudfunctions.net/app/";
-    private final String deleteUserURL = "https://us-central1-icane-41ce5.cloudfunctions.net/deleteUser";
+    private final String addUserURL = "https://us-central1-icane-41ce5.cloudfunctions.net/app/admin/addUser";
+    private final String deleteUserURL = "https://us-central1-icane-41ce5.cloudfunctions.net/app/admin/deleteUser";
     private final String editUserURL = "https://us-central1-icane-41ce5.cloudfunctions.net/editUser";
 
     // for logging
@@ -52,7 +52,7 @@ public class AdminRequest extends
         String resp, adminAction;
         adminAction = adminFuncs[0];
 
-        if (adminAction == "newUser"){
+        if (adminAction == "addUser"){
             resp = getServerResponse(addUserURL);
         } else if(adminAction == "deleteUser"){
             resp = getServerResponse(deleteUserURL);

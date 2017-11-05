@@ -50,14 +50,21 @@
             android:id="@+id/buttonLogin"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:padding="10dp"
-            android:layout_margin="15dp"
+            android:layout_margin="10dp"
             android:background="@drawable/pinkbutton"
             android:onClick="loginPublic"
-            android:text="@string/login"
-            android:textColor="@color/colorPrimary2"
-            android:radius="8dp"
-            android:visibility="visible" />
+            android:text="@string/Login"
+            android:textColor="@color/colorPrimary" />
+
+        <Button
+            android:id="@+id/buttonCreateUser"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="10dp"
+            android:background="@drawable/bluebutton"
+            android:onClick="loginPublic"
+            android:text="@string/activity_login_create_account"
+            android:textColor="@color/colorPrimary" />
 
     </LinearLayout>
 

@@ -2,13 +2,16 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+
     android:orientation="vertical"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:weightSum="1">
 
+
     <TextView
-        android:layout_width="wrap_content"
+        android:id="@+id/textView7"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_gravity="center"
         android:padding="12dp"
@@ -23,7 +26,12 @@
 
 
         <ImageButton
+
             android:id="@+id/buttonNewUser"
+            android:onClick="newUser"
+            android:background="@drawable/button"
+            app:srcCompat="@drawable/newuser"
+
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:adjustViewBounds="true"
@@ -32,13 +40,16 @@
             android:scaleType="fitCenter"
             android:layout_marginLeft="35dp"
             android:layout_marginRight="10dp"
-            android:background="@drawable/button"
-            app:srcCompat="@drawable/newuser"
             android:layout_weight="1"/>
 
 
         <ImageButton
+
             android:id="@+id/buttonEditUser"
+            android:onClick="editUser"
+            android:background="@drawable/button"
+            app:srcCompat="@drawable/edituser"
+
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:adjustViewBounds="true"
@@ -47,8 +58,6 @@
             android:scaleType="fitCenter"
             android:layout_marginLeft="10dp"
             android:layout_marginRight="35dp"
-            android:background="@drawable/button"
-            app:srcCompat="@drawable/edituser"
             android:layout_weight="1"/>
 
     </LinearLayout>
@@ -60,7 +69,12 @@
 
 
         <ImageButton
-            android:id="@+id/button_ok"
+
+            android:id="@+id/buttonAssociatePT"
+            android:onClick="associatePT"
+            android:background="@drawable/button"
+            app:srcCompat="@drawable/patientwithpt"
+
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:adjustViewBounds="true"
@@ -69,13 +83,16 @@
             android:scaleType="fitCenter"
             android:layout_marginLeft="35dp"
             android:layout_marginRight="10dp"
-            android:background="@drawable/button"
-            app:srcCompat="@drawable/patientwithpt"
             android:layout_weight="1"/>
 
 
         <ImageButton
-            android:id="@+id/button_done"
+
+            android:id="@+id/butto"
+            app:srcCompat="@drawable/patientwithdata"
+            android:onClick="associateSession"
+            android:background="@drawable/button"
+
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:adjustViewBounds="true"
@@ -84,8 +101,8 @@
             android:scaleType="fitCenter"
             android:layout_marginLeft="10dp"
             android:layout_marginRight="35dp"
-            android:background="@drawable/button"
-            app:srcCompat="@drawable/patientwithdata"
+
+
             android:layout_weight="1"/>
 
     </LinearLayout>
@@ -98,6 +115,10 @@
 
         <ImageButton
             android:id="@+id/buttonDeleteData"
+            android:onClick="deleteData"
+            android:background="@drawable/button"
+            app:srcCompat="@drawable/deleteuserdata"
+
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:adjustViewBounds="true"
@@ -106,13 +127,15 @@
             android:scaleType="fitCenter"
             android:layout_marginLeft="35dp"
             android:layout_marginRight="10dp"
-            android:background="@drawable/button"
-            app:srcCompat="@drawable/deleteuserdata"
             android:layout_weight="1"/>
 
 
         <ImageButton
             android:id="@+id/buttonDeleteUser"
+            android:onClick="deleteUser"
+            android:background="@drawable/button"
+            app:srcCompat="@drawable/deleteuser"
+
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:adjustViewBounds="true"
@@ -121,8 +144,6 @@
             android:scaleType="fitCenter"
             android:layout_marginLeft="10dp"
             android:layout_marginRight="35dp"
-            android:background="@drawable/button"
-            app:srcCompat="@drawable/deleteuser"
             android:layout_weight="1"/>
 
     </LinearLayout>
