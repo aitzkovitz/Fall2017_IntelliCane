@@ -76,10 +76,13 @@ public class NewUserActivity extends AppCompatActivity {
 
         FirebaseAuth mAuth = FirebaseAuth.getInstance();
 
-        EditText editTextEmail = (EditText) findViewById(R.id.newUserEmail);
-        EditText editTextFName = (EditText) findViewById(R.id.fName);
-        EditText editTextLName = (EditText) findViewById(R.id.lName);
-        radioGroup = (RadioGroup) findViewById(R.id.radio);
+        EditText editTextEmail = (EditText) findViewById(R.id.newUserEmail );
+        EditText editTextFName = (EditText) findViewById(R.id.newUserfName );
+        EditText editTextLName = (EditText) findViewById(R.id.newUserlName );
+        EditText editTextPhone = (EditText) findViewById(R.id.newUserPhone );
+        EditText editTextPhotoURL = (EditText) findViewById(R.id.newUserPhotoURL );
+        EditText editTextDisplayName = (EditText) findViewById(R.id.newUserDisplayName );
+        radioGroup = (RadioGroup) findViewById(R.id.radio );
 
         int selectedId = radioGroup.getCheckedRadioButtonId();
         radioButton = (RadioButton) findViewById(selectedId);
@@ -87,6 +90,9 @@ public class NewUserActivity extends AppCompatActivity {
         final String email = editTextEmail.getText().toString();
         final String fname = editTextFName.getText().toString();
         final String lname = editTextLName.getText().toString();
+        final String photourl = editTextPhotoURL.getText().toString();
+        final String phone = editTextPhone.getText().toString();
+        final String displayname = editTextDisplayName.getText().toString();
         final String role = radioButton.getText().toString();
 
         // TBI: use cookies instead of requesting a token to send each time
@@ -120,7 +126,11 @@ public class NewUserActivity extends AppCompatActivity {
                                         new Pair<String, String>("role", role),
                                         new Pair<String, String>("email", email),
                                         new Pair<String, String>("fname", fname),
-                                        new Pair<String, String>("lname", lname));
+                                        new Pair<String, String>("lname", lname),
+                                        new Pair<String, String>("photoURL", photourl),
+                                        new Pair<String, String>("phone", phone),
+                                        new Pair<String, String>("displayName", displayname)
+                                );
                                 adminRequest.addToken(tok);
                                 adminRequest.execute("addUser");
 

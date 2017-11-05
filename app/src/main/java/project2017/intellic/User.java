@@ -23,6 +23,7 @@ public class User implements Parcelable {
     // database userinfo
     private String fname;
     private String lname;
+    private String role;
 
     // auth userinfo
     private String email;
@@ -80,6 +81,9 @@ public class User implements Parcelable {
             if (json.has( "emailVerified" )){
                 emailVerified = json.optBoolean( "emailVerified" );
             }
+            if (json.has( "role" )){
+                role = json.optBoolean( "role" );
+            }
         } catch (JSONException e){
             Log.v("JSON CONSTRUCTOR", e.toString());
         }
@@ -103,6 +107,7 @@ public class User implements Parcelable {
 
     private User(Parcel in) {
         uid = in.readString();
+        role = in.readString();
         fname = in.readString();
         lname = in.readString();
         email = in.readString();
@@ -116,6 +121,7 @@ public class User implements Parcelable {
 
     public void writeToParcel(Parcel out, int flags) {
         out.writeString(uid);
+        out.writeString(role);
         out.writeString(fname);
         out.writeString(lname);
         out.writeString(email);

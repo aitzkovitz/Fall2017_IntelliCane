@@ -65,6 +65,32 @@ public class EditUserActivity extends AppCompatActivity{
     // on button click listener
     public void editUserRequest(View view){
 
+        // define listener for when the operation completes
+        final OnTaskCompleted listener = new OnTaskCompleted() {
+            @Override
+            public void onTaskCompleted(JSONObject res, int code) {
+                Log.v("LISTENER", res.toString());
+                if (code != 200){
+                    return;
+                }
+                if (res.length() == 0){
+                    Toast.makeText( EditUserActivity.this, "This user has no data.", Toast.LENGTH_SHORT).show();
+                }
+                else{
+                    // get a user object from the response
+                    User returnedUser = new User(res);
+
+                    // make intent and add the user data to it's bundle
+                    Intent intent = new Intent(EditUserActivity.this, UpdateUserActivity.class);
+                    Bundle extraInfo = new Bundle();
+                    extraInfo.putParcelable( "userData" , returnedUser );
+                    intent.putExtras(extraInfo);
+                    startActivity(intent);
+                    finish();
+                }
+            }
+        };
+
         // get info of user to delete
         final EditText editTextEmailToDelete = (EditText) findViewById(R.id.EditUserEmail);
         final String email = editTextEmailToDelete.getText().toString();
@@ -86,40 +112,14 @@ public class EditUserActivity extends AppCompatActivity{
                     JSONObject response;
                     int code;
 
-                    // define listener for when the operation completes
-                    OnTaskCompleted listener = new OnTaskCompleted() {
-                        @Override
-                        public void onTaskCompleted(JSONObject res, int code) {
-                            Log.v("LISTENER", res.toString());
-                            if (res.length() == 0){
-                                Toast.makeText(EditUserActivity.this, "This user has no data.", Toast.LENGTH_SHORT).show();
-                            }
-                            else{
-                                // get a user object from the response
-                                User returnedUser = new User(res);
-
-                                // make intent and add the user data to it's bundle
-                                Intent intent = new Intent(EditUserActivity.this, UpdateUserActivity.class);
-                                Bundle extraInfo = new Bundle();
-                                extraInfo.putParcelable("userData", returnedUser);
-                                intent.putExtras(extraInfo);
-                                startActivity(intent);
-                                finish();
-                            }
-                        }
-                    };
-
                     // pass complete listener into constructor
                     AdminRequest adminInfoRequest = new AdminRequest( listener );
                     // add data to send
                     adminInfoRequest.addPost(
                             new Pair<String, String>("email", email)
                     );
-                    adminInfoRequest.addToken(tok);
-                    adminInfoRequest.execute("getUser");
-
-
-
+                    adminInfoRequest.addToken( tok );
+                    adminInfoRequest.execute( "getUser" );
 
                 } catch(Exception e){
                     Log.v("AMI", e.toString());

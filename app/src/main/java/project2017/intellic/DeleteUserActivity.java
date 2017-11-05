@@ -23,6 +23,8 @@ import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.auth.GetTokenResult;
 
+import org.json.JSONObject;
+
 import bolts.Task;
 
 /**
@@ -67,6 +69,24 @@ public class DeleteUserActivity extends AppCompatActivity {
     // TBI: use cookies instead of requesting a token to send each time?
     public void deleteUserRequest(View view) {
 
+        // define listener for when the operation completes
+        final OnTaskCompleted listener = new OnTaskCompleted() {
+            @Override
+            public void onTaskCompleted(JSONObject res, int code) {
+                Log.v("LISTENER", res.toString());
+                if (code != 200){
+                    return;
+                }
+                else{
+                    // go back to adminActivity if success
+                    Toast.makeText(DeleteUserActivity.this, "Successfully deleted user.", Toast.LENGTH_SHORT).show();
+                    Intent intent = new Intent(DeleteUserActivity.this, AdminActivity.class);
+                    startActivity(intent);
+                    finish();
+                }
+            }
+        };
+
         // get info of user to delete
         EditText editTextEmail = (EditText) findViewById(R.id.deleteUserEmail);
         final String email = editTextEmail.getText().toString();
@@ -81,16 +101,15 @@ public class DeleteUserActivity extends AppCompatActivity {
             @Override
             public void onSuccess(GetTokenResult getTokenResult) {
                 // we got the token
-               /* try {
+                try {
                     String tok = getTokenResult.getToken();
                     // send the token as part of the request
-                    AdminRequest adminRequest = new AdminRequest();
+                    AdminRequest adminRequest = new AdminRequest( listener );
                     adminRequest.addPost(
                             new Pair<String, String>("email", email)
                     );
                     adminRequest.addToken(tok);
                     adminRequest.execute("deleteUser");
-
 
                     Toast.makeText(DeleteUserActivity.this, "user creation successful", Toast.LENGTH_SHORT).show();
                     Intent intent = new Intent(DeleteUserActivity.this, AdminActivity.class);
@@ -100,7 +119,7 @@ public class DeleteUserActivity extends AppCompatActivity {
                 } catch(Exception e){
                     Log.v("AMI", e.toString());
                 }
-                */
+
 
             }
         }).addOnFailureListener( new OnFailureListener() {

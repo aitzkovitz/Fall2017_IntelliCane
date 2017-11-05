@@ -12,31 +12,46 @@
         android:textSize="36dp"
         />
     <EditText
-        android:id="@+id/fName"
+        android:id="@+id/newUserEmail"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Email"
+        android:inputType="textEmailAddress"
+        />
+
+    <EditText
+        android:id="@+id/newUserfName"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:hint="First Name"
         />
 
     <EditText
-        android:id="@+id/lName"
+        android:id="@+id/newUserlName"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:hint="Last Name"
         />
 
     <EditText
-        android:id="@+id/newUserEmail"
+        android:id="@+id/newUserPhone"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:hint="Email"
+        android:hint="Phone"
         />
     <EditText
-        android:id="@+id/newUserPassword"
+        android:id="@+id/newUserPhotoURL"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:hint="Password"
-        android:inputType="textVisiblePassword"/>
+        android:hint="Photo URL"
+        android:inputType="textUri"/>
+
+    <EditText
+        android:id="@+id/newUserDisplayName"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Display Name"
+        android:inputType="text"/>
 
     <TextView
         android:layout_width="wrap_content"
