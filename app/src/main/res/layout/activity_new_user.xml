@@ -1,29 +1,69 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:orientation="vertical" android:layout_width="match_parent"
     android:layout_height="match_parent">
 
     <TextView
+        android:id="@+id/textView7"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_gravity="center"
-        android:padding="16dp"
-        android:text="New user"
-        android:textSize="36dp"
-        />
+        android:layout_marginBottom="16dp"
+        android:layout_marginTop="40dp"
+        android:text="New user is a..."
+        android:textAppearance="@style/TextAppearance.AppCompat.Display1" />
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+
+        <ImageButton
+            android:id="@+id/imageButton1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:adjustViewBounds="true"
+            android:maxWidth="150dp"
+            android:maxHeight="150dp"
+            android:scaleType="fitCenter"
+            android:layout_marginLeft="35dp"
+            android:layout_marginRight="10dp"
+            android:background="@drawable/button"
+            app:srcCompat="@drawable/patient"
+            android:layout_weight="1"/>
+
+
+        <ImageButton
+            android:id="@+id/imageButton2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:adjustViewBounds="true"
+            android:maxWidth="150dp"
+            android:maxHeight="150dp"
+            android:scaleType="fitCenter"
+            android:layout_marginLeft="10dp"
+            android:layout_marginRight="35dp"
+            android:background="@drawable/button"
+            app:srcCompat="@drawable/physicaltherapist"
+            android:layout_weight="1"/>
+
+    </LinearLayout>
+
+
+
     <EditText
         android:id="@+id/fName"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:hint="First Name"
-        />
+        android:hint="First Name" />
 
     <EditText
         android:id="@+id/lName"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:hint="Last Name"
-        />
+        android:hint="Last Name" />
 
     <EditText
         android:id="@+id/newUserEmail"
@@ -38,46 +78,24 @@
         android:hint="Password"
         android:inputType="textVisiblePassword"/>
 
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center"
-        android:layout_marginBottom="16dp"
-        android:layout_marginTop="16dp"
-        android:text="Role"
-        android:textAllCaps="true"
-        android:textSize="16dp"
-        />
-
     <RadioGroup
         android:id="@+id/radio"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
         android:orientation="vertical">
-        <RadioButton
-            android:id="@+id/admin"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Administrator"
 
-            />
-        <RadioButton android:id="@+id/physical_therapist"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Therapist"
-            />
-        <RadioButton android:id="@+id/patient"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Patient"
-            />
     </RadioGroup>
+
 
     <Button
         android:id="@+id/buttonCreateUser"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="16dp"
+        android:layout_width="150dp"
+        android:layout_height="20dp"
+        android:layout_gravity="center"
+        android:background="@drawable/button"
         android:onClick="createNewUserRequest"
-        android:text="Add User"/>
+        android:text="Add User"
+        android:textColor="@color/colorPrimary2"/>
+
+
 </LinearLayout>

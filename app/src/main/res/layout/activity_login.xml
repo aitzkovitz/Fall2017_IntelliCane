@@ -1,19 +1,33 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:orientation="vertical" android:layout_width="match_parent"
-    android:layout_height="match_parent">
-    tools:context="project2017.intellic.LoginActivity">
-
+    android:background="@color/colorPrimary2"
+    android:layout_height="match_parent"
+    tools:context="project2017.intellic.LoginActivity" >
 
     <LinearLayout
+
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="vertical"
+        android:id="@+id/linearLayout"
         android:layout_alignParentTop="true"
         android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true"
-        android:layout_marginTop="204dp">
+        android:layout_alignParentStart="true">
 
+        <ImageView
+            android:id="@+id/imageView2"
+            android:layout_width="348dp"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="50dp"
+            android:layout_marginStart="30dp"
+            android:layout_weight="0.12"
+            android:maxHeight="100dp"
+            android:maxWidth="100dp"
+            android:scaleType="fitCenter"
+            app:srcCompat="@drawable/intellicane" />
 
         <EditText
             android:id="@+id/editTextEmail"
@@ -21,7 +35,7 @@
             android:layout_height="wrap_content"
             android:layout_margin="15dp"
             android:hint="@string/email"
-            android:inputType="textEmailAddress" />
+            android:textColorHint="@color/colorPrimary3" />
 
         <EditText
             android:id="@+id/editTextPassword"
@@ -29,30 +43,22 @@
             android:layout_height="wrap_content"
             android:layout_margin="15dp"
             android:hint="@string/password"
-            android:inputType="textPassword"
-            android:imeOptions="actionDone"/>
-
+            android:imeOptions="actionDone"
+            android:textColorHint="@color/colorPrimary3" />
 
         <Button
             android:id="@+id/buttonLogin"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:padding="10dp"
             android:layout_margin="15dp"
-            android:background="@color/colorPrimary"
+            android:background="@drawable/pinkbutton"
             android:onClick="loginPublic"
             android:text="@string/login"
-            android:textColor="@android:color/white" />
+            android:textColor="@color/colorPrimary2"
+            android:radius="8dp"
+            android:visibility="visible" />
 
     </LinearLayout>
 
-    <TextView
-        android:id="@+id/textView"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentTop="true"
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="98dp"
-        android:text="Login"
-        android:textAlignment="center"
-        android:textSize="36sp" />
 </RelativeLayout>
