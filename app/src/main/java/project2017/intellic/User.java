@@ -82,7 +82,7 @@ public class User implements Parcelable {
                 emailVerified = json.optBoolean( "emailVerified" );
             }
             if (json.has( "role" )){
-                role = json.optBoolean( "role" );
+                role = json.getString( "role" );
             }
         } catch (JSONException e){
             Log.v("JSON CONSTRUCTOR", e.toString());
@@ -212,6 +212,12 @@ public class User implements Parcelable {
 
     public void setPhotoURL(String photoURL) {
         this.photoURL = photoURL;
+    }
+
+    public String getRole() { return role; }
+
+    public void setRole(String role) {
+        this.role = role;
     }
 
 }

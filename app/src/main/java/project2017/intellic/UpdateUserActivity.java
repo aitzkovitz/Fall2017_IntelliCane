@@ -46,6 +46,7 @@ public class UpdateUserActivity extends AppCompatActivity {
 
     private FirebaseAuth mAuth;
     private String uid;
+    private String role;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -72,6 +73,7 @@ public class UpdateUserActivity extends AppCompatActivity {
             User userToUpdate = extraInfo.getParcelable("userData");
 
             uid = userToUpdate.getUid();
+            role = userToUpdate.getRole();
             editTextFname.setText(userToUpdate.getFname());
             editTextLname.setText(userToUpdate.getLname());
             editTextEmail.setText(userToUpdate.getEmail());
@@ -154,6 +156,7 @@ public class UpdateUserActivity extends AppCompatActivity {
                                 // add post data to request
                                 updateRequest.addPost(
                                         new Pair<String, String>("uid", uid),
+                                        new Pair<String, String>("role", role),
                                         new Pair<String, String>("newFname", newFname),
                                         new Pair<String, String>("newLname", newLname),
                                         new Pair<String, String>("newEmail", newEmail),
@@ -171,13 +174,6 @@ public class UpdateUserActivity extends AppCompatActivity {
                                 // get response data
                                 response = updateRequest.getResponseBody();
                                 code = updateRequest.getResponseCode();
-
-                                if (code == 200 ){
-                                    Toast.makeText(UpdateUserActivity.this, "Update Successful", Toast.LENGTH_SHORT).show();
-                                }else{
-                                    Toast.makeText(UpdateUserActivity.this, "Update Failed", Toast.LENGTH_SHORT).show();
-                                    Log.v("UPDATE RESPONSE", code + response.toString(4));
-                                }
 
                                 Intent intent = new Intent(UpdateUserActivity.this, AdminActivity.class);
                                 startActivity(intent);

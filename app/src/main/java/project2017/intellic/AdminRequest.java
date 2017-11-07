@@ -117,6 +117,7 @@ public class AdminRequest extends
                 stringBuilder.append( line );
             }
 
+            Log.v("JSON FORMAT", stringBuilder.toString());
             // read string into JSON
             resBody = new JSONObject(stringBuilder.toString());
 
@@ -134,7 +135,7 @@ public class AdminRequest extends
 
         }
 
-        return null;
+        return false;
     }
 
     // prepare connection
@@ -157,8 +158,6 @@ public class AdminRequest extends
             writer.write( post );
             writer.close();
             out.close();
-
-            Log.v(TAG, "response code is " + conn.getResponseCode());
 
         } catch( Exception e ){
             Log.v(TAG, e.toString());

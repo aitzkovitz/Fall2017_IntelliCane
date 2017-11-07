@@ -71,10 +71,7 @@ public class EditUserActivity extends AppCompatActivity{
             public void onTaskCompleted(JSONObject res, int code) {
                 Log.v("LISTENER", res.toString());
                 if (code != 200){
-                    return;
-                }
-                if (res.length() == 0){
-                    Toast.makeText( EditUserActivity.this, "This user has no data.", Toast.LENGTH_SHORT).show();
+                    Log.v("RES", "bad response");
                 }
                 else{
                     // get a user object from the response

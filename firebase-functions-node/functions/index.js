@@ -63,7 +63,7 @@ const validateFirebaseIdToken = (req, res, next) => {
 // hook up all middleware parts of app
 app.use(cors);
 app.use(cookieParser);
-app.use(validateFirebaseIdToken);
+//app.use(validateFirebaseIdToken);
 
 /////////////////// ADD NEW USER TO AUTH AND DB ///////////////////
 app.post('/admin/addUser', (req, res) => {
@@ -75,9 +75,9 @@ app.post('/admin/addUser', (req, res) => {
   	var lname = req.body.lname;
   	var email = req.body.email;
   	var role = req.body.role;
+  	var photoURL = req.body
   	var uid, field4;
   	
-
 
   	// add user to authentication
 	admin.auth().createUser({
@@ -106,7 +106,13 @@ app.post('/admin/addUser', (req, res) => {
   		}).then(snapshot => {
     		// Redirect with 303 SEE OTHER to the URL of the pushed object in the Firebase console.
     		console.log("added to db");
-    		res.status(200).send('Request Succeeded');
+    		res.status(200).send({status:"Successfully added user"});
+
+
+    		// send that new password to the user
+    		//
+
+
   		});
 	}).catch(function(error) {
 		console.log("Error creating new user:", error);
@@ -116,7 +122,6 @@ app.post('/admin/addUser', (req, res) => {
 
 
 });
-
 
 ////////////// DELETE USER ///////////////////
 app.post('/admin/deleteUser', (req, res) => {
@@ -159,11 +164,20 @@ app.post('/admin/deleteUser', (req, res) => {
   	});
 
   	// Now we are authorized and know we can delete this account
-	admin.auth().deleteUser(uid).then( function( userRecord ){
+	admin.auth().deleteUser("q2wktRWhvwfgLe2ndLZIwlq07U82").then( function(){
 		console.log("Successfully deleted user from auth: ", uid);
 		// now we need to delete the user and associated date from DB
 		if (role == "Therapist"){
-			// do any additionaly db cleanup that needs to be done
+			console.log('poopoopeepee');
+			var tRef = admin.database.ref('/Users/Therapist').child(uid);
+			tRef.remove().then(function(){
+				res.status(200).send('Tharapist deleted successful');
+				console.log("Remove succeeded for Patient." + uid);
+				return;
+			}).catch( function(error) {
+				console.log("Remove failed on Tharapist: " + uid + "  " + error );
+				return;
+			});
 		} else {
 			// this is a patient so we need to clean up the sessions also
 			var ref = admin.database().ref('/Users/Patient').child(uid).child("Sessions");
@@ -171,7 +185,7 @@ app.post('/admin/deleteUser', (req, res) => {
 				// we need to check if this is empty
   				if (null == data.val()){
   					console.log("No extra session data to delete for patient.");
-  					res.status(200).send( "delete patient operation done." );
+  					res.status(200).send( "delete patient session operation done." );
   					return;
   				} else{
   					// there are sessions we need to delete, val will be an object most likely and we need keys (session ids)
@@ -198,9 +212,18 @@ app.post('/admin/deleteUser', (req, res) => {
 				res.status(500).send('Error trying to get user role.');
 				return;
 			});
+			ref.remove().then( function(){
+				res.status(200).send('Patient deleted sucessful');
+				console.log("Remove succeeded for Patient." + uid);
+				return;
+			}).catch( function(error) {
+				console.log("Remove failed on Patient: ", uid + "  " + error);
+				return;
+			});
 		}
 	}).catch(function(error) {
 		console.log("Couldn't delete user for some reason: ", error);
+		return;
 	});
 });
 
@@ -225,28 +248,38 @@ app.post('/admin/getUser', (req, res) => {
 		ref.once("value", function(data) {
   			role = data.val();
   			if ("Administrator" == role ){
-  				console.error('Trying to delete an admin account');
-				res.status(400).send("Can't delete this account.");
+  				console.error('Trying to edit an admin account');
+				res.status(400).send("Can't edit this account.");
 				return;
-  			}else {
+  			} else {
   				// call database for fname and lname
-  				var ref1 = admin.database().ref('/Users/' + role).child(uid);
+  				var ref1 = admin.database().ref('/Users').child( role ).child( uid );
   				ref1.once("value", function( data1 ) {
   					var user = data1.val();
+  					console.log("User object: ", user);
 
   					// make user response object
-	  				var resp = { "email": userRecord.email,
-	  							 "fname": user.fname,
-	  							 "lname": user.lname, 
-	  							 "displayName": userRecord.displayName, 
-	  							 "phone": userRecord.phoneNumber,
-	  							 "photoURL": userRecord.photoURL,
-	  							 "emailVerified": userRecord.emailVerified,
-	  							 "disabled": userRecord.disabled };
-  				}
-  				
-	  			res.status(200).send(resp);
-	  			return;
+	  				var resp = { "email"			: userRecord.email,
+	  							 "uid"				: uid,
+	  							 "fname"			: user.fname,
+	  							 "lname"			: user.lname,
+	  							 "role" 			: role, 
+	  							 "displayName"		: userRecord.displayName, 
+	  							 "phone"			: userRecord.phoneNumber,
+	  							 "photoURL"			: userRecord.photoURL,
+	  							 "emailVerified"	: userRecord.emailVerified,
+	  							 "disabled"			: userRecord.disabled 
+	  				};
+
+	  				//^\+?[1-9]\d{1,14}$
+	  				// send back user
+	  				res.status(200).send(resp);
+
+
+  				}, function(error){
+  					console.log("Error getting user from db: ", error.message );
+  					res.status(500).send("Could not get user from DB.");
+  				});
   			}
 		}, function( errObj ){
 			console.log('Error trying to get user role.', errObj);
@@ -263,10 +296,21 @@ app.post('/admin/getUser', (req, res) => {
 
 
 /////////////// UPDATE USER INFO //////////////////////////
-app.get('/admin/updateUser', (req, res) => {
+app.post('/admin/updateUser', (req, res) => {
+
+	// update DATABASE with new info
+	function updateInDB(){
+		let userRef = admin.database().ref('/Users').child(role).child(uid);
+		userRef.child('fname').set(newFname);
+		userRef.child('lname').set(newLname);
+		userRef.child('email').set(newEmail);
+		return true;
+	}
 
 	// get the new info
+	// TBI: all of these need to be validated and cleaned
 	var uid = req.body.uid;
+	var role = req.body.role;
 	var newFname = req.body.newFname;
 	var newLname = req.body.newLname;
 	var newEmail = req.body.newEmail;
@@ -276,25 +320,31 @@ app.get('/admin/updateUser', (req, res) => {
 	var newDisabled = req.body.newDisabled;
 	var newVerified = req.body.newVerified;
 
-	// update DB and AUTH with new info
+	console.log(req.body);
+
+	// update AUTH with new info
 	admin.auth().updateUser( uid, {
-		""
-	}).then
-
-
-
+		email: newEmail,
+		phoneNumber: '+447911123456',//newPhone,
+		emailVerified: newVerified,
+		displayName: newDisplayName,
+		photoURL: 'https://static.pexels.com/photos/290263/pexels-photo-290263.jpeg',//newPhotoURL,
+		disabled: newDisabled
+	}).then(function(userRecord){
+		console.log("successfully updated user: " + userRecord );
+		if (updateInDB()){
+			res.status(200).send({status:"update sucessful"});
+		}else{
+			console.log('you suck');
+		}
+		
+	}).catch(function(error){
+		console.log("error updating user" + error);
+		res.status(500).send(error.toJSON());
+		return;
+	});
 
 });
 
 // use the app at the new endpoint root '/'
 exports.app = functions.https.onRequest(app);
-
-
-
-
-
-
-
-
-
-

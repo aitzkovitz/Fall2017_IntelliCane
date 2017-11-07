@@ -6,32 +6,33 @@
 
 
     <EditText
-        android:id="@+id/fName"
+        android:id="@+id/signUpUserFname"
         android:layout_width="300dp"
         android:layout_height="wrap_content"
         android:hint="First Name" />
 
     <EditText
-        android:id="@+id/lName"
+        android:id="@+id/signUpUserLname"
         android:layout_width="300dp"
         android:layout_height="wrap_content"
         android:hint="Last Name" />
 
     <EditText
-        android:id="@+id/newUserEmail"
+        android:id="@+id/signUpUserEmail"
         android:layout_width="300dp"
         android:layout_height="wrap_content"
+        android:inputType="textEmailAddress"
         android:hint="Email"
         />
     <EditText
-        android:id="@+id/newUserPassword"
+        android:id="@+id/signUpUserPassword"
         android:layout_width="300dp"
         android:layout_height="wrap_content"
         android:hint="Password"
         android:inputType="textVisiblePassword"/>
 
     <RadioGroup
-        android:id="@+id/radio"
+        android:id="@+id/signUpUserRoleRadio"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
         android:orientation="vertical">

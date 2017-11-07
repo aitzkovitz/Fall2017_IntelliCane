@@ -82,7 +82,7 @@ public class NewUserActivity extends AppCompatActivity {
         EditText editTextPhone = (EditText) findViewById(R.id.newUserPhone );
         EditText editTextPhotoURL = (EditText) findViewById(R.id.newUserPhotoURL );
         EditText editTextDisplayName = (EditText) findViewById(R.id.newUserDisplayName );
-        radioGroup = (RadioGroup) findViewById(R.id.radio );
+        radioGroup = (RadioGroup) findViewById(R.id.newUserRoleRadio );
 
         int selectedId = radioGroup.getCheckedRadioButtonId();
         radioButton = (RadioButton) findViewById(selectedId);

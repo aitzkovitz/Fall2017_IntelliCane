@@ -25,8 +25,6 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 
-import static project2017.intellic.R.id.patient;
-
 public class PatientSelectActivity extends AppCompatActivity {
 
     private ListView patientListView;
