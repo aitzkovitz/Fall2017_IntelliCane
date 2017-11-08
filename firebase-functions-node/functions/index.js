@@ -145,8 +145,10 @@ app.post('/admin/deleteUser', (req, res) => {
 		console.log("uid found is:", uid);
 		// make sure this isn't an Admin
     	var ref = admin.database().ref('/Roles').child(uid);
+		console.log("uid found is:", ref);
 		ref.once("value", function(data) {
   			role = data.val();
+			console.log("role found is:", role);
   			if ("Administrator" == role ){
   				console.error('Trying to delete an admin account');
 				res.status(400).send({status:"Can't delete this account."});
