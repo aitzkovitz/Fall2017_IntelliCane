@@ -164,12 +164,12 @@ app.post('/admin/deleteUser', (req, res) => {
   	});
 
   	// Now we are authorized and know we can delete this account
-	admin.auth().deleteUser("q2wktRWhvwfgLe2ndLZIwlq07U82").then( function(){
+	admin.auth().deleteUser(uid).then( function(){
 		console.log("Successfully deleted user from auth: ", uid);
 		// now we need to delete the user and associated date from DB
 		if (role == "Therapist"){
 			console.log('poopoopeepee');
-			var tRef = admin.database.ref('/Users/Therapist').child(uid);
+			var tRef = admin.database.ref('/Users').child(role).child(uid);
 			tRef.remove().then(function(){
 				res.status(200).send('Tharapist deleted successful');
 				console.log("Remove succeeded for Patient." + uid);
