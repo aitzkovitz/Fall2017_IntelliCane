@@ -5,6 +5,7 @@ import android.content.Intent;
 import android.drm.DrmManagerClient;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
+import android.support.v4.app.NavUtils;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.Menu;
@@ -63,6 +64,9 @@ public class NewUserSignupActivity extends AppCompatActivity {
                 startActivity(intent);
                 finish();
                 break;
+            case android.R.id.home:
+                NavUtils.navigateUpFromSameTask(this);
+                return true;
             default:
                 break;
         }
@@ -73,6 +77,7 @@ public class NewUserSignupActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_new_user_info);
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
     }
 
     public void userSignup(View view) {

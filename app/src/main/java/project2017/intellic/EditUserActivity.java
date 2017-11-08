@@ -2,7 +2,9 @@ package project2017.intellic;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.v4.app.NavUtils;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.util.Pair;
 import android.view.Menu;
@@ -35,6 +37,7 @@ public class EditUserActivity extends AppCompatActivity{
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_edit_user);
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
     }
 
     @Override
@@ -55,6 +58,9 @@ public class EditUserActivity extends AppCompatActivity{
                 startActivity(intent);
                 finish();
                 break;
+            case android.R.id.home:
+                NavUtils.navigateUpFromSameTask(this);
+                return true;
             default:
                 break;
         }
@@ -83,7 +89,7 @@ public class EditUserActivity extends AppCompatActivity{
                     extraInfo.putParcelable( "userData" , returnedUser );
                     intent.putExtras(extraInfo);
                     startActivity(intent);
-                    finish();
+                    //finish();
                 }
             }
         };

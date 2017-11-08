@@ -108,7 +108,8 @@ public class AdminRequest extends
         } else{
             Log.v(TAG, "The Request failed." );
         }
-
+        Activity activity = mWeakActivity.get();
+        activity.setContentView(R.layout.activity_edit_user);
     }
 
     // get server response

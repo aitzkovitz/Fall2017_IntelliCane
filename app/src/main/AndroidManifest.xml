@@ -14,16 +14,14 @@
         <activity android:name=".LoginActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
-
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".AdminActivity">
-
-            <!-- android:parentActivityName=".LoginActivity"> -->
-            <!-- <meta-data -->
-            <!-- android:name="android.support.PARENT_ACTIVITY" -->
-            <!-- android:value="project2017.intellic.LoginActivity" /> -->
+        <activity android:name=".AdminActivity"
+            android:parentActivityName=".LoginActivity">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="project2017.intellic.LoginActivity"/>
         </activity>
         <activity
             android:name=".NewUserSignupActivity">
@@ -98,10 +96,10 @@
         </activity>
         <activity
             android:name=".UpdateUserActivity"
-            android:parentActivityName=".EditUserActivity">
+            android:parentActivityName=".AdminActivity">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
-                android:value="project2017.intellic.AdminActivity" />
+                android:value="project2017.intellic.EditUserActivity" />
         </activity>
     </application>
 

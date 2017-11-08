@@ -7,7 +7,9 @@ package project2017.intellic;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.v4.app.NavUtils;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
@@ -24,6 +26,7 @@ public class AdminActivity extends AppCompatActivity {
     public boolean onCreateOptionsMenu(Menu menu) {
         MenuInflater inflater = getMenuInflater();
         inflater.inflate(R.menu.menu, menu);
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         return true;
     }
 
@@ -39,6 +42,9 @@ public class AdminActivity extends AppCompatActivity {
                 startActivity(intent);
                 finish();
                 break;
+            case android.R.id.home:
+                NavUtils.navigateUpFromSameTask(this);
+                return true;
             default:
                 break;
         }
@@ -58,14 +64,14 @@ public class AdminActivity extends AppCompatActivity {
     public void newUser(View view) {
         Intent intent = new Intent(AdminActivity.this, NewUserActivity.class);
         startActivity(intent);
-        finish();
+        //finish();
     }
 
     // delete user
     public void deleteUser(View view) {
         Intent intent = new Intent(AdminActivity.this, DeleteUserActivity.class);
         startActivity(intent);
-        finish();
+        //finish();
     }
 
     // edit user
@@ -78,7 +84,7 @@ public class AdminActivity extends AppCompatActivity {
     public void editUser(View view) {
         Intent intent = new Intent(AdminActivity.this, EditUserActivity.class);
         startActivity(intent);
-        finish();
+        //finish();
     }
 
     // delete session data
@@ -87,21 +93,21 @@ public class AdminActivity extends AppCompatActivity {
     public void deleteData(View view) {
         Intent intent = new Intent(AdminActivity.this, DeleteDataActivity.class);
         startActivity(intent);
-        finish();
+        //finish();
     }
 
     // assoicate patient and sessions
     public void associatePT(View View) {
         Intent intent = new Intent(AdminActivity.this, AssociateUserActivity.class);
         startActivity(intent);
-        finish();
+        //finish();
     }
 
     // associate patient and therapist
     public void associatePS(View view) {
         Intent intent = new Intent(AdminActivity.this, AssociateSessionActivity.class);
         startActivity(intent);
-        finish();
+        //finish();
     }
 }
 

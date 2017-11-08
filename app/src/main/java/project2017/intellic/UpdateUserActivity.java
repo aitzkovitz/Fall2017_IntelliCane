@@ -3,6 +3,7 @@ package project2017.intellic;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
+import android.support.v4.app.NavUtils;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.util.Pair;
@@ -52,6 +53,7 @@ public class UpdateUserActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_update_user);
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
         // grab the fields and fill them with info from last activity
         // get auth info fields to populate with response info later
@@ -106,6 +108,9 @@ public class UpdateUserActivity extends AppCompatActivity {
                 startActivity(intent);
                 finish();
                 break;
+            case android.R.id.home:
+                NavUtils.navigateUpFromSameTask(this);
+                return true;
             default:
                 break;
         }
