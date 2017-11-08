@@ -116,7 +116,7 @@ app.post('/admin/addUser', (req, res) => {
   		});
 	}).catch(function(error) {
 		console.log("Error creating new user:", error);
-		res.status(500).send( "Internal Server Error" );
+		res.status(500).send( {status:"Internal Server Error"});
 	});
 
 
@@ -149,29 +149,29 @@ app.post('/admin/deleteUser', (req, res) => {
   			role = data.val();
   			if ("Administrator" == role ){
   				console.error('Trying to delete an admin account');
-				res.status(400).send("Can't delete this account.");
+				res.status(400).send({status:"Can't delete this account."});
 				return;
   			}
 		}, function( errObj ){
 			console.log('Error trying to get user role.', errObj);
-			res.status(500).send('Error trying to get user role.');
+			res.status(500).send({status:'Error trying to get user role.'});
 			return;
 		});
   	}).catch(function(error) {
     	console.log("Error retrieving user to delete.", error);
-    	res.status(500).send('You cannot delete this account.');
+    	res.status(500).send({status:'You cannot delete this account.'});
     	return;
   	});
 
   	// Now we are authorized and know we can delete this account
-	admin.auth().deleteUser("q2wktRWhvwfgLe2ndLZIwlq07U82").then( function(){
+	admin.auth().deleteUser(uid).then( function(){
 		console.log("Successfully deleted user from auth: ", uid);
 		// now we need to delete the user and associated date from DB
 		if (role == "Therapist"){
 			console.log('poopoopeepee');
 			var tRef = admin.database.ref('/Users/Therapist').child(uid);
 			tRef.remove().then(function(){
-				res.status(200).send('Tharapist deleted successful');
+				res.status(200).send({status:'Tharapist deleted successful'});
 				console.log("Remove succeeded for Patient." + uid);
 				return;
 			}).catch( function(error) {
@@ -185,7 +185,7 @@ app.post('/admin/deleteUser', (req, res) => {
 				// we need to check if this is empty
   				if (null == data.val()){
   					console.log("No extra session data to delete for patient.");
-  					res.status(200).send( "delete patient session operation done." );
+  					res.status(200).send({status:"delete patient session operation done." });
   					return;
   				} else{
   					// there are sessions we need to delete, val will be an object most likely and we need keys (session ids)
@@ -204,16 +204,17 @@ app.post('/admin/deleteUser', (req, res) => {
   						});
 					});
 					console.log("made it to the end of delete");
-					res.status(200).send("Delete function done");
+					res.status(200).send({status:"Delete function done"});
 					return;
   				}
 			}, function( errObj ){
 				console.log('Error trying to get user role.', errObj);
-				res.status(500).send('Error trying to get user role.');
+				res.status(500).send({status:'Error trying to get user role.'});
 				return;
 			});
+			ref = admin.database().ref('/Users/Patient').child(uid);
 			ref.remove().then( function(){
-				res.status(200).send('Patient deleted sucessful');
+				res.status(200).send({status:'Patient deleted sucessful'});
 				console.log("Remove succeeded for Patient." + uid);
 				return;
 			}).catch( function(error) {
