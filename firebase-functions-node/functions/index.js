@@ -142,7 +142,7 @@ app.post('/admin/deleteUser', (req, res) => {
 		// now we have the user
 		console.log("Successfully fetched user data:", userRecord.toJSON());
 		uid = userRecord.uid;
-		
+		console.log("uid found is:", uid);
 		// make sure this isn't an Admin
     	var ref = admin.database().ref('/Roles').child(uid);
 		ref.once("value", function(data) {
