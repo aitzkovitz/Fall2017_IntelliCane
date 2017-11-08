@@ -1,10 +1,16 @@
 package project2017.intellic;
 
+import android.app.Activity;
+import android.app.ProgressDialog;
 import android.content.Context;
 import android.os.AsyncTask;
 import android.os.Parcelable;
+import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.util.Pair;
+import android.view.View;
+import android.widget.LinearLayout;
+import android.widget.ProgressBar;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -17,6 +23,7 @@ import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.io.OutputStream;
 import java.io.OutputStreamWriter;
+import java.lang.ref.WeakReference;
 import java.net.URL;
 import java.util.HashMap;
 import java.util.Map;
@@ -50,9 +57,22 @@ public class AdminRequest extends
     private JSONObject resBody;
     private int responseCode;
 
+    WeakReference<Activity> mWeakActivity;
+    private ProgressBar prog;
+
+
+    public AdminRequest(OnTaskCompleted listener, Activity activity){
+        this.listener=listener;
+        mWeakActivity = new WeakReference<Activity>(activity);
+    }
+
     @Override
     protected void onPreExecute() {
         Log.v(TAG, "1 - Admin request is about to start...");
+        Activity activity = mWeakActivity.get();
+        if (activity != null) {
+            activity.setContentView(R.layout.loading);
+        }
     }
 
     @Override
@@ -88,10 +108,7 @@ public class AdminRequest extends
         } else{
             Log.v(TAG, "The Request failed." );
         }
-    }
 
-    public AdminRequest(OnTaskCompleted listener){
-        this.listener=listener;
     }
 
     // get server response
@@ -149,9 +166,9 @@ public class AdminRequest extends
         try {
             // set request headers
             conn.setRequestMethod("POST");
-            conn.setRequestProperty("Authorization", "Bearer " + token);
-            conn.setRequestProperty("Content-Type", "application/json");
-            conn.setRequestProperty("Accept", "application/json, text/plain");
+            conn.setRequestProperty("Authorization", "Bearer " + token );
+            conn.setRequestProperty("Content-Type", "application/json" );
+            conn.setRequestProperty("Accept", "application/json, text/plain" );
 
             out = new BufferedOutputStream(conn.getOutputStream());
             BufferedWriter writer = new BufferedWriter(new OutputStreamWriter(out, "UTF-8"));

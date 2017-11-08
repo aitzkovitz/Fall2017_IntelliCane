@@ -121,7 +121,7 @@ public class NewUserActivity extends AppCompatActivity {
                                 String tok = task.getResult().getToken();
 
                                 // pass listener in request constructor
-                                AdminRequest adminRequest = new AdminRequest( listener );
+                                AdminRequest adminRequest = new AdminRequest( listener, NewUserActivity.this );
                                 adminRequest.addPost(
                                         new Pair<String, String>("role", role),
                                         new Pair<String, String>("email", email),

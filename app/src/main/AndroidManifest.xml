@@ -41,6 +41,7 @@
         </activity>
         <activity android:name=".PatientSelectActivity">
 
+
             <!-- android:parentActivityName=".LoginActivity"> -->
             <!-- <meta-data -->
             <!-- android:name="android.support.PARENT_ACTIVITY" -->
@@ -76,6 +77,20 @@
         </activity>
         <activity
             android:name=".EditUserActivity"
+            android:parentActivityName=".AdminActivity">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="project2017.intellic.AdminActivity" />
+        </activity>
+        <activity
+            android:name=".DeleteUserActivity"
+            android:parentActivityName=".AdminActivity">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="project2017.intellic.AdminActivity" />
+        </activity>
+        <activity
+            android:name=".DeleteDataActivity"
             android:parentActivityName=".AdminActivity">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"

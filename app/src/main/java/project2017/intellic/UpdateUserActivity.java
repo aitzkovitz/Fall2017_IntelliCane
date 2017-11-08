@@ -152,7 +152,7 @@ public class UpdateUserActivity extends AppCompatActivity {
 
                                 String tok = task.getResult().getToken();
                                 // construct update request
-                                AdminRequest updateRequest = new AdminRequest( listener );
+                                AdminRequest updateRequest = new AdminRequest( listener, UpdateUserActivity.this );
                                 // add post data to request
                                 updateRequest.addPost(
                                         new Pair<String, String>("uid", uid),

@@ -110,7 +110,7 @@ public class EditUserActivity extends AppCompatActivity{
                     int code;
 
                     // pass complete listener into constructor
-                    AdminRequest adminInfoRequest = new AdminRequest( listener );
+                    AdminRequest adminInfoRequest = new AdminRequest( listener, EditUserActivity.this );
                     // add data to send
                     adminInfoRequest.addPost(
                             new Pair<String, String>("email", email)

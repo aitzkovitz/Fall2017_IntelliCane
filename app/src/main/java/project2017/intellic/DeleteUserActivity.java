@@ -104,7 +104,7 @@ public class DeleteUserActivity extends AppCompatActivity {
                 try {
                     String tok = getTokenResult.getToken();
                     // send the token as part of the request
-                    AdminRequest adminRequest = new AdminRequest( listener );
+                    AdminRequest adminRequest = new AdminRequest( listener, DeleteUserActivity.this );
                     adminRequest.addPost(
                             new Pair<String, String>("email", email)
                     );

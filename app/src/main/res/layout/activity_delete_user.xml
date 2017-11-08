@@ -12,4 +12,14 @@
         android:inputType="textEmailAddress"
         android:imeOptions="actionDone"/>
 
+    <Button
+        android:id="@+id/adminDeleteUser"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="15dp"
+        android:background="@color/colorPrimary"
+        android:onClick="deleteUserRequest"
+        android:hint="Delete User"
+        android:textColor="@android:color/white" />
+
 </LinearLayout>
