@@ -65,7 +65,7 @@ public class LoginActivity extends AppCompatActivity {
             // action with ID action_logout was selected
             case R.id.offline_mode:
 
-                Intent intent = new Intent(LoginActivity.this, OfflineActivity.class);
+                Intent intent = new Intent(LoginActivity.this, SettingsActivity.class);
                 startActivity(intent);
                 //finish();
                 break;

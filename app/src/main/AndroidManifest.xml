@@ -101,6 +101,13 @@
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="project2017.intellic.EditUserActivity" />
         </activity>
+        <activity
+            android:name=".SettingsActivity"
+            android:parentActivityName=".LoginActivity">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="project2017.intellic.LoginActivity" />
+        </activity>
     </application>
 
 </manifest>

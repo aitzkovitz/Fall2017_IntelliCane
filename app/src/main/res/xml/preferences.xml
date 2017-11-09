@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_height="match_parent"
+    android:layout_width="match_parent">
+    <CheckboxPreference
+        android:key="check 1"
+        android:title="Pref1"
+        android:summary="Pref1"
+        android:defaultValue="false" />
+
+</PreferenceScreen>
