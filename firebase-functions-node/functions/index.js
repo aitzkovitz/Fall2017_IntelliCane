@@ -15,7 +15,7 @@ const validateFirebaseIdToken = (req, res, next) => {
 	if ((!req.headers.authorization || !req.headers.authorization.startsWith('Bearer ')) &&
 		!req.cookies.__session) {
 		console.error('No Firebase ID token was passed as a Bearer token in the Authorization header.' );
-		res.status(403).send('Unauthorized');
+		res.status(403).send({status:'Unauthorized'});
 		return;
 	}
 
@@ -41,21 +41,21 @@ const validateFirebaseIdToken = (req, res, next) => {
   			var role = data.val();
   			if ("Administrator" !== role ){
   				console.error('You do not have admin privs');
-				res.status(403).send('Unauthorized');
+				res.status(403).send({status:'Unauthorized'});
 				return;
   			}
 		}, function( errObj ){
 			console.log( "Couldn't retrieve the user's role for verification. ");
-			res.status(403).send('Unauthorized');
+			res.status(403).send({status:'Unauthorized'});
 			return;
 		});
 
     	console.log("Successfully verified");
-    	res.status(200).send('Request Succeeded');
+    	res.status(200).send({status:'Request Succeeded'});
     	next();
   	}).catch(error => {
 		console.error('Error while verifying Firebase ID token:', error);
-		res.status(403).send('Unauthorized');
+		res.status(403).send({status:'Unauthorized'});
 	});
 };
 
@@ -252,7 +252,7 @@ app.post('/admin/getUser', (req, res) => {
   			role = data.val();
   			if ("Administrator" == role ){
   				console.error('Trying to edit an admin account');
-				res.status(400).send("Can't edit this account.");
+			res.status(400).send({status:"Can't edit this account."});
 				return;
   			} else {
   				// call database for fname and lname
@@ -281,17 +281,17 @@ app.post('/admin/getUser', (req, res) => {
 
   				}, function(error){
   					console.log("Error getting user from db: ", error.message );
-  					res.status(500).send("Could not get user from DB.");
+  					res.status(500).send({status:"Could not get user from DB."});
   				});
   			}
 		}, function( errObj ){
 			console.log('Error trying to get user role.', errObj);
-			res.status(500).send('Error trying to get user role.');
+			res.status(500).send({status:'Error trying to get user role.'});
 			return;
 		});
   	}).catch(function(error) {
     	console.log("Error retrieving user to delete.", error);
-    	res.status(500).send('You cannot delete this account.');
+    	res.status(500).send({status:'You cannot delete this account.'});
     	return;
   	});
 
