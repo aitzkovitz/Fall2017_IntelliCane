@@ -4,6 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/colorPrimary"
     tools:context="project2017.intellic.SessionSelectActivity">
 
     <ListView
@@ -23,9 +24,10 @@
         android:id="@+id/textView6"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Select a Session"
+        android:text="Please select a session"
+        android:textColor="@color/colorPrimary1"
         android:textAlignment="center"
-        android:textSize="36sp"
+        android:textSize="30sp"
         app:layout_constraintTop_toTopOf="parent"
         android:layout_marginTop="40dp"
         android:layout_marginLeft="8dp"

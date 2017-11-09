@@ -10,7 +10,7 @@
     <string name="admin">Administrator</string>
     <string name="add_user">Add new user</string>
     <string name="logout">Logout</string>
-    <string name="select_login_0">I am a </string>
+    <string name="select_login_0">I am a... </string>
     <string name="select_login_patient">Patient</string>
     <string name="select_login_therapist">Therapist</string>
     <string name="select_login_admin">Administrator</string>

@@ -2,7 +2,8 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:orientation="vertical" android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:background="@color/colorPrimary">
 
     <TextView
         android:id="@+id/textView7"
@@ -11,6 +12,7 @@
         android:layout_marginBottom="16dp"
         android:layout_marginTop="40dp"
         android:text="New user is a..."
+        android:textColor="@color/colorPrimary1"
         android:textAppearance="@style/TextAppearance.AppCompat.Display1" />
 
 
@@ -90,9 +92,9 @@
     <Button
         android:id="@+id/buttonCreateUser"
         android:layout_width="150dp"
-        android:layout_height="20dp"
+        android:layout_height="wrap_content"
         android:layout_gravity="center"
-        android:background="@drawable/button"
+        android:background="@drawable/bluebutton"
         android:onClick="createNewUserRequest"
         android:text="Add User"
         android:textColor="@color/colorPrimary2"/>

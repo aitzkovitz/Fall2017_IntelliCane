@@ -4,7 +4,9 @@
     package="project2017.intellic">
 
     <uses-sdk tools:overrideLibrary="com.firebase.ui, com.firebase.ui.auth" />
+
     <uses-permission android:name="android.permission.INTERNET" />
+
     <application
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
@@ -25,8 +27,8 @@
             <!-- android:name="android.support.PARENT_ACTIVITY" -->
             <!-- android:value="project2017.intellic.LoginActivity" /> -->
         </activity>
-        <activity
-            android:name=".NewUserSignupActivity">
+        <activity android:name=".NewUserSignupActivity">
+
             <!-- android:parentActivityName=".LoginActivity"> -->
             <!-- <meta-data -->
             <!-- android:name="android.support.PARENT_ACTIVITY" -->
@@ -74,6 +76,9 @@
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="project2017.intellic.AdminActivity" />
         </activity>
+        <activity android:name="res.layout.SplashScreen" />
+        <activity android:name=".SplashScreenActivity.SplashScreen" />
+        <activity android:name=".SplashScreen" />
     </application>
 
 </manifest>

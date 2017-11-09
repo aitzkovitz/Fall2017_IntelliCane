@@ -4,6 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/colorPrimary"
     tools:context="project2017.intellic.AssociateSessionActivity">
 
     <TextView
@@ -58,7 +59,7 @@
         android:layout_width="250dp"
         android:layout_height="wrap_content"
         android:layout_margin="30dp"
-        android:background="@drawable/button"
+        android:background="@drawable/pinkbutton"
         android:onClick="createAssociation"
         android:text="Create Association"
         android:textColor="@color/colorPrimary2"

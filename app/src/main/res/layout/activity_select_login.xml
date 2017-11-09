@@ -4,6 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:orientation="vertical" android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/colorPrimary"
     android:weightSum="1">
 
     <TextView
@@ -12,72 +13,60 @@
         android:layout_height="wrap_content"
         android:layout_margin="23dp"
         android:layout_marginTop="98dp"
-        android:text="@string/select_login_0"
-        android:textColor="@android:color/holo_orange_dark"
-        android:textColorLink="@android:color/holo_orange_light"
-        android:textSize="36sp" />
+        android:text="Welcome! Please select your role:"
+        android:textColor="@color/colorPrimary1"
+        android:textSize="18sp" />
 
     <ImageButton
         android:id="@+id/imageButtonAdm"
-        android:layout_width="178dp"
-        android:layout_height="112dp"
-        android:contentDescription="@string/select_login_patient"
-        android:onClick="goto_activity_login"
-        android:scrollbarSize="@dimen/com_facebook_button_corner_radius"
-        android:visibility="visible"
-        app:srcCompat="@drawable/com_facebook_profile_picture_blank_square" />
-
-    <TextView
-        android:id="@+id/textView001"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_margin="23dp"
-        android:layout_marginTop="98dp"
-        android:text="@string/select_login_admin"
-        android:textColor="@android:color/holo_orange_dark"
-        android:textColorLink="@android:color/holo_orange_light"
-        android:textSize="36sp" />
+        android:layout_marginLeft="35dp"
+        android:layout_marginRight="35dp"
+        android:adjustViewBounds="true"
+        android:background="@drawable/button"
+        android:contentDescription="@string/select_login_admin"
+        android:maxHeight="150dp"
+        android:maxWidth="150dp"
+        android:onClick="goto_activity_login"
+        android:scaleType="fitCenter"
+        android:scrollbarSize="@dimen/com_facebook_button_corner_radius"
+        android:visibility="visible"
+        app:srcCompat="@drawable/administrator" />
+
 
     <ImageButton
         android:id="@+id/imageButtonThera"
-        android:layout_width="186dp"
-        android:layout_height="99dp"
-        android:layout_weight="0.36"
-        android:contentDescription="@string/select_login_patient"
-        android:onClick="goto_activity_login"
-        android:scrollbarSize="@dimen/com_facebook_button_corner_radius"
-        android:visibility="visible"
-        app:srcCompat="@drawable/com_facebook_profile_picture_blank_square" />
-
-    <TextView
-        android:id="@+id/textView002"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_margin="23dp"
-        android:layout_marginTop="98dp"
-        android:text="@string/select_login_therapist"
-        android:textColor="@android:color/holo_orange_dark"
-        android:textColorLink="@android:color/holo_orange_light"
-        android:textSize="36sp" />
+        android:layout_marginLeft="35dp"
+        android:layout_marginRight="35dp"
+        android:adjustViewBounds="true"
+        android:background="@drawable/button"
+        android:contentDescription="@string/select_login_therapist"
+        android:maxHeight="150dp"
+        android:maxWidth="150dp"
+        android:onClick="goto_activity_login"
+        android:scaleType="fitCenter"
+        android:scrollbarSize="@dimen/com_facebook_button_corner_radius"
+        android:visibility="visible"
+        app:srcCompat="@drawable/physicaltherapist" />
 
     <ImageButton
         android:id="@+id/imageButtonPatie"
-        android:layout_width="188dp"
-        android:layout_height="145dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:adjustViewBounds="true"
+        android:maxWidth="150dp"
+        android:maxHeight="150dp"
+        android:scaleType="fitCenter"
+        android:layout_marginLeft="35dp"
+        android:layout_marginRight="35dp"
+        android:background="@drawable/button"
         android:contentDescription="@string/select_login_patient"
         android:onClick="goto_activity_login"
         android:scrollbarSize="@dimen/com_facebook_button_corner_radius"
         android:visibility="visible"
-        app:srcCompat="@drawable/com_facebook_profile_picture_blank_square" />
+        app:srcCompat="@drawable/patient" />
 
-    <TextView
-        android:id="@+id/textView003"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_margin="23dp"
-        android:layout_marginTop="98dp"
-        android:text="@string/select_login_patient"
-        android:textColor="@android:color/holo_orange_dark"
-        android:textColorLink="@android:color/holo_orange_light"
-        android:textSize="36sp" />
 </LinearLayout>
