@@ -145,12 +145,21 @@ public class UpdateUserActivity extends AppCompatActivity {
                                 OnTaskCompleted listener = new OnTaskCompleted() {
                                     @Override
                                     public void onTaskCompleted(JSONObject res, int code) {
-                                        Log.v("LISTENER", res.toString());
-                                        if (code == 200){
-                                            Toast.makeText(UpdateUserActivity.this, "User update successful", Toast.LENGTH_SHORT).show();
-                                            Intent intent = new Intent(UpdateUserActivity.this, AdminActivity.class);
-                                            startActivity(intent);
-                                            finish();
+                                        try {
+                                            Log.v("LISTENER", res.toString());
+                                            if (code == 200) {
+                                                Toast.makeText(UpdateUserActivity.this, "User update successful", Toast.LENGTH_SHORT).show();
+                                                Intent intent = new Intent(UpdateUserActivity.this, AdminActivity.class);
+                                                startActivity(intent);
+                                                finish();
+                                            } else {
+                                                Toast.makeText(UpdateUserActivity.this, res.getString("status"), Toast.LENGTH_SHORT).show();
+                                                Intent intent = new Intent(UpdateUserActivity.this, UpdateUserActivity.class);
+                                                startActivity(intent);
+                                                finish();
+                                            }
+                                        }catch(Exception e){
+                                            Toast.makeText(UpdateUserActivity.this, "Error parsing response", Toast.LENGTH_SHORT).show();
                                         }
                                     }
                                 };

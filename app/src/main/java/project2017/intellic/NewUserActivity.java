@@ -111,12 +111,21 @@ public class NewUserActivity extends AppCompatActivity {
                                 OnTaskCompleted listener = new OnTaskCompleted() {
                                     @Override
                                     public void onTaskCompleted(JSONObject res, int code) {
-                                        Log.v("LISTENER", res.toString());
-                                        if (code == 200){
-                                            Toast.makeText(NewUserActivity.this, "User creation successful", Toast.LENGTH_SHORT).show();
-                                            Intent intent = new Intent(NewUserActivity.this, AdminActivity.class);
-                                            startActivity(intent);
-                                            finish();
+                                        try {
+                                            Log.v("LISTENER", res.toString());
+                                            if (code == 200) {
+                                                Toast.makeText(NewUserActivity.this, "User creation successful", Toast.LENGTH_SHORT).show();
+                                                Intent intent = new Intent(NewUserActivity.this, AdminActivity.class);
+                                                startActivity(intent);
+                                                finish();
+                                            } else {
+                                                Toast.makeText(NewUserActivity.this, res.getString("status"), Toast.LENGTH_SHORT).show();
+                                                Intent intent = new Intent(NewUserActivity.this, NewUserActivity.class);
+                                                startActivity(intent);
+                                                finish();
+                                            }
+                                        }catch(Exception e){
+                                            Log.v("RESP HANDLER", e.toString());
                                         }
                                     }
                                 };

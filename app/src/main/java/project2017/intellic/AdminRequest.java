@@ -9,6 +9,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.util.Pair;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.LinearLayout;
 import android.widget.ProgressBar;
 
@@ -57,9 +58,8 @@ public class AdminRequest extends
     private JSONObject resBody;
     private int responseCode;
 
+    // for navigation
     WeakReference<Activity> mWeakActivity;
-    private ProgressBar prog;
-
 
     public AdminRequest(OnTaskCompleted listener, Activity activity){
         this.listener=listener;
@@ -107,9 +107,10 @@ public class AdminRequest extends
             listener.onTaskCompleted(resBody, responseCode);
         } else{
             Log.v(TAG, "The Request failed." );
+            listener.onTaskCompleted(resBody, responseCode);
         }
         Activity activity = mWeakActivity.get();
-        activity.setContentView(R.layout.activity_edit_user);
+        //finish(activity);
     }
 
     // get server response
@@ -126,9 +127,16 @@ public class AdminRequest extends
             // make the connection
             urlConnection.connect();
 
+            // set properties with reponse info
+            responseCode = urlConnection.getResponseCode();
+
             // read from input stream
             BufferedReader reader;
-            reader = new BufferedReader(new InputStreamReader(urlConnection.getInputStream(),"UTF-8"));
+            if (responseCode == HttpsURLConnection.HTTP_OK){
+                reader = new BufferedReader(new InputStreamReader(urlConnection.getInputStream(),"UTF-8"));
+            } else{
+                reader = new BufferedReader(new InputStreamReader(urlConnection.getErrorStream(),"UTF-8"));
+            }
             StringBuilder stringBuilder = new StringBuilder();
             String line = null;
             while( (line = reader.readLine()) != null ){
@@ -139,9 +147,7 @@ public class AdminRequest extends
             // read string into JSON
             resBody = new JSONObject(stringBuilder.toString());
 
-            // set properties with reponse info
-            responseCode = urlConnection.getResponseCode();
-            Log.v("CODE", "" + responseCode);
+
 
             // log the type of content returned
             urlConnection.disconnect();
@@ -150,6 +156,7 @@ public class AdminRequest extends
         } catch (Exception e) {
 
             Log.v(TAG, e.toString());
+            e.printStackTrace();
 
         }
 
@@ -160,7 +167,7 @@ public class AdminRequest extends
     private void setupConnection(HttpsURLConnection conn){
 
         OutputStream out = null;
-        conn.setDoOutput(true);
+        //conn.setDoOutput(true);
         conn.setDoInput(true);
 
         // write data to the connection object

@@ -44,9 +44,9 @@ const validateFirebaseIdToken = (req, res, next) => {
 				res.status(403).send({status:'Unauthorized'});
 				return;
   			}
-		}, function( errObj ){
+		}, function( error ){
 			console.log( "Couldn't retrieve the user's role for verification. ");
-			res.status(403).send({status:'Unauthorized'});
+			res.status(403).send({status:error.message});
 			return;
 		});
 
@@ -55,7 +55,7 @@ const validateFirebaseIdToken = (req, res, next) => {
     	next();
   	}).catch(error => {
 		console.error('Error while verifying Firebase ID token:', error);
-		res.status(403).send({status:'Unauthorized'});
+		res.status(403).send({status:error.message});
 	});
 };
 
@@ -75,7 +75,9 @@ app.post('/admin/addUser', (req, res) => {
   	var lname = req.body.lname;
   	var email = req.body.email;
   	var role = req.body.role;
-  	var photoURL = req.body
+  	var photoURL = req.body.photoURL;
+  	var phone = req.body.phone;
+  	var displayName = req.body.displayName;
   	var uid, field4;
   	
 
@@ -84,44 +86,44 @@ app.post('/admin/addUser', (req, res) => {
 		email: email,
 	  	emailVerified: false,
 	  	// use Math.random().toString(36).substr(2, 8) eventually?
-	  	password: "autoPassword",
-	  	displayName: fname + ' ' + lname,
+	  	password: "123456",
+	  	displayName: displayName,
 	  	disabled: false
 	}).then( function( userRecord ){
 
 		uid = userRecord.uid;
 		console.log("Successfully created new auth user: ", uid );
 
-		if ( role == "Patient" ){
-			field4 = "Sessions";
-		} else {
-			field4 = "Patients";
-		}
+		// set last field of user entry
+		field4 = "Patient" == role ? "Sessions" : "Patients"; 
+
 	  	// Push the new message into the Realtime Database using the Firebase Admin SDK.
   		admin.database().ref('/Users').child(role).child(uid).set({
 			"fname": fname,
 			"lname": lname,
 			"email": email,
-			[field4]: true
-  		}).then(snapshot => {
-    		// Redirect with 303 SEE OTHER to the URL of the pushed object in the Firebase console.
-    		console.log("added to db");
-    		res.status(200).send({status:"Successfully added user"});
+			[field4]: null
+  		}).then(function(){
+    		admin.database().ref('/Roles').child(uid).set(role).then(function(){
+    			console.log("added to db");
+    			res.status(200).send({status:"Successfully added user"});
 
+    			// 
+    			// send user a new password
+    			//
 
-    		// send that new password to the user
-    		//
-
-
+    		}).catch(function(error){
+    			console.log("Couldn't add new user to roles", error);
+				res.status(500).send({status:error.message});
+    		});
   		});
 	}).catch(function(error) {
 		console.log("Error creating new user:", error);
-		res.status(500).send( {status:"Internal Server Error"});
+		res.status(500).send({status:error.message});
 	});
-
-
-
 });
+
+
 
 ////////////// DELETE USER ///////////////////
 app.post('/admin/deleteUser', (req, res) => {
@@ -143,6 +145,7 @@ app.post('/admin/deleteUser', (req, res) => {
 		console.log("Successfully fetched user data:", userRecord.toJSON());
 		uid = userRecord.uid;
 		console.log("uid found is:", uid);
+
 		// make sure this isn't an Admin
     	var ref = admin.database().ref('/Roles').child(uid);
 		console.log("uid found is:", ref);
@@ -154,14 +157,14 @@ app.post('/admin/deleteUser', (req, res) => {
 				res.status(400).send({status:"Can't delete this account."});
 				return;
   			}
-		}, function( errObj ){
-			console.log('Error trying to get user role.', errObj);
-			res.status(500).send({status:'Error trying to get user role.'});
+		}, function( error ){
+			console.log('Error trying to get user role.', error);
+			res.status(500).send({status:error.message});
 			return;
 		});
   	}).catch(function(error) {
     	console.log("Error retrieving user to delete.", error);
-    	res.status(500).send({status:'You cannot delete this account.'});
+    	res.status(500).send({status:error.message});
     	return;
   	});
 
@@ -170,19 +173,30 @@ app.post('/admin/deleteUser', (req, res) => {
 		console.log("Successfully deleted user from auth: ", uid);
 		// now we need to delete the user and associated date from DB
 		if (role == "Therapist"){
-			console.log('poopoopeepee');
 			var tRef = admin.database.ref('/Users').child(role).child(uid);
 			tRef.remove().then(function(){
-				res.status(200).send({status:'Tharapist deleted successful'});
-				console.log("Remove succeeded for Patient." + uid);
-				return;
+
+				// now we need to delete from roles section
+				roleRef = admin.database.ref('/Roles').child(uid);
+				roleRef.remove().then(function(){
+
+					// remove from roles successful
+					res.status(200).send({status:'Tharapist deleted successful'});
+					console.log("Remove succeeded for Therapist" + uid);
+					return;
+				}).catch(function(error){
+					console.log("Error removing user from Roles node.", error);
+    				res.status(500).send({status:error.message});
+    				return;
+				});
 			}).catch( function(error) {
 				console.log("Remove failed on Tharapist: " + uid + "  " + error );
+				res.status(500).send({status:error.message});
 				return;
 			});
 		} else {
 			// this is a patient so we need to clean up the sessions also
-			var ref = admin.database().ref('/Users/Patient').child(uid).child("Sessions");
+			var ref = admin.database().ref('/Users/Patient').child(uid).child( "Sessions" );
 			ref.once("value", function(data) {
 				// we need to check if this is empty
   				if (null == data.val()){
@@ -194,24 +208,25 @@ app.post('/admin/deleteUser', (req, res) => {
   					sessions = data.val();
   					console.log("sessions is type: ", typeof sessions );
   					sessions = data.val();
+
   					// loop through object props
   					Object.keys(sessions).forEach(function(key,index) {
   						var newRef = admin.database().ref('/Sessions').child(key);
   						newRef.remove().then( function(){
   							console.log("successfully deleted a session");
-  						}).catch(function(err){
+  						}).catch(function(error){
   							// couldn't remove session from sessions node
   							console.log("couldn't delete a session");
-  							//continue;
+  							res.status(500).send({status:error.message});
   						});
 					});
 					console.log("made it to the end of delete");
 					res.status(200).send({status:"Delete function done"});
 					return;
   				}
-			}, function( errObj ){
+			}, function( error ){
 				console.log('Error trying to get user role.', errObj);
-				res.status(500).send({status:'Error trying to get user role.'});
+				res.status(500).send({status:error.message});
 				return;
 			});
 			ref = admin.database().ref('/Users/Patient').child(uid);
@@ -220,12 +235,14 @@ app.post('/admin/deleteUser', (req, res) => {
 				console.log("Remove succeeded for Patient." + uid);
 				return;
 			}).catch( function(error) {
+				res.status(500).send({status:error.message});
 				console.log("Remove failed on Patient: ", uid + "  " + error);
 				return;
 			});
 		}
 	}).catch(function(error) {
 		console.log("Couldn't delete user for some reason: ", error);
+		res.status(500).send({status:error.message});
 		return;
 	});
 });
@@ -252,7 +269,7 @@ app.post('/admin/getUser', (req, res) => {
   			role = data.val();
   			if ("Administrator" == role ){
   				console.error('Trying to edit an admin account');
-			res.status(400).send({status:"Can't edit this account."});
+				res.status(400).send({status:"Can't edit this account."});
 				return;
   			} else {
   				// call database for fname and lname
@@ -286,12 +303,12 @@ app.post('/admin/getUser', (req, res) => {
   			}
 		}, function( errObj ){
 			console.log('Error trying to get user role.', errObj);
-			res.status(500).send({status:'Error trying to get user role.'});
+			res.status(500).send({status:error.message});
 			return;
 		});
   	}).catch(function(error) {
     	console.log("Error retrieving user to delete.", error);
-    	res.status(500).send({status:'You cannot delete this account.'});
+    	res.status(500).send({status:error.message});
     	return;
   	});
 
@@ -328,10 +345,10 @@ app.post('/admin/updateUser', (req, res) => {
 	// update AUTH with new info
 	admin.auth().updateUser( uid, {
 		email: newEmail,
-		phoneNumber: '+447911123456',//newPhone,
+		//phoneNumber: newPhone,
 		emailVerified: newVerified,
 		displayName: newDisplayName,
-		photoURL: 'https://static.pexels.com/photos/290263/pexels-photo-290263.jpeg',//newPhotoURL,
+		//photoURL: newPhotoURL,
 		disabled: newDisabled
 	}).then(function(userRecord){
 		console.log("successfully updated user: " + userRecord );
@@ -343,7 +360,7 @@ app.post('/admin/updateUser', (req, res) => {
 		
 	}).catch(function(error){
 		console.log("error updating user" + error);
-		res.status(500).send(error.toJSON());
+		res.status(500).send({status:error.message});
 		return;
 	});
 
