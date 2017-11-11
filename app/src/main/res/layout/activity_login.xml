@@ -19,7 +19,7 @@
 
         <ImageView
             android:id="@+id/imageView2"
-            android:layout_width="348dp"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginLeft="50dp"
             android:layout_marginStart="30dp"
@@ -48,9 +48,9 @@
 
         <Button
             android:id="@+id/buttonLogin"
-            android:layout_width="match_parent"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_margin="10dp"
+            android:layout_gravity="center_horizontal"
             android:background="@drawable/pinkbutton"
             android:onClick="loginPublic"
             android:text="@string/Login"
@@ -58,8 +58,9 @@
 
         <Button
             android:id="@+id/buttonCreateUser"
-            android:layout_width="match_parent"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
             android:layout_margin="10dp"
             android:background="@drawable/bluebutton"
             android:onClick="loginPublic"
