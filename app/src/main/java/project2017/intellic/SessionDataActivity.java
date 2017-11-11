@@ -402,6 +402,10 @@ public class SessionDataActivity extends AppCompatActivity {
                 test.setText(st);
                 TextView max = (TextView) findViewById(R.id.textView24);
                 TextView min = (TextView) findViewById(R.id.textView20);
+                TextView Mean = (TextView) findViewById(R.id.textView12);
+                Double calMean;
+                TextView StandardDeveation = (TextView) findViewById(R.id.textView13);
+
                 switch (st) {
                     case "1":
                         series = new LineGraphSeries<>(pointsHAx);
@@ -413,7 +417,9 @@ public class SessionDataActivity extends AppCompatActivity {
 
                         max.setText(Double.toString(Collections.max(HAx)));
                         min.setText(Double.toString(Collections.min(HAx)));
-
+                        calMean=calculateMean(HAx);
+                        Mean.setText(Double.toString(calMean));
+                        StandardDeveation.setText(Double.toString(CalculateSD(HAx,calMean)));
                         break;
                     case "2":
                         series = new LineGraphSeries<>(pointHAy);
@@ -424,6 +430,9 @@ public class SessionDataActivity extends AppCompatActivity {
                         graph.getViewport().setScalableY(true);
                         max.setText(Double.toString(Collections.max(HAy)));
                         min.setText(Double.toString(Collections.min(HAy)));
+                        calMean=calculateMean(HAy);
+                        Mean.setText(Double.toString(calMean));
+                        StandardDeveation.setText(Double.toString(CalculateSD(HAy,calMean)));
                         break;
                     case "3":
                         series = new LineGraphSeries<>(pointHAz);
@@ -434,6 +443,9 @@ public class SessionDataActivity extends AppCompatActivity {
                         graph.getViewport().setScalableY(true);
                         max.setText(Double.toString(Collections.max(HAz)));
                         min.setText(Double.toString(Collections.min(HAz)));
+                        calMean=calculateMean(HAz);
+                        Mean.setText(Double.toString(calMean));
+                        StandardDeveation.setText(Double.toString(CalculateSD(HAz,calMean)));
                         break;
                     case "4":
                         series = new LineGraphSeries<>(pointBAx);
@@ -444,6 +456,9 @@ public class SessionDataActivity extends AppCompatActivity {
                         graph.getViewport().setScalableY(true);
                         max.setText(Double.toString(Collections.max(BAx)));
                         min.setText(Double.toString(Collections.min(BAx)));
+                        calMean=calculateMean(BAx);
+                        Mean.setText(Double.toString(calMean));
+                        StandardDeveation.setText(Double.toString(CalculateSD(BAx,calMean)));
                         break;
                     case "5":
                         series = new LineGraphSeries<>(pointBAy);
@@ -454,6 +469,9 @@ public class SessionDataActivity extends AppCompatActivity {
                         graph.getViewport().setScalableY(true);
                         max.setText(Double.toString(Collections.max(BAy)));
                         min.setText(Double.toString(Collections.min(BAy)));
+                        calMean=calculateMean(BAy);
+                        Mean.setText(Double.toString(calMean));
+                        StandardDeveation.setText(Double.toString(CalculateSD(BAy,calMean)));
                         break;
                     case "6":
                         series = new LineGraphSeries<>(pointBAz);
@@ -464,6 +482,9 @@ public class SessionDataActivity extends AppCompatActivity {
                         graph.getViewport().setScalableY(true);
                         max.setText(Double.toString(Collections.max(BAz)));
                         min.setText(Double.toString(Collections.min(BAz)));
+                        calMean=calculateMean(BAz);
+                        Mean.setText(Double.toString(calMean));
+                        StandardDeveation.setText(Double.toString(CalculateSD(BAz,calMean)));
                         break;
                     case "7":
                         series = new LineGraphSeries<>(pointGx);
@@ -474,6 +495,9 @@ public class SessionDataActivity extends AppCompatActivity {
                         graph.getViewport().setScalableY(true);
                         max.setText(Double.toString(Collections.max(Gx)));
                         min.setText(Double.toString(Collections.min(Gx)));
+                        calMean=calculateMean(Gx);
+                        Mean.setText(Double.toString(calMean));
+                        StandardDeveation.setText(Double.toString(CalculateSD(Gx,calMean)));
                         break;
                     case "8":
                         series = new LineGraphSeries<>(pointGy);
@@ -484,6 +508,9 @@ public class SessionDataActivity extends AppCompatActivity {
                         graph.getViewport().setScalableY(true);
                         max.setText(Double.toString(Collections.max(Gy)));
                         min.setText(Double.toString(Collections.min(Gy)));
+                        calMean=calculateMean(Gy);
+                        Mean.setText(Double.toString(calMean));
+                        StandardDeveation.setText(Double.toString(CalculateSD(Gy,calMean)));
                         break;
                     case "9":
                         series = new LineGraphSeries<>(pointGz);
@@ -494,6 +521,9 @@ public class SessionDataActivity extends AppCompatActivity {
                         graph.getViewport().setScalableY(true);
                         max.setText(Double.toString(Collections.max(Gz)));
                         min.setText(Double.toString(Collections.min(Gz)));
+                        calMean=calculateMean(Gz);
+                        Mean.setText(Double.toString(calMean));
+                        StandardDeveation.setText(Double.toString(CalculateSD(Gz,calMean)));
                         break;
                     case "10":
                         series = new LineGraphSeries<>(pointf0);
@@ -504,6 +534,9 @@ public class SessionDataActivity extends AppCompatActivity {
                         graph.getViewport().setScalableY(true);
                         max.setText(Double.toString(Collections.max(f0)));
                         min.setText(Double.toString(Collections.min(f0)));
+                        calMean=calculateMean(f0);
+                        Mean.setText(Double.toString(calMean));
+                        StandardDeveation.setText(Double.toString(CalculateSD(f0,calMean)));
                         break;
                     case "11":
                         series = new LineGraphSeries<>(pointf1);
@@ -514,6 +547,9 @@ public class SessionDataActivity extends AppCompatActivity {
                         graph.getViewport().setScalableY(true);
                         max.setText(Double.toString(Collections.max(f1)));
                         min.setText(Double.toString(Collections.min(f1)));
+                        calMean=calculateMean(f1);
+                        Mean.setText(Double.toString(calMean));
+                        StandardDeveation.setText(Double.toString(CalculateSD(f1,calMean)));
                         break;
                     case "12":
                         series = new LineGraphSeries<>(pointf2);
@@ -524,6 +560,9 @@ public class SessionDataActivity extends AppCompatActivity {
                         graph.getViewport().setScalableY(true);
                         max.setText(Double.toString(Collections.max(f2)));
                         min.setText(Double.toString(Collections.min(f2)));
+                        calMean=calculateMean(f2);
+                        Mean.setText(Double.toString(calMean));
+                        StandardDeveation.setText(Double.toString(CalculateSD(f2,calMean)));
                         break;
                     case "13":
                         series = new LineGraphSeries<>(pointf3);
@@ -534,6 +573,9 @@ public class SessionDataActivity extends AppCompatActivity {
                         graph.getViewport().setScalableY(true);
                         max.setText(Double.toString(Collections.max(f3)));
                         min.setText(Double.toString(Collections.min(f3)));
+                        calMean=calculateMean(f3);
+                        Mean.setText(Double.toString(calMean));
+                        StandardDeveation.setText(Double.toString(CalculateSD(f3,calMean)));
                         break;
                     case "14":
                         series = new LineGraphSeries<>(pointf4);
@@ -544,6 +586,9 @@ public class SessionDataActivity extends AppCompatActivity {
                         graph.getViewport().setScalableY(true);
                         max.setText(Double.toString(Collections.max(f4)));
                         min.setText(Double.toString(Collections.min(f4)));
+                        calMean=calculateMean(f4);
+                        Mean.setText(Double.toString(calMean));
+                        StandardDeveation.setText(Double.toString(CalculateSD(f4,calMean)));
                         break;
                     case "15":
                         series = new LineGraphSeries<>(pointf5);
@@ -554,6 +599,9 @@ public class SessionDataActivity extends AppCompatActivity {
                         graph.getViewport().setScalableY(true);
                         max.setText(Double.toString(Collections.max(f5)));
                         min.setText(Double.toString(Collections.min(f5)));
+                        calMean=calculateMean(f5);
+                        Mean.setText(Double.toString(calMean));
+                        StandardDeveation.setText(Double.toString(CalculateSD(f5,calMean)));
                         break;
                     case "16":
                         series = new LineGraphSeries<>(pointf6);
@@ -564,6 +612,9 @@ public class SessionDataActivity extends AppCompatActivity {
                         graph.getViewport().setScalableY(true);
                         max.setText(Double.toString(Collections.max(f6)));
                         min.setText(Double.toString(Collections.min(f6)));
+                        calMean=calculateMean(f6);
+                        Mean.setText(Double.toString(calMean));
+                        StandardDeveation.setText(Double.toString(CalculateSD(f6,calMean)));
                         break;
                     case "17":
                         series = new LineGraphSeries<>(pointf7);
@@ -574,6 +625,9 @@ public class SessionDataActivity extends AppCompatActivity {
                         graph.getViewport().setScalableY(true);
                         max.setText(Double.toString(Collections.max(f7)));
                         min.setText(Double.toString(Collections.min(f7)));
+                        calMean=calculateMean(f7);
+                        Mean.setText(Double.toString(calMean));
+                        StandardDeveation.setText(Double.toString(CalculateSD(f7,calMean)));
                         break;
                     case "18":
                         series = new LineGraphSeries<>(pointHA);
@@ -584,6 +638,9 @@ public class SessionDataActivity extends AppCompatActivity {
                         graph.getViewport().setScalableY(true);
                         max.setText(Double.toString(Collections.max(HA)));
                         min.setText(Double.toString(Collections.min(HA)));
+                        calMean=calculateMean(HA);
+                        Mean.setText(Double.toString(calMean));
+                        StandardDeveation.setText(Double.toString(CalculateSD(HA,calMean)));
                         break;
                     case "19":
                         series = new LineGraphSeries<>(pointBA);
@@ -594,6 +651,9 @@ public class SessionDataActivity extends AppCompatActivity {
                         graph.getViewport().setScalableY(true);
                         max.setText(Double.toString(Collections.max(BA)));
                         min.setText(Double.toString(Collections.min(BA)));
+                        calMean=calculateMean(BA);
+                        Mean.setText(Double.toString(calMean));
+                        StandardDeveation.setText(Double.toString(CalculateSD(BA,calMean)));
                         break;
                     case "20":
                         series = new LineGraphSeries<>(pointG);
@@ -604,6 +664,9 @@ public class SessionDataActivity extends AppCompatActivity {
                         graph.getViewport().setScalableY(true);
                         max.setText(Double.toString(Collections.max(G)));
                         min.setText(Double.toString(Collections.min(G)));
+                        calMean=calculateMean(G);
+                        Mean.setText(Double.toString(calMean));
+                        StandardDeveation.setText(Double.toString(CalculateSD(G,calMean)));
                         break;
                     case "21":
                         series = new LineGraphSeries<>(pointFsum);
@@ -614,6 +677,9 @@ public class SessionDataActivity extends AppCompatActivity {
                         graph.getViewport().setScalableY(true);
                         max.setText(Double.toString(Collections.max(Fsum)));
                         min.setText(Double.toString(Collections.min(Fsum)));
+                        calMean=calculateMean(Fsum);
+                        Mean.setText(Double.toString(calMean));
+                        StandardDeveation.setText(Double.toString(CalculateSD(Fsum,calMean)));
                         break;
                     case "22":
                         series = new LineGraphSeries<>(pointGt);
@@ -624,6 +690,9 @@ public class SessionDataActivity extends AppCompatActivity {
                         graph.getViewport().setScalableY(true);
                         max.setText(Double.toString(Collections.max(Gt)));
                         min.setText(Double.toString(Collections.min(Gt)));
+                        calMean=calculateMean(Gt);
+                        Mean.setText(Double.toString(calMean));
+                        StandardDeveation.setText(Double.toString(CalculateSD(Gt,calMean)));
                         break;
                     case "23":
                         series = new LineGraphSeries<>(pointHAt);
@@ -634,7 +703,11 @@ public class SessionDataActivity extends AppCompatActivity {
                         graph.getViewport().setScalableY(true);
                         max.setText(Double.toString(Collections.max(HAt)));
                         min.setText(Double.toString(Collections.min(HAt)));
+                        calMean=calculateMean(HAt);
+                        Mean.setText(Double.toString(calMean));
+                        StandardDeveation.setText(Double.toString(CalculateSD(HAt,calMean)));
                         break;
+
                     case "24":
                         series = new LineGraphSeries<>(pointBAt);
                         graph.addSeries(series);
@@ -644,6 +717,9 @@ public class SessionDataActivity extends AppCompatActivity {
                         graph.getViewport().setScalableY(true);
                         max.setText(Double.toString(Collections.max(BAt)));
                         min.setText(Double.toString(Collections.min(BAt)));
+                        calMean=calculateMean(BAt);
+                        Mean.setText(Double.toString(calMean));
+                        StandardDeveation.setText(Double.toString(CalculateSD(BAt,calMean)));
                         break;
 
                     case "25":
@@ -655,6 +731,9 @@ public class SessionDataActivity extends AppCompatActivity {
                         graph.getViewport().setScalableY(true);
                         max.setText(Double.toString(Collections.max(V_US)));
                         min.setText(Double.toString(Collections.min(V_US)));
+                        calMean=calculateMean(V_US);
+                        Mean.setText(Double.toString(calMean));
+                        StandardDeveation.setText(Double.toString(CalculateSD(V_US,calMean)));
                         break;
                     case "26":
                         series = new LineGraphSeries<>(pointV_LC);
@@ -663,8 +742,11 @@ public class SessionDataActivity extends AppCompatActivity {
                         graph.getViewport().setScrollableY(true);
                         graph.getViewport().setScalable(true);
                         graph.getViewport().setScalableY(true);
-                        max.setText(Double.toString(Collections.max(V_US)));
-                        min.setText(Double.toString(Collections.min(V_US)));
+                        max.setText(Double.toString(Collections.max(V_LC)));
+                        min.setText(Double.toString(Collections.min(V_LC)));
+                        calMean=calculateMean(V_LC);
+                        Mean.setText(Double.toString(calMean));
+                        StandardDeveation.setText(Double.toString(CalculateSD(V_LC,calMean)));
                         break;
                     case "27":
                         series = new LineGraphSeries<>(pointRoll);
@@ -675,6 +757,9 @@ public class SessionDataActivity extends AppCompatActivity {
                         graph.getViewport().setScalableY(true);
                         max.setText(Double.toString(Collections.max(roll)));
                         min.setText(Double.toString(Collections.min(roll)));
+                        calMean=calculateMean(roll);
+                        Mean.setText(Double.toString(calMean));
+                        StandardDeveation.setText(Double.toString(CalculateSD(roll,calMean)));
                         break;
                     case "28":
                         series = new LineGraphSeries<>(pointPitch);
@@ -685,6 +770,9 @@ public class SessionDataActivity extends AppCompatActivity {
                         graph.getViewport().setScalableY(true);
                         max.setText(Double.toString(Collections.max(pitch)));
                         min.setText(Double.toString(Collections.min(pitch)));
+                        calMean=calculateMean(pitch);
+                        Mean.setText(Double.toString(calMean));
+                        StandardDeveation.setText(Double.toString(CalculateSD(pitch,calMean)));
                         break;
 
                 }}
@@ -736,6 +824,27 @@ public class SessionDataActivity extends AppCompatActivity {
         series2.setValuesOnTopColor(Color.RED);
         //series.setValuesOnTopSize(50);
   */  }
+  //this function add the whole array and divides by the numbr of items
+    private Double calculateMean(List <Double> Signal) {
+        double sum = 0;
+        for (int i=0; i< Signal.size(); i++) {
+            sum += Signal.get(i);
+        }
+        return sum / Signal.size();
+    }
 
+    //this function takes the squared differance of the element minus the average divide by the
+    // number of elements and returns the squareroot of that
+    private double CalculateSD(List <Double> Signal,double Mean)
+    {
 
+        double sd = 0;
+        for (int i = 0; i < Signal.size(); i++)
+        {
+            sd += Math.pow((Signal.get(i) - Mean),2.0);
+        }
+        sd=sd/Signal.size();
+        return sqrt(sd);
+
+    }
 }
