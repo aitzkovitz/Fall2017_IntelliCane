@@ -16,4 +16,28 @@
     <string name="select_login_therapist">Therapist</string>
     <string name="select_login_admin">Administrator</string>
     <string name="activity_login_create_account">I want to create an new account</string>
+    <string name="Create_Association">Create Association</string>
+    <string name="Select_Session">Select Session</string>
+    <string name="Select_Patient">Select Patient</string>
+    <string name="Administrator">Administrator</string>
+    <string name="Select_Therapist">Select Therapist</string>
+    <string name="Get_User">Get User</string>
+    <string name="Delete_User">Delete User</string>
+    <string name="New_user_is_a">New user is a…</string>
+    <string name="Email">Email</string>
+    <string name="First_Name">First Name</string>
+    <string name="Last_Name">Last Name</string>
+    <string name="Phone">Phone</string>
+    <string name="Photo_URL">Photo URL</string>
+    <string name="Display_Name">Display Name</string>
+    <string name="Therapist">Therapist</string>
+    <string name="Patient">Patient</string>
+    <string name="Add_User">Add User</string>
+    <string name="Select_a_Patient">Select a Patient</string>
+    <string name="Fname">Fname</string>
+    <string name="Lname">Lname</string>
+    <string name="Disabled">Disabled</string>
+    <string name="Update_User">Update User</string>
+    <string name="Verified">Verified</string>
+
 </resources>

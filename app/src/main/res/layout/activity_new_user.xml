@@ -10,7 +10,7 @@
         android:layout_height="wrap_content"
         android:layout_marginBottom="16dp"
         android:layout_marginTop="40dp"
-        android:text="New user is a..."
+        android:text="@string/New_user_is_a"
         android:textAppearance="@style/TextAppearance.AppCompat.Display1" />
 
 
@@ -55,7 +55,7 @@
         android:id="@+id/newUserEmail"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:hint="Email"
+        android:hint="@string/Email"
         android:inputType="textEmailAddress"
         />
 
@@ -63,32 +63,32 @@
         android:id="@+id/newUserfName"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:hint="First Name" />
+        android:hint="@string/First_Name" />
 
     <EditText
         android:id="@+id/newUserlName"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:hint="Last Name" />
+        android:hint="@string/Last_Name" />
 
     <EditText
         android:id="@+id/newUserPhone"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:hint="Phone"
+        android:hint="@string/Phone"
         />
     <EditText
         android:id="@+id/newUserPhotoURL"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:hint="Photo URL"
+        android:hint="@string/Photo_URL"
         android:inputType="textUri"/>
 
     <EditText
         android:id="@+id/newUserDisplayName"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:hint="Display Name"
+        android:hint="@string/Display_Name"
         android:inputType="text"/>
 
     <RadioGroup
@@ -99,20 +99,20 @@
 
         <RadioButton
             android:id="@+id/newUserAdminRadio"
-            android:hint="Administrator"
-            android:text="Administrator"
+            android:hint="@string/admin"
+            android:text="@string/admin"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content" />
         <RadioButton
             android:id="@+id/newUserTherapistRadio"
-            android:hint="Therapist"
-            android:text="Therapist"
+            android:hint="@string/Therapist"
+            android:text="@string/Therapist"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content" />
         <RadioButton
             android:id="@+id/newUserPatientRadio"
-            android:hint="Patient"
-            android:text="Patient"
+            android:hint="@string/Patient"
+            android:text="@string/Patient"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content" />
 
@@ -126,7 +126,7 @@
         android:layout_gravity="center"
         android:background="@drawable/button"
         android:onClick="createNewUserRequest"
-        android:text="Add User"
+        android:text="@string/Add_User"
         android:textColor="@color/colorPrimary2"/>
 
 

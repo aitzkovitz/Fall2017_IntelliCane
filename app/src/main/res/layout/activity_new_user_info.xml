@@ -9,26 +9,26 @@
         android:id="@+id/signUpUserFname"
         android:layout_width="300dp"
         android:layout_height="wrap_content"
-        android:hint="First Name" />
+        android:hint="@string/First_Name" />
 
     <EditText
         android:id="@+id/signUpUserLname"
         android:layout_width="300dp"
         android:layout_height="wrap_content"
-        android:hint="Last Name" />
+        android:hint="@string/Last_Name" />
 
     <EditText
         android:id="@+id/signUpUserEmail"
         android:layout_width="300dp"
         android:layout_height="wrap_content"
         android:inputType="textEmailAddress"
-        android:hint="Email"
+        android:hint="@string/Email"
         />
     <EditText
         android:id="@+id/signUpUserPassword"
         android:layout_width="300dp"
         android:layout_height="wrap_content"
-        android:hint="Password"
+        android:hint="@string/password"
         android:inputType="textVisiblePassword"/>
 
     <RadioGroup
@@ -47,6 +47,6 @@
         android:layout_gravity="center"
         android:background="@drawable/button"
         android:onClick="createNewUserRequest"
-        android:text="Add User"
+        android:text="@string/Add_User"
         android:textColor="@color/colorPrimary2"/>
 </LinearLayout>

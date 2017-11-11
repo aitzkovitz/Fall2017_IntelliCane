@@ -8,53 +8,53 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_margin="15dp"
-        android:hint="Fname"
+        android:hint="@string/Fname"
         android:inputType="textEmailAddress" />
     <EditText
         android:id="@+id/editUserLname"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_margin="15dp"
-        android:hint="Lname"
+        android:hint="@string/Lname"
         android:inputType="text" />
     <EditText
         android:id="@+id/editUserEmail"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_margin="15dp"
-        android:hint="Email"
+        android:hint="@string/Email"
         android:inputType="textEmailAddress" />
     <EditText
         android:id="@+id/editUserPhone"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_margin="15dp"
-        android:hint="Phone"
+        android:hint="@string/Phone"
         android:inputType="phone" />
     <EditText
         android:id="@+id/editUserPhotoURL"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_margin="15dp"
-        android:hint="Photo URL"
+        android:hint="@string/Photo_URL"
         android:inputType="textUri" />
     <EditText
         android:id="@+id/editUserDisplayName"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_margin="15dp"
-        android:hint="Display Name"
+        android:hint="@string/Display_Name"
         android:inputType="text" />
     <CheckBox
         android:id="@+id/editUserDisabled"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:hint="Disabled" />
+        android:hint="@string/Disabled" />
     <CheckBox
         android:id="@+id/editUserVerified"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:hint="Verified" />
+        android:hint="@string/Verified" />
 
     <Button
         android:id="@+id/amdinUpdateUser"
@@ -63,7 +63,7 @@
         android:layout_margin="15dp"
         android:background="@color/colorPrimary"
         android:onClick="updateUserRequest"
-        android:hint="Update User"
+        android:hint="@string/Update_User"
         android:textColor="@android:color/white" />
 
 </LinearLayout>
