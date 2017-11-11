@@ -1,6 +1,7 @@
 package project2017.intellic;
 
 import android.content.Intent;
+import android.support.v4.app.NavUtils;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.Menu;
@@ -50,6 +51,9 @@ public class AssociateUserActivity extends AppCompatActivity {
                 startActivity(intent);
                 finish();
                 break;
+            case android.R.id.home:
+                NavUtils.navigateUpFromSameTask(this);
+                return true;
             default:
                 break;
         }
@@ -60,6 +64,7 @@ public class AssociateUserActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_associate_user);
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
         // Reference patient list under current Therapist user
         database = FirebaseDatabase.getInstance();

@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <EditText
+        android:id="@+id/editUserFname"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="15dp"
+        android:hint="First name"
+        android:textSize="40dp"
+        android:inputType="textEmailAddress" />
+    <EditText
+        android:id="@+id/editUserLname"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="15dp"
+        android:hint="Last name"
+        android:textSize="40dp"
+        android:inputType="text" />
+    <EditText
+        android:id="@+id/editUserEmail"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="15dp"
+        android:hint="Email"
+        android:textSize="40dp"
+        android:inputType="textEmailAddress" />
+    <EditText
+        android:id="@+id/editUserPhone"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="15dp"
+        android:hint="Phone"
+        android:textSize="40dp"
+        android:inputType="phone" />
+    <EditText
+        android:id="@+id/editUserPhotoURL"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="15dp"
+        android:hint="Photo URL"
+        android:textSize="40dp"
+        android:inputType="textUri" />
+    <EditText
+        android:id="@+id/editUserDisplayName"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="15dp"
+        android:hint="Display Name"
+        android:textSize="40dp"
+        android:inputType="text" />
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+
+        <CheckBox
+            android:id="@+id/editUserDisabled"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Disabled"
+            android:textSize="40dp"
+            android:layout_margin="15dp"
+            android:layout_weight="1"/>
+
+        <CheckBox
+            android:id="@+id/editUserVerified"
+            android:layout_width="206dp"
+            android:layout_height="wrap_content"
+            android:hint="Verified"
+            android:textSize="40dp"
+            android:layout_margin="15dp"
+            android:layout_weight="1"/>
+    </LinearLayout>
+
+
+    <Button
+        android:id="@+id/amdinUpdateUser"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:padding="30dp"
+        android:layout_margin="15dp"
+        android:onClick="updateUserRequest"
+        android:text="Update User"
+        android:textSize="40dp"
+        android:textColor="@color/colorPrimary"
+        android:background="@drawable/bluebutton"/>
+
+</LinearLayout>

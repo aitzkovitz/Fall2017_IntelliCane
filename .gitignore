@@ -7,3 +7,7 @@
 /build
 /captures
 .externalNativeBuild
+firebase-functions-node/functions/node_modules
+node_modules/
+.firebaserc
+/firebase-functions-node/functions/test.rtf

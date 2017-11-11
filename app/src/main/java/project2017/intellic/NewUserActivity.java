@@ -31,6 +31,8 @@ import com.google.firebase.auth.GetTokenResult;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
+import org.json.JSONObject;
+
 public class NewUserActivity extends AppCompatActivity {
     private FirebaseAuth firebaseAuth;
     String uid = "";
@@ -40,6 +42,7 @@ public class NewUserActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_new_user);
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
     }
 
     @Override
@@ -61,6 +64,9 @@ public class NewUserActivity extends AppCompatActivity {
                 startActivity(intent);
                 finish();
                 break;
+            case android.R.id.home:
+                NavUtils.navigateUpFromSameTask(this);
+                return true;
             default:
                 break;
         }
@@ -74,10 +80,13 @@ public class NewUserActivity extends AppCompatActivity {
 
         FirebaseAuth mAuth = FirebaseAuth.getInstance();
 
-        EditText editTextEmail = (EditText) findViewById(R.id.newUserEmail);
-        EditText editTextFName = (EditText) findViewById(R.id.fName);
-        EditText editTextLName = (EditText) findViewById(R.id.lName);
-        radioGroup = (RadioGroup) findViewById(R.id.radio);
+        EditText editTextEmail = (EditText) findViewById(R.id.newUserEmail );
+        EditText editTextFName = (EditText) findViewById(R.id.newUserfName );
+        EditText editTextLName = (EditText) findViewById(R.id.newUserlName );
+        EditText editTextPhone = (EditText) findViewById(R.id.newUserPhone );
+        EditText editTextPhotoURL = (EditText) findViewById(R.id.newUserPhotoURL );
+        EditText editTextDisplayName = (EditText) findViewById(R.id.newUserDisplayName );
+        radioGroup = (RadioGroup) findViewById(R.id.newUserRoleRadio );
 
         int selectedId = radioGroup.getCheckedRadioButtonId();
         radioButton = (RadioButton) findViewById(selectedId);
@@ -85,6 +94,9 @@ public class NewUserActivity extends AppCompatActivity {
         final String email = editTextEmail.getText().toString();
         final String fname = editTextFName.getText().toString();
         final String lname = editTextLName.getText().toString();
+        final String photourl = editTextPhotoURL.getText().toString();
+        final String phone = editTextPhone.getText().toString();
+        final String displayname = editTextDisplayName.getText().toString();
         final String role = radioButton.getText().toString();
 
         // TBI: use cookies instead of requesting a token to send each time
@@ -95,26 +107,50 @@ public class NewUserActivity extends AppCompatActivity {
                     public void onComplete(@NonNull Task<GetTokenResult> task) {
                         if (task.isSuccessful()) {
                             try {
+                                // make callback for task completion
+                                OnTaskCompleted listener = new OnTaskCompleted() {
+                                    @Override
+                                    public void onTaskCompleted(JSONObject res, int code) {
+                                        try {
+                                            Log.v("LISTENER", res.toString());
+                                            if (code == 200) {
+                                                Toast.makeText(NewUserActivity.this, "User creation successful", Toast.LENGTH_SHORT).show();
+                                                Intent intent = new Intent(NewUserActivity.this, AdminActivity.class);
+                                                startActivity(intent);
+                                                finish();
+                                            } else {
+                                                Toast.makeText(NewUserActivity.this, res.getString("status"), Toast.LENGTH_SHORT).show();
+                                                Intent intent = new Intent(NewUserActivity.this, NewUserActivity.class);
+                                                startActivity(intent);
+                                                finish();
+                                            }
+                                        }catch(Exception e){
+                                            Log.v("RESP HANDLER", e.toString());
+                                        }
+                                    }
+                                };
+
+                                // get token from promise
                                 String tok = task.getResult().getToken();
-                                // send the token as part of the request
-                                AdminRequest adminRequest = new AdminRequest();
+
+                                // pass listener in request constructor
+                                AdminRequest adminRequest = new AdminRequest( listener, NewUserActivity.this );
                                 adminRequest.addPost(
                                         new Pair<String, String>("role", role),
                                         new Pair<String, String>("email", email),
                                         new Pair<String, String>("fname", fname),
-                                        new Pair<String, String>("lname", lname));
+                                        new Pair<String, String>("lname", lname),
+                                        new Pair<String, String>("photoURL", photourl),
+                                        new Pair<String, String>("phone", phone),
+                                        new Pair<String, String>("displayName", displayname)
+                                );
                                 adminRequest.addToken(tok);
                                 adminRequest.execute("addUser");
-
-
-                                Toast.makeText(NewUserActivity.this, "user creation successful", Toast.LENGTH_SHORT).show();
-                                Intent intent = new Intent(NewUserActivity.this, AdminActivity.class);
-                                startActivity(intent);
-                                finish();
 
                             } catch(Exception e){
                                 Log.v("AMI", e.toString());
                             }
+
                         }
                     }
                 });

@@ -16,16 +16,14 @@
         <activity android:name=".LoginActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
-
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".AdminActivity">
-
-            <!-- android:parentActivityName=".LoginActivity"> -->
-            <!-- <meta-data -->
-            <!-- android:name="android.support.PARENT_ACTIVITY" -->
-            <!-- android:value="project2017.intellic.LoginActivity" /> -->
+        <activity android:name=".AdminActivity"
+            android:parentActivityName=".LoginActivity">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="project2017.intellic.LoginActivity"/>
         </activity>
         <activity android:name=".NewUserSignupActivity">
 
@@ -42,6 +40,7 @@
                 android:value="project2017.intellic.AdminActivity" />
         </activity>
         <activity android:name=".PatientSelectActivity">
+
 
             <!-- android:parentActivityName=".LoginActivity"> -->
             <!-- <meta-data -->
@@ -76,9 +75,41 @@
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="project2017.intellic.AdminActivity" />
         </activity>
-        <activity android:name="res.layout.SplashScreen" />
-        <activity android:name=".SplashScreenActivity.SplashScreen" />
-        <activity android:name=".SplashScreen" />
+        <activity
+            android:name=".EditUserActivity"
+            android:parentActivityName=".AdminActivity">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="project2017.intellic.AdminActivity" />
+        </activity>
+        <activity
+            android:name=".DeleteUserActivity"
+            android:parentActivityName=".AdminActivity">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="project2017.intellic.AdminActivity" />
+        </activity>
+        <activity
+            android:name=".DeleteDataActivity"
+            android:parentActivityName=".AdminActivity">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="project2017.intellic.AdminActivity" />
+        </activity>
+        <activity
+            android:name=".UpdateUserActivity"
+            android:parentActivityName=".AdminActivity">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="project2017.intellic.EditUserActivity" />
+        </activity>
+        <activity
+            android:name=".SettingsActivity"
+            android:parentActivityName=".LoginActivity">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="project2017.intellic.LoginActivity" />
+        </activity>
     </application>
 
 </manifest>
