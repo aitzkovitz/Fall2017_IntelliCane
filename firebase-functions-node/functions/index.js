@@ -225,7 +225,7 @@ app.post('/admin/deleteUser', (req, res) => {
 					return;
   				}
 			}, function( error ){
-				console.log('Error trying to get user role.', errObj);
+				console.log('Error trying to get user role.', error);
 				res.status(500).send({status:error.message});
 				return;
 			});
@@ -301,8 +301,8 @@ app.post('/admin/getUser', (req, res) => {
   					res.status(500).send({status:"Could not get user from DB."});
   				});
   			}
-		}, function( errObj ){
-			console.log('Error trying to get user role.', errObj);
+		}, function( error ){
+			console.log('Error trying to get user role.', error);
 			res.status(500).send({status:error.message});
 			return;
 		});
@@ -366,5 +366,66 @@ app.post('/admin/updateUser', (req, res) => {
 
 });
 
-// use the app at the new endpoint root '/'
+
+/////////////////////// DELETE DATA ENDPOINT //////////////////
+app.post('/admin/deleteData', (req, res) => {
+  	// grab original body
+  	const original = req.body;
+  	
+  	// parse json body request for user info
+  	var email = req.body.email;
+  	var uid, role, sessions;
+
+  	// get UID from email info
+  	admin.auth().getUserByEmail( email ).then(function(userRecord) {
+
+		// now we have the user
+		console.log("Successfully fetched user data:", userRecord.toJSON());
+		uid = userRecord.uid;
+		
+		// make sure this is a patient
+    	var ref = admin.database().ref('/Roles').child(uid);
+		ref.once("value", function(data) {
+  			role = data.val();
+  			if ("Patient" != role ){
+  				console.error('Can only get patients for delete data');
+				res.status(400).send({status:'Can only get patients for delete data.'});
+				return;
+  			} else {
+  				// call database for fname and lname
+  				var ref1 = admin.database().ref('/Users').child( 'Patient' ).child( uid );
+  				ref1.once("value", function( data1 ) {
+  					var user = data1.val();
+  					console.log("User object: ", user);
+  					var sessions = user.sessions;
+
+  					if ( sessions == null ){
+  						// user has no sessions
+  						console.log('This patient has no sessions');
+  						res.status(400).send({status:'This patient has no sessions.'});
+  						return;
+  					} else {
+  						// user has sessions
+	  					res.status(200).send( sessions );
+  					}
+  				}, function(error){
+  					console.log("Error getting user from db: ", error.message );
+  					res.status(500).send({status:"Could not get user from DB."});
+  				});
+  			}
+		}, function( error ){
+			console.log('Error trying to get user role.', error);
+			res.status(500).send({status:error.message});
+			return;
+		});
+  	}).catch(function(error) {
+    	console.log("Error retrieving user to delete.", error);
+    	res.status(500).send({status:error.message});
+    	return;
+  	});
+
+});
+
+/* use the app at the new endpoint root '/' */
 exports.app = functions.https.onRequest(app);
+
