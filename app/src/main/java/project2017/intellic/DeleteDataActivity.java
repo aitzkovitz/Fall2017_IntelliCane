@@ -22,6 +22,9 @@ import com.google.firebase.auth.GetTokenResult;
 
 import org.json.JSONObject;
 
+import java.util.ArrayList;
+import java.util.Iterator;
+
 /**
  * Created by aaronitzkovitz on 10/28/17.
  */
@@ -71,22 +74,34 @@ public class DeleteDataActivity extends AppCompatActivity {
         final OnTaskCompleted listener = new OnTaskCompleted() {
             @Override
             public void onTaskCompleted(JSONObject res, int code) {
-                Log.v("LISTENER", res.toString());
-                if (code != 200){
-                    return;
-                }
-                else{
-                    Toast.makeText(DeleteDataActivity.this, "Successfully deleted", Toast.LENGTH_SHORT).show();
-                    // make intent to go back to admin activity
-                    Intent intent = new Intent(DeleteDataActivity.this, AdminActivity.class);
-                    startActivity(intent);
-                    finish();
+                try {
+                    Log.v("CODE RES", res.toString());
+                    Log.v("LISTENER", res.toString());
+                    if (code != 200) {
+                        Toast.makeText(DeleteDataActivity.this, res.getString("status"), Toast.LENGTH_SHORT).show();
+                        return;
+                    } else {
+                        Iterator<?> keys = res.keys();
+                        ArrayList<String> sessions = new ArrayList<String>();
+
+                        while (keys.hasNext()) {
+                            sessions.add((String) keys.next());
+                            //Log.v("DELETE TEST, SESSION: ", (String) keys.next());
+                        }
+
+                        Intent intent = new Intent(DeleteDataActivity.this, DeleteSessionActivity.class);
+                        intent.putExtra("SESSION_ARRAY", sessions);
+                        startActivity(intent);
+
+                    }
+                }catch(Exception e){
+                    e.printStackTrace();
                 }
             }
         };
 
         // get info of user to delete
-        final EditText editTextEmailToDelete = (EditText) findViewById(R.id.EditUserEmail);
+        final EditText editTextEmailToDelete = (EditText) findViewById(R.id.deleteDataEmail);
         final String email = editTextEmailToDelete.getText().toString();
 
         // get current user
@@ -113,7 +128,7 @@ public class DeleteDataActivity extends AppCompatActivity {
                             new Pair<String, String>("email", email)
                     );
                     adminInfoRequest.addToken(tok);
-                    adminInfoRequest.execute("deleteUser");
+                    adminInfoRequest.execute("deleteData");
 
 
                 } catch(Exception e){

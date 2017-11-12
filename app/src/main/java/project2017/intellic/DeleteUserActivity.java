@@ -26,6 +26,9 @@ import com.google.firebase.auth.GetTokenResult;
 
 import org.json.JSONObject;
 
+import java.util.ArrayList;
+import java.util.Iterator;
+
 import bolts.Task;
 
 /**
@@ -78,16 +81,21 @@ public class DeleteUserActivity extends AppCompatActivity {
         final OnTaskCompleted listener = new OnTaskCompleted() {
             @Override
             public void onTaskCompleted(JSONObject res, int code) {
-                Log.v("LISTENER", res.toString());
-                if (code != 200){
-                    return;
-                }
-                else{
-                    // go back to adminActivity if success
-                    Toast.makeText(DeleteUserActivity.this, "Successfully deleted user.", Toast.LENGTH_SHORT).show();
-                    Intent intent = new Intent(DeleteUserActivity.this, AdminActivity.class);
-                    startActivity(intent);
-                    finish();
+                try {
+                    Log.v("LISTENER", res.toString());
+                    if (code != 200) {
+                        Toast.makeText(DeleteUserActivity.this, res.getString("status"), Toast.LENGTH_SHORT).show();
+                        return;
+
+                    } else {
+                        // go back to adminActivity if success
+                        Toast.makeText(DeleteUserActivity.this, "Successfully Deleted User", Toast.LENGTH_SHORT).show();
+                        Intent intent = new Intent(DeleteUserActivity.this, AdminActivity.class);
+                        startActivity(intent);
+                        finish();
+                    }
+                }catch(Exception e){
+                    e.printStackTrace();
                 }
             }
         };

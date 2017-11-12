@@ -3,4 +3,23 @@
     android:orientation="vertical" android:layout_width="match_parent"
     android:layout_height="match_parent">
 
+    <EditText
+        android:id="@+id/deleteDataEmail"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="15dp"
+        android:hint="User Email"
+        android:inputType="textEmailAddress"
+        android:imeOptions="actionDone"/>
+
+    <Button
+        android:id="@+id/adminDeleteData"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="15dp"
+        android:background="@color/colorPrimary"
+        android:onClick="deleteData"
+        android:hint="Get User's Sessions"
+        android:textColor="@android:color/white" />
+
 </LinearLayout>
