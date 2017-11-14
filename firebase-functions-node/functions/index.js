@@ -6,7 +6,7 @@ const cookieParser = require('cookie-parser')();
 const cors = require('cors')({origin: true});
 const app = express();
 
-
+// TBI: rewrite by chaining thenables together instead of nesting
 
 // main validation function to be called last in middleware
 const validateFirebaseIdToken = (req, res, next) => {
@@ -368,7 +368,7 @@ app.post('/admin/updateUser', (req, res) => {
 
 
 /////////////////////// DELETE DATA ENDPOINT //////////////////
-app.post('/admin/deleteData', (req, res) => {
+app.post('/admin/getSessions', (req, res) => {
   	// grab original body
   	const original = req.body;
   	
@@ -425,6 +425,41 @@ app.post('/admin/deleteData', (req, res) => {
   	});
 
 });
+
+/////////////////////// DELETE SESSION ENDPOINT /////////////////////////////////
+app.post('/admin/deleteData', (req, res) => {
+	// parse json body request for user info
+  	const sessionId = req.body.sessionId;
+  	const userEmail = req.body.userEmail;
+  	var uid;
+
+  	// do some validation to make sure this is a session ID
+  	// ...
+
+  	// get UID from email
+  	admin.auth().getUserByEmail( userEmail ).then(function( userRecord ){
+  		// get the uid
+  		uid = userRecord.uid;
+  	}).then(function(){
+  		// get the reference to sessions
+  		var userRef = admin.database().ref('/Users').child( 'Patient' ).child(uid).child("sessions").child(sessionId);
+  		userRef.remove();
+  	}).then(function(){
+  		// detete from sessions node
+  		var sessionRef = admin.database().ref('/Sessions').child( sessionId );
+  		sessionRef.remove();
+  	}).then(function(){
+  		// success
+  		console.log("Success, session deleted!");
+  		res.status(200).send({status:"Success, Session Deleted!"});
+  		return;
+  	}).catch(function(error){
+  		console.log("couldn't delete session for some reason");
+  		res.status(500).send({status:error.message});
+  		return;
+  	});
+});
+
 
 /* use the app at the new endpoint root '/' */
 exports.app = functions.https.onRequest(app);
