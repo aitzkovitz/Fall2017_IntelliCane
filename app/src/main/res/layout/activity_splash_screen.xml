@@ -9,10 +9,10 @@
 
     <ImageView
         android:id="@+id/imageView"
-        android:layout_width="match_parent"
+        android:layout_width="784dp"
         android:layout_height="wrap_content"
         app:srcCompat="@drawable/intellicane"
-        tools:layout_editor_absoluteX="0dp"
-        tools:layout_editor_absoluteY="5dp" />
+        tools:layout_editor_absoluteX="8dp"
+        tools:layout_editor_absoluteY="274dp" />
 
 </android.support.constraint.ConstraintLayout>
