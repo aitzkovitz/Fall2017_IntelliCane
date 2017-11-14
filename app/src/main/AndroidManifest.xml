@@ -23,6 +23,12 @@
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="project2017.intellic.LoginActivity"/>
         </activity>
+        <activity android:name=".TherapistActivity"
+            android:parentActivityName=".LoginActivity">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="project2017.intellic.LoginActivity"/>
+        </activity>
         <activity
             android:name=".NewUserSignupActivity">
             <!-- android:parentActivityName=".LoginActivity"> -->

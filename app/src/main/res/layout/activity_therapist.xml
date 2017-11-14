@@ -1,6 +1,61 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:orientation="vertical" android:layout_width="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_height="match_parent">
+
+    <TextView
+        android:id="@+id/textView7"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:padding="12dp"
+        android:text="@string/Therapist"
+        android:textColor="@color/colorPrimary1"
+        android:textSize="12sp" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+
+        <ImageButton
+
+            android:id="@+id/buttonNewUser"
+            android:onClick="newUser"
+            android:background="@drawable/button"
+            app:srcCompat="@drawable/newuser"
+
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:adjustViewBounds="true"
+            android:maxWidth="150dp"
+            android:maxHeight="150dp"
+            android:scaleType="fitCenter"
+            android:layout_marginLeft="35dp"
+            android:layout_marginRight="10dp"
+            android:layout_weight="1"/>
+
+        <!-- need another image button here for VIEW DATA option
+        <ImageButton
+
+            android:id="@+id/buttonEditUser"
+            android:onClick="editUser"
+            android:background="@drawable/button"
+            app:srcCompat="@drawable/edituser"
+
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:adjustViewBounds="true"
+            android:maxWidth="150dp"
+            android:maxHeight="150dp"
+            android:scaleType="fitCenter"
+            android:layout_marginLeft="10dp"
+            android:layout_marginRight="35dp"
+            android:layout_weight="1"/>
+            -->
+
+    </LinearLayout>
 
 </LinearLayout>

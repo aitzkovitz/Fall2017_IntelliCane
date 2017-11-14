@@ -69,7 +69,11 @@ public class DeleteDataActivity extends AppCompatActivity {
     }
 
     public void deleteData(View view){
-        // session
+
+        // get info of user to delete
+        final EditText editTextEmailToDelete = (EditText) findViewById(R.id.deleteDataEmail);
+        final String email = editTextEmailToDelete.getText().toString();
+
         // define listener for when the operation completes
         final OnTaskCompleted listener = new OnTaskCompleted() {
             @Override
@@ -91,6 +95,7 @@ public class DeleteDataActivity extends AppCompatActivity {
 
                         Intent intent = new Intent(DeleteDataActivity.this, DeleteSessionActivity.class);
                         intent.putExtra("SESSION_ARRAY", sessions);
+                        intent.putExtra("USER_EMAIL", email);
                         startActivity(intent);
 
                     }
@@ -99,10 +104,6 @@ public class DeleteDataActivity extends AppCompatActivity {
                 }
             }
         };
-
-        // get info of user to delete
-        final EditText editTextEmailToDelete = (EditText) findViewById(R.id.deleteDataEmail);
-        final String email = editTextEmailToDelete.getText().toString();
 
         // get current user
         FirebaseAuth mAuth = FirebaseAuth.getInstance();
@@ -128,7 +129,7 @@ public class DeleteDataActivity extends AppCompatActivity {
                             new Pair<String, String>("email", email)
                     );
                     adminInfoRequest.addToken(tok);
-                    adminInfoRequest.execute("deleteData");
+                    adminInfoRequest.execute("getSessions");
 
 
                 } catch(Exception e){
