@@ -5,6 +5,7 @@
     android:orientation="vertical"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/colorPrimary"
     android:weightSum="1">
 
     <TextView
@@ -12,34 +13,28 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_gravity="center"
-        android:padding="12dp"
-        android:text="@string/Administrator"
+        android:padding="18dp"
+        android:text="@string/welcome_administrator"
         android:textColor="@color/colorPrimary1"
-        android:textSize="12sp" />
+        android:textSize="60dp" />
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="horizontal">
 
-
         <ImageButton
-
             android:id="@+id/buttonNewUser"
             android:onClick="newUser"
             android:background="@drawable/button"
             app:srcCompat="@drawable/newuser"
-
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:adjustViewBounds="true"
-            android:maxWidth="150dp"
-            android:maxHeight="150dp"
+            android:maxWidth="300dp"
+            android:maxHeight="300dp"
             android:scaleType="fitCenter"
-            android:layout_marginLeft="35dp"
-            android:layout_marginRight="10dp"
             android:layout_weight="1"/>
-
 
         <ImageButton
 
@@ -51,14 +46,12 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:adjustViewBounds="true"
-            android:maxWidth="150dp"
-            android:maxHeight="150dp"
+            android:maxWidth="300dp"
+            android:maxHeight="300dp"
             android:scaleType="fitCenter"
-            android:layout_marginLeft="10dp"
-            android:layout_marginRight="35dp"
             android:layout_weight="1"/>
+    </LinearLayout>/>
 
-    </LinearLayout>
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -76,10 +69,10 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:adjustViewBounds="true"
-            android:maxWidth="150dp"
-            android:maxHeight="150dp"
+            android:maxWidth="300dp"
+            android:maxHeight="300dp"
             android:scaleType="fitCenter"
-            android:layout_marginLeft="35dp"
+            android:layout_marginLeft="@dimen/activity_horizontal_margin"
             android:layout_marginRight="10dp"
             android:layout_weight="1"/>
 
@@ -94,8 +87,8 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:adjustViewBounds="true"
-            android:maxWidth="150dp"
-            android:maxHeight="150dp"
+            android:maxWidth="300dp"
+            android:maxHeight="300dp"
             android:scaleType="fitCenter"
             android:layout_marginLeft="10dp"
             android:layout_marginRight="35dp"
@@ -120,8 +113,8 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:adjustViewBounds="true"
-            android:maxWidth="150dp"
-            android:maxHeight="150dp"
+            android:maxWidth="300dp"
+            android:maxHeight="300dp"
             android:scaleType="fitCenter"
             android:layout_marginLeft="35dp"
             android:layout_marginRight="10dp"
@@ -137,13 +130,12 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:adjustViewBounds="true"
-            android:maxWidth="150dp"
-            android:maxHeight="150dp"
+            android:maxWidth="300dp"
+            android:maxHeight="300dp"
             android:scaleType="fitCenter"
             android:layout_marginLeft="10dp"
             android:layout_marginRight="35dp"
             android:layout_weight="1"/>
 
     </LinearLayout>
-
 </LinearLayout>

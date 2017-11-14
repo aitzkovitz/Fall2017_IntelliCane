@@ -7,18 +7,21 @@
         android:id="@+id/EditUserEmail"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_margin="15dp"
+        android:layout_margin="45dp"
+        android:textSize="60sp"
         android:hint="@string/email"
         android:inputType="textEmailAddress" />
 
     <Button
         android:id="@+id/amdinEditUser"
-        android:layout_width="match_parent"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_margin="15dp"
-        android:background="@color/colorPrimary"
         android:onClick="editUserRequest"
-        android:hint="@string/Get_User"
-        android:textColor="@android:color/white" />
+        android:textSize="48sp"
+        android:padding="30dp"
+        android:background="@drawable/pinkbutton"
+        android:text="@string/Get_User"
+        android:textColor="@android:color/white"/>
 
 </LinearLayout>

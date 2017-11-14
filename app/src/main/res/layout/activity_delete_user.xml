@@ -8,18 +8,24 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_margin="15dp"
-        android:hint="@string/password"
+        android:hint="@string/email"
+        android:textSize="60sp"
+        android:layout_marginLeft="45dp"
+        android:layout_marginRight="45dp"
         android:inputType="textEmailAddress"
         android:imeOptions="actionDone"/>
 
     <Button
         android:id="@+id/adminDeleteUser"
-        android:layout_width="match_parent"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_margin="15dp"
-        android:background="@color/colorPrimary"
         android:onClick="deleteUserRequest"
-        android:hint="@string/Delete_User"
-        android:textColor="@android:color/white" />
+        android:textSize="48sp"
+        android:padding="30dp"
+        android:textColor="@color/colorPrimary2"
+        android:background="@drawable/pinkbutton"
+        android:text="@string/Delete_User" />
+
 
 </LinearLayout>

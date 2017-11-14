@@ -8,6 +8,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_margin="15dp"
+        android:textSize="40dp"
         android:hint="@string/Fname"
         android:inputType="textEmailAddress" />
     <EditText
@@ -15,6 +16,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_margin="15dp"
+        android:textSize="40dp"
         android:hint="@string/Lname"
         android:inputType="text" />
     <EditText
@@ -22,6 +24,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_margin="15dp"
+        android:textSize="40sp"
         android:hint="@string/Email"
         android:inputType="textEmailAddress" />
     <EditText
@@ -29,6 +32,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_margin="15dp"
+        android:textSize="40sp"
         android:hint="@string/Phone"
         android:inputType="phone" />
     <EditText
@@ -36,6 +40,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_margin="15dp"
+        android:textSize="40sp"
         android:hint="@string/Photo_URL"
         android:inputType="textUri" />
     <EditText
@@ -43,27 +48,45 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_margin="15dp"
+        android:textSize="40sp"
         android:hint="@string/Display_Name"
         android:inputType="text" />
-    <CheckBox
-        android:id="@+id/editUserDisabled"
-        android:layout_width="match_parent"
+
+    <LinearLayout
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:hint="@string/Disabled" />
-    <CheckBox
-        android:id="@+id/editUserVerified"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:hint="@string/Verified" />
+        android:orientation="horizontal">
+
+
+        <CheckBox
+            android:id="@+id/editUserDisabled"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="@string/Disabled"
+            android:textSize="40sp"
+            android:layout_margin="15dp"
+            android:layout_weight="1"/>
+
+        <CheckBox
+            android:id="@+id/editUserVerified"
+            android:layout_width="206dp"
+            android:layout_height="wrap_content"
+            android:hint="@string/Verified"
+            android:textSize="40sp"
+            android:layout_margin="15dp"
+            android:layout_weight="1"/>
+    </LinearLayout>
 
     <Button
         android:id="@+id/amdinUpdateUser"
-        android:layout_width="match_parent"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:padding="30dp"
         android:layout_margin="15dp"
-        android:background="@color/colorPrimary"
         android:onClick="updateUserRequest"
-        android:hint="@string/Update_User"
-        android:textColor="@android:color/white" />
+        android:textSize="40sp"
+        android:text="@string/Update_User"
+        android:textColor="@color/colorPrimary"
+        android:background="@drawable/bluebutton"/>
 
 </LinearLayout>

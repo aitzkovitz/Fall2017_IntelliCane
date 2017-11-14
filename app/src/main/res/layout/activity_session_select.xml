@@ -4,12 +4,13 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/colorPrimary"
     tools:context="project2017.intellic.SessionSelectActivity">
 
     <ListView
         android:id="@+id/sessionListView"
-        android:layout_width="352dp"
-        android:layout_height="479dp"
+        android:layout_width="700dp"
+        android:layout_height="800dp"
         android:layout_marginLeft="16dp"
         android:layout_marginRight="16dp"
         app:layout_constraintLeft_toLeftOf="parent"
@@ -23,9 +24,10 @@
         android:id="@+id/textView6"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:textColor="@color/colorPrimary1"
         android:text="@string/Select_Session"
         android:textAlignment="center"
-        android:textSize="36sp"
+        android:textSize="30sp"
         app:layout_constraintTop_toTopOf="parent"
         android:layout_marginTop="40dp"
         android:layout_marginLeft="8dp"
