@@ -4,7 +4,7 @@
     <modules>
       <module fileurl="file://$PROJECT_DIR$/Fall2017_IntelliCane.iml" filepath="$PROJECT_DIR$/Fall2017_IntelliCane.iml" />
       <module fileurl="file://$PROJECT_DIR$/app/app.iml" filepath="$PROJECT_DIR$/app/app.iml" />
-      <module fileurl="file://$PROJECT_DIR$/iCane.iml" filepath="$PROJECT_DIR$/iCane.iml" />
+      <module fileurl="file://$PROJECT_DIR$/../../../../silve/Desktop/Fall2017_IntelliCane/iCane.iml" filepath="$PROJECT_DIR$/../../../../silve/Desktop/Fall2017_IntelliCane/iCane.iml" />
     </modules>
   </component>
 </project>

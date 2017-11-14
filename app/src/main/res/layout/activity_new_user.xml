@@ -14,9 +14,9 @@
         android:layout_marginTop="24dp"
         android:layout_marginLeft="45dp"
         android:layout_marginRight="45dp"
-        android:text="Please select new user's role: "
         android:textSize="48dp"
         android:textColor="@color/colorPrimary1"
+        android:text="@string/New_user_is_a"
         android:textAppearance="@style/TextAppearance.AppCompat.Display1" />
 
 
@@ -94,7 +94,7 @@
         android:layout_marginRight="45dp"
         android:layout_marginTop="10dp"
         android:textSize="40dp"
-        android:hint="First Name" />
+        android:hint="@string/First_Name" />
 
     <EditText
         android:id="@+id/newUserlName"
@@ -104,7 +104,8 @@
         android:layout_marginRight="45dp"
         android:layout_marginTop="10dp"
         android:textSize="40dp"
-        android:hint="Last Name" />
+        android:hint="@string/Last_Name" />
+
 
     <EditText
         android:id="@+id/newUserPhone"
@@ -114,8 +115,7 @@
         android:layout_marginRight="45dp"
         android:layout_marginTop="10dp"
         android:textSize="40dp"
-        android:hint="Phone"
-        />
+        android:hint="@string/Phone" />
     <EditText
         android:id="@+id/newUserPhotoURL"
         android:layout_width="match_parent"
@@ -124,19 +124,20 @@
         android:layout_marginRight="45dp"
         android:layout_marginTop="10dp"
         android:textSize="40dp"
-        android:hint="Photo URL"
+        android:hint="@string/Photo_URL"
         android:inputType="textUri"/>
 
     <EditText
         android:id="@+id/newUserDisplayName"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:hint="Display Name"
         android:layout_marginLeft="45dp"
         android:layout_marginRight="45dp"
         android:layout_marginTop="10dp"
         android:textSize="40dp"
+        android:hint="@string/Display_Name"
         android:inputType="text"/>
+
 
 
     <Button
@@ -148,8 +149,8 @@
         android:onClick="createNewUserRequest"
         android:layout_marginTop="25dp"
         android:textSize="48dp"
-        android:text="Add User"
         android:padding="30dp"
+        android:text="@string/Add_User"
         android:textColor="@color/colorPrimary2"/>
 
 

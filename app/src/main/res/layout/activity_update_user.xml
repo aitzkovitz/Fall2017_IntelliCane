@@ -8,48 +8,48 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_margin="15dp"
-        android:hint="First name"
         android:textSize="40dp"
+        android:hint="@string/Fname"
         android:inputType="textEmailAddress" />
     <EditText
         android:id="@+id/editUserLname"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_margin="15dp"
-        android:hint="Last name"
         android:textSize="40dp"
+        android:hint="@string/Lname"
         android:inputType="text" />
     <EditText
         android:id="@+id/editUserEmail"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_margin="15dp"
-        android:hint="Email"
-        android:textSize="40dp"
+        android:textSize="40sp"
+        android:hint="@string/Email"
         android:inputType="textEmailAddress" />
     <EditText
         android:id="@+id/editUserPhone"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_margin="15dp"
-        android:hint="Phone"
-        android:textSize="40dp"
+        android:textSize="40sp"
+        android:hint="@string/Phone"
         android:inputType="phone" />
     <EditText
         android:id="@+id/editUserPhotoURL"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_margin="15dp"
-        android:hint="Photo URL"
-        android:textSize="40dp"
+        android:textSize="40sp"
+        android:hint="@string/Photo_URL"
         android:inputType="textUri" />
     <EditText
         android:id="@+id/editUserDisplayName"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_margin="15dp"
-        android:hint="Display Name"
-        android:textSize="40dp"
+        android:textSize="40sp"
+        android:hint="@string/Display_Name"
         android:inputType="text" />
 
     <LinearLayout
@@ -62,8 +62,8 @@
             android:id="@+id/editUserDisabled"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="Disabled"
-            android:textSize="40dp"
+            android:hint="@string/Disabled"
+            android:textSize="40sp"
             android:layout_margin="15dp"
             android:layout_weight="1"/>
 
@@ -71,12 +71,11 @@
             android:id="@+id/editUserVerified"
             android:layout_width="206dp"
             android:layout_height="wrap_content"
-            android:hint="Verified"
-            android:textSize="40dp"
+            android:hint="@string/Verified"
+            android:textSize="40sp"
             android:layout_margin="15dp"
             android:layout_weight="1"/>
     </LinearLayout>
-
 
     <Button
         android:id="@+id/amdinUpdateUser"
@@ -85,8 +84,8 @@
         android:padding="30dp"
         android:layout_margin="15dp"
         android:onClick="updateUserRequest"
-        android:text="Update User"
-        android:textSize="40dp"
+        android:textSize="40sp"
+        android:text="@string/Update_User"
         android:textColor="@color/colorPrimary"
         android:background="@drawable/bluebutton"/>
 

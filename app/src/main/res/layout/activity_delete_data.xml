@@ -8,10 +8,11 @@
         android:id="@+id/buttonDeleteData"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:textSize="48sp"
-        android:padding="30dp"
+        android:background="@drawable/pinkbutton"
         android:onClick="deleteData"
-        android:text="Delete user data"
+        android:padding="30dp"
+        android:text="@string/Delete_User_Data"
         android:textColor="@color/colorPrimary2"
-        android:background="@drawable/pinkbutton" />
+        android:textSize="48sp"
+        android:layout_marginTop="50dp"/>
 </LinearLayout>

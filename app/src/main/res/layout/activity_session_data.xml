@@ -6,7 +6,7 @@
     android:layout_height="match_parent"
     tools:context="project2017.intellic.SessionDataActivity"
     android:background="@color/colorPrimary">
-    android:orientation="horizontal">
+
 
 
 

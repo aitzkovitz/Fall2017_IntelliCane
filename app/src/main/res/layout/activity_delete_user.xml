@@ -10,6 +10,8 @@
         android:layout_margin="15dp"
         android:hint="@string/email"
         android:textSize="60sp"
+        android:layout_marginLeft="45dp"
+        android:layout_marginRight="45dp"
         android:inputType="textEmailAddress"
         android:imeOptions="actionDone"/>
 
@@ -19,10 +21,11 @@
         android:layout_height="wrap_content"
         android:layout_margin="15dp"
         android:onClick="deleteUserRequest"
-        android:text="Delete User"
         android:textSize="48sp"
         android:padding="30dp"
         android:textColor="@color/colorPrimary2"
-        android:background="@drawable/pinkbutton" />
+        android:background="@drawable/pinkbutton"
+        android:text="@string/Delete_User" />
+
 
 </LinearLayout>
