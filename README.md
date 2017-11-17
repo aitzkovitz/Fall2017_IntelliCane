@@ -31,7 +31,7 @@ Once the repository has been cloned to your local machine you will simply need t
 
 This will be a link to the HTML documentation.
 
-## Contributors
+## Spring 2017 Contributors
 
 - **Ahmed Alnemer**  
   - Data Visualization Designer
@@ -54,3 +54,12 @@ This will be a link to the HTML documentation.
 - **Nathaniel Burton**
   - Data Visualization Designer
   - Visualization Programmer
+  
+## Fall 2017 Contributors
+  
+- **Aaron Itzkovitz**  
+- **Yuxin Zhang**
+- **Karla Robles**  
+- **Damon Hughes** 
+- **Jeremy Bickford**
+
