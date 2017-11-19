@@ -17,44 +17,41 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="horizontal">
+        android:orientation="horizontal"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true">
 
 
         <ImageButton
 
             android:id="@+id/buttonNewUser"
-            android:onClick="newUser"
-            android:background="@drawable/button"
-            app:srcCompat="@drawable/newuser"
-
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:adjustViewBounds="true"
-            android:maxWidth="150dp"
-            android:maxHeight="150dp"
-            android:scaleType="fitCenter"
             android:layout_marginLeft="35dp"
+
             android:layout_marginRight="10dp"
-            android:layout_weight="1"/>
-
-        <!-- need another image button here for VIEW DATA option
-        <ImageButton
-
-            android:id="@+id/buttonEditUser"
-            android:onClick="editUser"
+            android:layout_weight="1"
+            android:adjustViewBounds="true"
             android:background="@drawable/button"
-            app:srcCompat="@drawable/edituser"
+            android:maxHeight="150dp"
+            android:maxWidth="150dp"
+            android:onClick="newPatient"
+            android:scaleType="fitCenter"
+            app:srcCompat="@drawable/newuser" />
 
+        <!-- need another image button here for VIEW DATA option -->
+        <Button
+            android:id="@+id/buttonLogin"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:adjustViewBounds="true"
-            android:maxWidth="150dp"
-            android:maxHeight="150dp"
-            android:scaleType="fitCenter"
-            android:layout_marginLeft="10dp"
-            android:layout_marginRight="35dp"
-            android:layout_weight="1"/>
-            -->
+            android:layout_gravity="center_horizontal"
+            android:background="@drawable/pinkbutton"
+            android:onClick="lookupPatientData"
+            android:padding="20dp"
+            android:text="View Patient Data"
+            android:textColor="@color/colorPrimary"
+            android:textSize="48sp" />
 
     </LinearLayout>
 

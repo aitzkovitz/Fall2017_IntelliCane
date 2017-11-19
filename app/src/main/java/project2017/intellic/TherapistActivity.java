@@ -2,6 +2,7 @@ package project2017.intellic;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.v4.app.NavUtils;
 import android.support.v7.app.AppCompatActivity;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -20,6 +21,7 @@ public class TherapistActivity extends AppCompatActivity {
     public boolean onCreateOptionsMenu(Menu menu) {
         MenuInflater inflater = getMenuInflater();
         inflater.inflate(R.menu.menu, menu);
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         return true;
     }
 
@@ -35,6 +37,9 @@ public class TherapistActivity extends AppCompatActivity {
                 startActivity(intent);
                 finish();
                 break;
+            case android.R.id.home:
+                NavUtils.navigateUpFromSameTask(this);
+                return true;
             default:
                 break;
         }
@@ -51,14 +56,14 @@ public class TherapistActivity extends AppCompatActivity {
     // 2 activities for 2 different therapist options
     //-------------------
     // add new user
-    public void newUser(View view) {
+    public void newPatient(View view) {
         Intent intent = new Intent(TherapistActivity.this, NewPatientActivity.class);
         startActivity(intent);
         finish();
     }
 
     // delete user
-    public void deleteUser(View view) {
+    public void lookupPatientData(View view) {
         Intent intent = new Intent(TherapistActivity.this, PatientSelectActivity.class);
         startActivity(intent);
         finish();
