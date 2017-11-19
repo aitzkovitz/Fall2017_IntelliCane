@@ -4,6 +4,25 @@
     android:layout_height="match_parent"
     android:background="@color/colorPrimary">
 
+    <TextView
+        android:id="@+id/textView9"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="45dp"
+        android:textSize="48sp"
+        android:textColor="@color/colorPrimary1"
+        android:text="@string/Enter_user_email_delete_data" />
+
+    <EditText
+        android:id="@+id/deleteUserEmail"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="45dp"
+        android:hint="@string/email"
+        android:textSize="48sp"
+        android:inputType="textEmailAddress"
+        android:imeOptions="actionDone"/>
+
     <Button
         android:id="@+id/buttonDeleteData"
         android:layout_width="wrap_content"
@@ -12,6 +31,7 @@
         android:onClick="deleteData"
         android:padding="30dp"
         android:text="@string/Delete_User_Data"
+        android:layout_gravity="center"
         android:textColor="@color/colorPrimary2"
         android:textSize="48sp"
         android:layout_marginTop="50dp"/>

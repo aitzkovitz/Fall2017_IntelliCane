@@ -16,7 +16,7 @@
         android:padding="18dp"
         android:text="@string/welcome_administrator"
         android:textColor="@color/colorPrimary1"
-        android:textSize="60dp" />
+        android:textSize="54sp" />
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -72,8 +72,6 @@
             android:maxWidth="300dp"
             android:maxHeight="300dp"
             android:scaleType="fitCenter"
-            android:layout_marginLeft="@dimen/activity_horizontal_margin"
-            android:layout_marginRight="10dp"
             android:layout_weight="1"/>
 
 
@@ -90,10 +88,6 @@
             android:maxWidth="300dp"
             android:maxHeight="300dp"
             android:scaleType="fitCenter"
-            android:layout_marginLeft="10dp"
-            android:layout_marginRight="35dp"
-
-
             android:layout_weight="1"/>
 
     </LinearLayout>
@@ -106,19 +100,16 @@
 
         <ImageButton
             android:id="@+id/buttonDeleteData"
-            android:onClick="deleteData"
-            android:background="@drawable/button"
-            app:srcCompat="@drawable/deleteuserdata"
-
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_weight="1"
             android:adjustViewBounds="true"
-            android:maxWidth="300dp"
+            android:background="@drawable/button"
             android:maxHeight="300dp"
+            android:maxWidth="300dp"
+            android:onClick="deleteData"
             android:scaleType="fitCenter"
-            android:layout_marginLeft="35dp"
-            android:layout_marginRight="10dp"
-            android:layout_weight="1"/>
+            app:srcCompat="@drawable/deleteuserdata" />
 
 
         <ImageButton
@@ -126,15 +117,12 @@
             android:onClick="deleteUser"
             android:background="@drawable/button"
             app:srcCompat="@drawable/deleteuser"
-
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:adjustViewBounds="true"
             android:maxWidth="300dp"
             android:maxHeight="300dp"
             android:scaleType="fitCenter"
-            android:layout_marginLeft="10dp"
-            android:layout_marginRight="35dp"
             android:layout_weight="1"/>
 
     </LinearLayout>

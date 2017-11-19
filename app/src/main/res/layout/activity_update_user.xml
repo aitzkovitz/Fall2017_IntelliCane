@@ -7,7 +7,9 @@
         android:id="@+id/editUserFname"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_margin="15dp"
+        android:layout_marginLeft="45dp"
+        android:layout_marginRight="45dp"
+        android:layout_marginTop="30dp"
         android:textSize="40dp"
         android:hint="@string/Fname"
         android:inputType="textEmailAddress" />
@@ -15,7 +17,9 @@
         android:id="@+id/editUserLname"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_margin="15dp"
+        android:layout_marginLeft="45dp"
+        android:layout_marginRight="45dp"
+        android:layout_marginTop="30dp"
         android:textSize="40dp"
         android:hint="@string/Lname"
         android:inputType="text" />
@@ -23,7 +27,9 @@
         android:id="@+id/editUserEmail"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_margin="15dp"
+        android:layout_marginLeft="45dp"
+        android:layout_marginRight="45dp"
+        android:layout_marginTop="30dp"
         android:textSize="40sp"
         android:hint="@string/Email"
         android:inputType="textEmailAddress" />
@@ -31,7 +37,9 @@
         android:id="@+id/editUserPhone"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_margin="15dp"
+        android:layout_marginLeft="45dp"
+        android:layout_marginRight="45dp"
+        android:layout_marginTop="30dp"
         android:textSize="40sp"
         android:hint="@string/Phone"
         android:inputType="phone" />
@@ -39,7 +47,9 @@
         android:id="@+id/editUserPhotoURL"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_margin="15dp"
+        android:layout_marginLeft="45dp"
+        android:layout_marginRight="45dp"
+        android:layout_marginTop="30dp"
         android:textSize="40sp"
         android:hint="@string/Photo_URL"
         android:inputType="textUri" />
@@ -47,7 +57,9 @@
         android:id="@+id/editUserDisplayName"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_margin="15dp"
+        android:layout_marginLeft="45dp"
+        android:layout_marginRight="45dp"
+        android:layout_marginTop="30dp"
         android:textSize="40sp"
         android:hint="@string/Display_Name"
         android:inputType="text" />
@@ -64,7 +76,9 @@
             android:layout_height="wrap_content"
             android:hint="@string/Disabled"
             android:textSize="40sp"
-            android:layout_margin="15dp"
+            android:layout_marginLeft="45dp"
+            android:layout_marginRight="45dp"
+            android:layout_marginTop="25dp"
             android:layout_weight="1"/>
 
         <CheckBox
@@ -73,7 +87,9 @@
             android:layout_height="wrap_content"
             android:hint="@string/Verified"
             android:textSize="40sp"
-            android:layout_margin="15dp"
+            android:layout_marginLeft="45dp"
+            android:layout_marginRight="45dp"
+            android:layout_marginTop="25dp"
             android:layout_weight="1"/>
     </LinearLayout>
 
@@ -87,6 +103,7 @@
         android:textSize="40sp"
         android:text="@string/Update_User"
         android:textColor="@color/colorPrimary"
+        android:layout_gravity="center"
         android:background="@drawable/bluebutton"/>
 
 </LinearLayout>

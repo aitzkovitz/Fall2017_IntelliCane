@@ -3,15 +3,22 @@
     android:orientation="vertical" android:layout_width="match_parent"
     android:layout_height="match_parent">
 
+    <TextView
+        android:id="@+id/textView8"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textSize="48sp"
+        android:layout_margin="45dp"
+        android:textColor="@color/colorPrimary1"
+        android:text="@string/Enter_user_email_delete_user" />
+
     <EditText
         android:id="@+id/deleteUserEmail"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_margin="15dp"
+        android:layout_margin="45dp"
         android:hint="@string/email"
-        android:textSize="60sp"
-        android:layout_marginLeft="45dp"
-        android:layout_marginRight="45dp"
+        android:textSize="48sp"
         android:inputType="textEmailAddress"
         android:imeOptions="actionDone"/>
 
@@ -19,13 +26,14 @@
         android:id="@+id/adminDeleteUser"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_margin="15dp"
         android:onClick="deleteUserRequest"
         android:textSize="48sp"
         android:padding="30dp"
+        android:layout_gravity="center"
         android:textColor="@color/colorPrimary2"
         android:background="@drawable/pinkbutton"
-        android:text="@string/Delete_User" />
+        android:text="@string/Delete_User"
+        android:layout_marginTop="50dp"/>
 
 
 </LinearLayout>
