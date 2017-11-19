@@ -13,10 +13,12 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_gravity="center"
+        android:layout_marginLeft="20dp"
+        android:layout_marginTop="20dp"
         android:padding="18dp"
         android:text="@string/welcome_administrator"
         android:textColor="@color/colorPrimary1"
-        android:textSize="54sp" />
+        android:textSize="32sp" />
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -30,9 +32,10 @@
             app:srcCompat="@drawable/newuser"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_marginLeft="100dp"
             android:adjustViewBounds="true"
-            android:maxWidth="300dp"
-            android:maxHeight="300dp"
+            android:maxWidth="250dp"
+            android:maxHeight="250dp"
             android:scaleType="fitCenter"
             android:layout_weight="1"/>
 
@@ -46,17 +49,10 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:adjustViewBounds="true"
-            android:maxWidth="300dp"
-            android:maxHeight="300dp"
+            android:maxWidth="250dp"
+            android:maxHeight="250dp"
             android:scaleType="fitCenter"
             android:layout_weight="1"/>
-    </LinearLayout>/>
-
-
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal">
 
 
         <ImageButton
@@ -65,37 +61,34 @@
             android:onClick="associatePT"
             android:background="@drawable/button"
             app:srcCompat="@drawable/patientwithpt"
-
+            android:layout_marginRight="100dp"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:adjustViewBounds="true"
-            android:maxWidth="300dp"
-            android:maxHeight="300dp"
+            android:maxWidth="250dp"
+            android:maxHeight="250dp"
             android:scaleType="fitCenter"
             android:layout_weight="1"/>
 
+        </LinearLayout>
 
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
         <ImageButton
 
             android:id="@+id/butto"
             app:srcCompat="@drawable/patientwithdata"
             android:onClick="associatePS"
             android:background="@drawable/button"
-
+            android:layout_marginLeft="100dp"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:adjustViewBounds="true"
-            android:maxWidth="300dp"
-            android:maxHeight="300dp"
+            android:maxWidth="250dp"
+            android:maxHeight="250dp"
             android:scaleType="fitCenter"
             android:layout_weight="1"/>
-
-    </LinearLayout>
-
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal">
 
 
         <ImageButton
@@ -105,8 +98,8 @@
             android:layout_weight="1"
             android:adjustViewBounds="true"
             android:background="@drawable/button"
-            android:maxHeight="300dp"
-            android:maxWidth="300dp"
+            android:maxHeight="250dp"
+            android:maxWidth="250dp"
             android:onClick="deleteData"
             android:scaleType="fitCenter"
             app:srcCompat="@drawable/deleteuserdata" />
@@ -120,8 +113,9 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:adjustViewBounds="true"
-            android:maxWidth="300dp"
-            android:maxHeight="300dp"
+            android:layout_marginRight="100dp"
+            android:maxWidth="250dp"
+            android:maxHeight="250dp"
             android:scaleType="fitCenter"
             android:layout_weight="1"/>
 

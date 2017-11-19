@@ -3,134 +3,150 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:orientation="vertical" android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:layout_marginTop="40dp"
     android:background="@color/colorPrimary">
 
-    <TextView
-        android:id="@+id/textView7"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="16dp"
-        android:layout_marginTop="24dp"
-        android:layout_marginLeft="45dp"
-        android:layout_marginRight="45dp"
-        android:textSize="48sp"
-        android:textColor="@color/colorPrimary1"
-        android:text="@string/New_user_is_a"
-        android:textAppearance="@style/TextAppearance.AppCompat.Display1" />
-
-    <RadioGroup
-        android:id="@+id/newUserRoleRadio"
-        android:layout_width="fill_parent"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        android:layout_marginLeft="45dp"
-        android:layout_marginRight="45dp"
-        android:weightSum="1">
-
-        <RadioButton
-            android:id="@+id/newUserPatientRadio"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_weight="0.33" />
-
-
-        <RadioButton
-            android:id="@+id/newUserTherapistRadio"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"/>
-
-
-    </RadioGroup>
-
     <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        android:layout_marginLeft="45dp"
-        android:layout_marginRight="45dp">
-
-        <ImageView
-            android:id="@+id/imageView2"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:adjustViewBounds="true"
-            android:maxWidth="250dp"
-            android:maxHeight="250dp"
-            android:scaleType="fitCenter"
-            app:srcCompat="@drawable/patient" />
-        <ImageView
-            android:id="@+id/imageView3"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:adjustViewBounds="true"
-            android:maxWidth="250dp"
-            android:maxHeight="250dp"
-            android:scaleType="fitCenter"
-            app:srcCompat="@drawable/physicaltherapist" />
-
-    </LinearLayout>
-
-    <EditText
-        android:id="@+id/signUpUserFname"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginLeft="45dp"
-        android:layout_marginRight="45dp"
-        android:layout_marginTop="10dp"
-        android:textSize="40sp"
-        android:hint="@string/First_Name" />
-
-    <EditText
-        android:id="@+id/signUpUserLname"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginLeft="45dp"
-        android:layout_marginRight="45dp"
-        android:layout_marginTop="10dp"
-        android:textSize="40sp"
-        android:hint="@string/Last_Name" />
-
-    <EditText
-        android:id="@+id/signUpUserEmail"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginLeft="45dp"
-        android:layout_marginRight="45dp"
-        android:layout_marginTop="10dp"
-        android:textSize="40sp"
-        android:inputType="textEmailAddress"
-        android:hint="@string/Email"
-        />
-    <EditText
-        android:id="@+id/signUpUserPassword"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginLeft="45dp"
-        android:layout_marginRight="45dp"
-        android:layout_marginTop="10dp"
-        android:textSize="40sp"
-        android:hint="@string/password"
-        android:inputType="textVisiblePassword"/>
-
-    <RadioGroup
-        android:id="@+id/signUpUserRoleRadio"
-        android:layout_width="fill_parent"
-        android:layout_height="wrap_content"
-        android:orientation="vertical">
-
-    </RadioGroup>
-
-
-    <Button
-        android:id="@+id/buttonCreateUser"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:padding="30dp"
-        android:layout_gravity="center"
-        android:onClick="createNewUserRequest"
-        android:textSize="40sp"
-        android:text="@string/Add_User"
-        android:background="@drawable/bluebutton"
-        android:textColor="@color/colorPrimary2"/>
+        android:layout_height="match_parent"
+        android:orientation="horizontal">
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+            <TextView
+                android:id="@+id/textView7"
+                android:layout_width="500dp"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="16dp"
+                android:layout_marginTop="45dp"
+                android:layout_marginLeft="45dp"
+                android:layout_marginRight="45dp"
+                android:textSize="48sp"
+                android:textColor="@color/colorPrimary1"
+                android:text="@string/New_user_is_a"
+                android:textAppearance="@style/TextAppearance.AppCompat.Display1" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <RadioGroup
+                    android:id="@+id/newUserRoleRadio"
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:layout_marginLeft="45dp"
+                    android:layout_marginRight="45dp"
+                    android:weightSum="1">
+
+                    <RadioButton
+                        android:id="@+id/newUserPatientRadio"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="0.50" />
+
+
+                    <RadioButton
+                        android:id="@+id/newUserTherapistRadio"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"/>
+
+                </RadioGroup>
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:layout_marginLeft="45dp"
+                android:layout_marginRight="45dp">
+
+                <ImageView
+                    android:id="@+id/imageView2"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:adjustViewBounds="true"
+                    android:maxWidth="250dp"
+                    android:maxHeight="250dp"
+                    android:scaleType="fitCenter"
+                    app:srcCompat="@drawable/patient" />
+                <ImageView
+                    android:id="@+id/imageView3"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:adjustViewBounds="true"
+                    android:maxWidth="250dp"
+                    android:maxHeight="250dp"
+                    android:scaleType="fitCenter"
+                    app:srcCompat="@drawable/physicaltherapist" />
+
+            </LinearLayout>
+
+        </LinearLayout>
+
+
+        <LinearLayout
+            android:layout_width="650dp"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <EditText
+                android:id="@+id/signUpUserFname"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="45dp"
+                android:layout_marginRight="45dp"
+                android:layout_marginTop="40dp"
+                android:textSize="40sp"
+                android:hint="@string/First_Name" />
+
+            <EditText
+                android:id="@+id/signUpUserLname"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="45dp"
+                android:layout_marginRight="45dp"
+                android:layout_marginTop="10dp"
+                android:textSize="40sp"
+                android:hint="@string/Last_Name" />
+
+            <EditText
+                android:id="@+id/signUpUserEmail"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="45dp"
+                android:layout_marginRight="45dp"
+                android:layout_marginTop="10dp"
+                android:textSize="40sp"
+                android:inputType="textEmailAddress"
+                android:hint="@string/Email"
+                />
+            <EditText
+                android:id="@+id/signUpUserPassword"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="45dp"
+                android:layout_marginRight="45dp"
+                android:layout_marginTop="10dp"
+                android:textSize="40sp"
+                android:hint="@string/password"
+                android:inputType="textVisiblePassword"/>
+
+
+            <Button
+                android:id="@+id/buttonCreateUser"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="25dp"
+                android:padding="30dp"
+                android:layout_gravity="center"
+                android:onClick="createNewUserRequest"
+                android:textSize="40sp"
+                android:text="@string/Add_User"
+                android:background="@drawable/bluebutton"
+                android:textColor="@color/colorPrimary2"/>
+        </LinearLayout>
+    </LinearLayout>
 </LinearLayout>
