@@ -1,25 +1,38 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:orientation="vertical" android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:background="@color/colorPrimary">
 
-    <EditText
-        android:id="@+id/deleteDataEmail"
+    <TextView
+        android:id="@+id/textView9"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_margin="15dp"
-        android:hint="User Email"
+        android:layout_margin="45dp"
+        android:textSize="48sp"
+        android:textColor="@color/colorPrimary1"
+        android:text="@string/Enter_user_email_delete_data" />
+
+    <EditText
+        android:id="@+id/deleteUserEmail"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="45dp"
+        android:hint="@string/email"
+        android:textSize="48sp"
         android:inputType="textEmailAddress"
         android:imeOptions="actionDone"/>
 
     <Button
-        android:id="@+id/adminDeleteData"
-        android:layout_width="match_parent"
+        android:id="@+id/buttonDeleteData"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_margin="15dp"
-        android:background="@color/colorPrimary"
+        android:background="@drawable/pinkbutton"
         android:onClick="deleteData"
-        android:hint="Get User's Sessions"
-        android:textColor="@android:color/white" />
-
+        android:padding="30dp"
+        android:text="@string/Delete_User_Data"
+        android:layout_gravity="center"
+        android:textColor="@color/colorPrimary2"
+        android:textSize="48sp"
+        android:layout_marginTop="50dp"/>
 </LinearLayout>

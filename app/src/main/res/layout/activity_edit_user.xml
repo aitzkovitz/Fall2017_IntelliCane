@@ -22,6 +22,7 @@
         android:padding="30dp"
         android:background="@drawable/pinkbutton"
         android:text="@string/Get_User"
+        android:layout_gravity="center"
         android:textColor="@android:color/white"/>
 
 </LinearLayout>
