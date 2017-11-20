@@ -6,6 +6,11 @@
         <item name="colorPrimary">@color/colorAccent1</item>
         <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
         <item name="colorAccent">@color/colorAccent</item>
+
+    </style>
+    <style name="splashScreenTheme" parent="@android:style/Theme.DeviceDefault.Light.NoActionBar">
+        <item name="android:windowBackground">@drawable/intellicane</item>
+
     </style>
 
 </resources>
