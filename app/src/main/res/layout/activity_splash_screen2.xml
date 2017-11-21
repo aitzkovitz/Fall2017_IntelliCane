@@ -5,14 +5,20 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/colorPrimary"
-    tools:context="project2017.intellic.SplashScreen">
+    tools:context="project2017.intellic.SplashScreenActivity">
 
     <ImageView
         android:id="@+id/imageView"
-        android:layout_width="784dp"
-        android:layout_height="wrap_content"
+        android:layout_width="673dp"
+        android:layout_height="380dp"
+        android:contentDescription="load"
         app:srcCompat="@drawable/intellicane"
-        tools:layout_editor_absoluteX="8dp"
-        tools:layout_editor_absoluteY="274dp" />
+        tools:layout_constraintTop_creator="1"
+        tools:layout_constraintRight_creator="1"
+        android:layout_marginEnd="85dp"
+        app:layout_constraintRight_toRightOf="parent"
+        android:layout_marginTop="299dp"
+        app:layout_constraintTop_toTopOf="parent"
+        android:layout_marginRight="63dp" />
 
 </android.support.constraint.ConstraintLayout>

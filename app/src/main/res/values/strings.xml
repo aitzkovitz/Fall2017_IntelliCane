@@ -40,7 +40,12 @@
     <string name="Disabled">Disabled</string>
     <string name="Update_User">Update User</string>
     <string name="Verified">Verified</string>
-    <string name="welcome_administrator">Welcome, administrator!\nPlease select from the tasks below: </string>
+    <string name="welcome_administrator">Welcome, administrator! Please select from the tasks below: </string>
+    <string name="welcome_pt">Welcome! Please select from the tasks below: </string>
     <string name="Enter_user_email_delete_user">Please enter patient or physical therapist\'s e-mail to delete their account:</string>
     <string name="Enter_user_email_delete_data">Please enter patient or physical therapist\'s e-mail to delete their session data:</string>
+    <string name="trans_accel">Transverse Acceleration </string>
+    <string name="abs_accel">Absolute Acceleration </string>
+    <string name="Handle">Handle </string>
+    <string name="Base">Base </string>
 </resources>

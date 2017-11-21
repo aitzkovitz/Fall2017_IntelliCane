@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/colorPrimary"
+    tools:context="project2017.intellic.AssociateUserActivity">
+
+
+
+    <TextView
+        android:id="@+id/textView1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="45dp"
+        android:layout_marginTop="45dp"
+        android:textSize="60sp"
+        android:hint="@string/Select_Therapist"
+        android:textColor="@color/colorPrimary1"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <Spinner
+        android:id="@+id/spinnerTherapist"
+        android:layout_width="350dp"
+        android:layout_height="100dp"
+        android:layout_marginLeft="45dp"
+        android:layout_marginTop="20dp"
+        android:textSize="60sp"
+        android:textColor="@color/colorPrimary1"
+        app:layout_constraintTop_toBottomOf="@+id/textView1"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"/>
+
+    <TextView
+        android:id="@+id/textView2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="45dp"
+        android:layout_marginTop="45dp"
+        android:textColor="@color/colorPrimary1"
+        android:textSize="60sp"
+        android:hint="@string/Select_Patient"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/spinnerTherapist" />
+
+    <Spinner
+        android:id="@+id/spinnerPatient"
+        android:layout_width="350dp"
+        android:layout_height="100dp"
+        android:layout_marginLeft="45dp"
+        android:layout_marginTop="20dp"
+        android:textSize="60sp"
+        android:textColor="@color/colorPrimary1"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textView2"
+        app:layout_constraintRight_toRightOf="parent"/>
+
+    <Button
+        android:id="@+id/createAssociation"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textSize="48sp"
+        android:padding="30dp"
+        android:onClick="createAssociation"
+        android:text="@string/Create_Association"
+        android:textColor="@color/colorPrimary2"
+        android:background="@drawable/pinkbutton"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/spinnerPatient"
+        android:layout_marginTop="50dp" />
+</android.support.constraint.ConstraintLayout>

@@ -19,11 +19,9 @@
 
         <com.jjoe64.graphview.GraphView
             android:id="@+id/graph"
-            android:layout_width="781dp"
+            android:layout_width="wrap_content"
             android:layout_height="500dp"
-            android:layout_marginLeft="8dp"
-            android:layout_marginStart="8dp"
-            android:layout_marginTop="8dp" />
+            android:layout_margin="30dp" />
 
         <LinearLayout
             android:layout_width="wrap_content"

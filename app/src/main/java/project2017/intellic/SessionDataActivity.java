@@ -221,7 +221,6 @@ public class SessionDataActivity extends AppCompatActivity {
         };
 
 
-
         sessionRef.addValueEventListener(new ValueEventListener() {
 
             @Override
@@ -337,7 +336,6 @@ public class SessionDataActivity extends AppCompatActivity {
                     BAt.add(TwoSquare(BAx.get(i),BAy.get(i)));
                     Fsum.add(addForces(f0.get(i),f1.get(i),f2.get(i),f3.get(i),f4.get(i),f5.get(i),f6.get(i),f7.get(i)));
 
-
                     pointHA[i] = new DataPoint(i,HA.get(i));
                     pointBA[i] = new DataPoint(i,BA.get(i));
                     pointG[i] = new DataPoint(i,G.get(i));
@@ -414,7 +412,6 @@ public class SessionDataActivity extends AppCompatActivity {
                         graph.getViewport().setScrollableY(true);
                         graph.getViewport().setScalable(true);
                         graph.getViewport().setScalableY(true);
-
                         max.setText(Double.toString(Collections.max(HAx)));
                         min.setText(Double.toString(Collections.min(HAx)));
                         calMean=calculateMean(HAx);
