@@ -27,8 +27,7 @@
     <ListView
         android:id="@+id/patientListView"
         android:layout_width="700dp"
-        android:layout_height="400dp"
-        android:textSize="30sp"
+        android:layout_height="800dp"
         android:layout_marginLeft="32dp"
         android:layout_marginRight="32dp"
         app:layout_constraintHorizontal_bias="0.5"

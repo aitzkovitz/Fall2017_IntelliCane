@@ -10,8 +10,7 @@
     <ListView
         android:id="@+id/sessionListView"
         android:layout_width="700dp"
-        android:layout_height="400dp"
-        android:textSize="30sp"
+        android:layout_height="800dp"
         android:layout_marginLeft="16dp"
         android:layout_marginRight="16dp"
         app:layout_constraintLeft_toLeftOf="parent"

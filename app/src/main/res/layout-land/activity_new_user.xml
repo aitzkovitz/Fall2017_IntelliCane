@@ -6,175 +6,152 @@
     android:background="@color/colorPrimary"
     >
 
-    <LinearLayout
+    <TextView
+        android:id="@+id/textView7"
         android:layout_width="wrap_content"
-        android:layout_height="match_parent"
-        android:orientation="horizontal">
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="16dp"
+        android:layout_marginTop="24dp"
+        android:layout_marginLeft="45dp"
+        android:layout_marginRight="45dp"
+        android:textSize="48dp"
+        android:textColor="@color/colorPrimary1"
+        android:text="@string/New_user_is_a"
+        android:textAppearance="@style/TextAppearance.AppCompat.Display1" />
 
-       <LinearLayout
-           android:layout_width="wrap_content"
-           android:layout_height="match_parent"
-           android:orientation="vertical">
 
-        <TextView
-            android:id="@+id/textView7"
-            android:layout_width="500dp"
+    <RadioGroup
+        android:id="@+id/newUserRoleRadio"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:layout_marginLeft="45dp"
+        android:layout_marginRight="45dp"
+        android:weightSum="1">
+
+        <RadioButton
+            android:id="@+id/newUserPatientRadio"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginBottom="16dp"
-            android:layout_marginTop="45dp"
-            android:layout_marginLeft="45dp"
-            android:layout_marginRight="45dp"
-            android:textSize="48dp"
-            android:textColor="@color/colorPrimary1"
-            android:text="@string/New_user_is_a"
-            android:textAppearance="@style/TextAppearance.AppCompat.Display1" />
+            android:layout_weight="0.33" />
+
+        <RadioButton
+            android:id="@+id/newUserTherapistRadio"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"/>
+
+    </RadioGroup>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:layout_marginLeft="45dp"
+        android:layout_marginRight="45dp">
 
 
-        <LinearLayout
-            android:layout_width="match_parent"
+        <ImageView
+            android:id="@+id/imageButton1"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:orientation="horizontal">
+            android:adjustViewBounds="true"
+            android:maxWidth="250dp"
+            android:maxHeight="250dp"
+            android:scaleType="fitCenter"
+            app:srcCompat="@drawable/patient" />
 
-            <RadioGroup
-                android:id="@+id/newUserRoleRadio"
-                android:layout_width="fill_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginLeft="45dp"
-                android:layout_marginRight="45dp"
-                android:orientation="horizontal"
-                android:weightSum="1">
 
-                <RadioButton
-                    android:id="@+id/newUserPatientRadio"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="0.50" />
-
-                <RadioButton
-                    android:id="@+id/newUserTherapistRadio"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content" />
-
-            </RadioGroup>
-
-        </LinearLayout>
-
-        <LinearLayout
-            android:layout_width="match_parent"
+        <ImageView
+            android:id="@+id/imageButton2"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            android:layout_marginLeft="45dp"
-            android:layout_marginRight="45dp">
+            android:adjustViewBounds="true"
+            android:maxHeight="250dp"
+            android:maxWidth="250dp"
+            android:scaleType="fitCenter"
+            app:srcCompat="@drawable/physicaltherapist" />
 
-
-            <ImageView
-                android:id="@+id/imageButton1"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:adjustViewBounds="true"
-                android:maxWidth="250dp"
-                android:maxHeight="250dp"
-                android:scaleType="fitCenter"
-                app:srcCompat="@drawable/patient" />
-
-
-            <ImageView
-                android:id="@+id/imageButton2"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:adjustViewBounds="true"
-                android:maxHeight="250dp"
-                android:maxWidth="250dp"
-                android:scaleType="fitCenter"
-                app:srcCompat="@drawable/physicaltherapist" />
-
-        </LinearLayout>
-
-       </LinearLayout>
-
-
-        <LinearLayout
-            android:layout_width="650dp"
-            android:layout_height="wrap_content"
-            android:orientation="vertical">
-
-
-            <EditText
-                android:id="@+id/newUserfName"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginLeft="45dp"
-                android:layout_marginRight="45dp"
-                android:layout_marginTop="40dp"
-                android:hint="@string/First_Name"
-                android:textSize="40dp" />
-
-            <EditText
-                android:id="@+id/newUserlName"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginLeft="45dp"
-                android:layout_marginRight="45dp"
-                android:layout_marginTop="10dp"
-                android:hint="@string/Last_Name"
-                android:textSize="40dp" />
-
-            <EditText
-                android:id="@+id/newUserEmail"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginLeft="45dp"
-                android:layout_marginRight="45dp"
-                android:layout_marginTop="10dp"
-                android:hint="Email"
-                android:inputType="textEmailAddress"
-                android:textSize="40dp" />
-
-            <EditText
-                android:id="@+id/newUserPhone"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginLeft="45dp"
-                android:layout_marginRight="45dp"
-                android:layout_marginTop="10dp"
-                android:hint="@string/Phone"
-                android:textSize="40sp" />
-
-            <EditText
-                android:id="@+id/newUserPhotoURL"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginLeft="45dp"
-                android:layout_marginRight="45dp"
-                android:layout_marginTop="10dp"
-                android:hint="@string/Photo_URL"
-                android:inputType="textUri"
-                android:textSize="40sp" />
-
-            <EditText
-                android:id="@+id/newUserDisplayName"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginLeft="45dp"
-                android:layout_marginRight="45dp"
-                android:layout_marginTop="10dp"
-                android:hint="@string/Display_Name"
-                android:inputType="text"
-                android:textSize="40sp" />
-
-
-            <Button
-                android:id="@+id/buttonCreateUser"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center"
-                android:layout_marginTop="25dp"
-                android:background="@drawable/bluebutton"
-                android:onClick="createNewUserRequest"
-                android:padding="30dp"
-                android:text="@string/Add_User"
-                android:textColor="@color/colorPrimary2"
-                android:textSize="48sp" />
-        </LinearLayout>
     </LinearLayout>
+
+
+    <EditText
+        android:id="@+id/newUserEmail"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="45dp"
+        android:layout_marginRight="45dp"
+        android:layout_marginTop="10dp"
+        android:textSize="40dp"
+        android:hint="Email"
+        android:inputType="textEmailAddress"
+        />
+
+    <EditText
+        android:id="@+id/newUserfName"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="45dp"
+        android:layout_marginRight="45dp"
+        android:layout_marginTop="10dp"
+        android:textSize="40dp"
+        android:hint="@string/First_Name" />
+
+    <EditText
+        android:id="@+id/newUserlName"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="45dp"
+        android:layout_marginRight="45dp"
+        android:layout_marginTop="10dp"
+        android:textSize="40dp"
+        android:hint="@string/Last_Name" />
+
+
+    <EditText
+        android:id="@+id/newUserPhone"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="45dp"
+        android:layout_marginRight="45dp"
+        android:layout_marginTop="10dp"
+        android:textSize="40dp"
+        android:hint="@string/Phone" />
+    <EditText
+        android:id="@+id/newUserPhotoURL"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="45dp"
+        android:layout_marginRight="45dp"
+        android:layout_marginTop="10dp"
+        android:textSize="40dp"
+        android:hint="@string/Photo_URL"
+        android:inputType="textUri"/>
+
+    <EditText
+        android:id="@+id/newUserDisplayName"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="45dp"
+        android:layout_marginRight="45dp"
+        android:layout_marginTop="10dp"
+        android:textSize="40dp"
+        android:hint="@string/Display_Name"
+        android:inputType="text"/>
+
+
+
+    <Button
+        android:id="@+id/buttonCreateUser"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:background="@drawable/bluebutton"
+        android:onClick="createNewUserRequest"
+        android:layout_marginTop="25dp"
+        android:textSize="48dp"
+        android:padding="30dp"
+        android:text="@string/Add_User"
+        android:textColor="@color/colorPrimary2"/>
+
+
 </LinearLayout>
