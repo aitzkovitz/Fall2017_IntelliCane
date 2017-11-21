@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android" android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        android:orientation="vertical" android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:gravity="center"
+        android:weightSum="1">
+
+
+        <!-- SOMEBODY MAKE THIS PRETTY PLZ -->
+        <ProgressBar
+
+            android:id="@+id/progressBar2"
+            android:layout_width="114dp"
+            android:layout_height="0dp"
+            android:layout_weight="0.10"
+            android:background="@xml/progress"
+            android:textColor="@color/colorPrimary" />
+
+        <TextView
+            android:id="@+id/textView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/progress_dialog_loading"
+            android:textSize="48sp"/>
+
+
+    </LinearLayout>
+</android.support.constraint.ConstraintLayout>

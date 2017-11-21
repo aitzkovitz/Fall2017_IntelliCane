@@ -14,7 +14,7 @@
         android:text="@string/Enter_user_email_delete_data" />
 
     <EditText
-        android:id="@+id/deleteUserEmail"
+        android:id="@+id/deleteDataEmail"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_margin="45dp"

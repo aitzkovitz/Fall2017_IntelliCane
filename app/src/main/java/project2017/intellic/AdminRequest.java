@@ -72,7 +72,7 @@ public class AdminRequest extends
         Log.v(TAG, "1 - Admin request is about to start...");
         Activity activity = mWeakActivity.get();
         if (activity != null) {
-            activity.setContentView(R.layout.activity_splash_screen2);
+            activity.setContentView(R.layout.loading);
         }
     }
 

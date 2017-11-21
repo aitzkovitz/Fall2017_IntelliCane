@@ -32,12 +32,14 @@
         <RadioButton
             android:id="@+id/newUserPatientRadio"
             android:layout_width="wrap_content"
+            android:text="Patient"
             android:layout_height="wrap_content"
             android:layout_weight="0.33" />
 
         <RadioButton
             android:id="@+id/newUserTherapistRadio"
             android:layout_width="wrap_content"
+            android:text="Therapist"
             android:layout_height="wrap_content"/>
 
     </RadioGroup>

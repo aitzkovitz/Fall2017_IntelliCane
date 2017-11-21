@@ -76,6 +76,7 @@ public class AssociateSessionActivity extends AppCompatActivity {
                 Map<String,Object> patientNode = (Map<String,Object>)dataSnapshot.getValue();
                 ArrayList<String> patients = new ArrayList<String>();
                 for (String key : patientNode.keySet()) {
+
                     // Use PatientID to get LastName, FirstName
                     Map<String,Object> patient = (Map<String,Object>)patientNode.get(key);
                     String patientName = patient.get("lname").toString()
