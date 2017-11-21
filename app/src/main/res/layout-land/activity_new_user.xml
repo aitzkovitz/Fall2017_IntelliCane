@@ -22,7 +22,7 @@
 
     <RadioGroup
         android:id="@+id/newUserRoleRadio"
-        android:layout_width="fill_parent"
+        android:layout_width="507dp"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
         android:layout_marginLeft="45dp"
@@ -33,7 +33,7 @@
             android:id="@+id/newUserPatientRadio"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_weight="0.33" />
+            android:layout_weight="0.20" />
 
         <RadioButton
             android:id="@+id/newUserTherapistRadio"

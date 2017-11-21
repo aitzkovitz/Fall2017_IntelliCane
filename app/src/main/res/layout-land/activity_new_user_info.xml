@@ -19,6 +19,15 @@
         android:text="@string/New_user_is_a"
         android:textAppearance="@style/TextAppearance.AppCompat.Display1" />
 
+<LinearLayout
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:orientation="horizontal">
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
     <RadioGroup
         android:id="@+id/newUserRoleRadio"
         android:layout_width="fill_parent"
@@ -32,7 +41,7 @@
             android:id="@+id/newUserPatientRadio"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_weight="0.33" />
+            android:layout_weight="0.50" />
 
 
         <RadioButton
@@ -70,67 +79,75 @@
             app:srcCompat="@drawable/physicaltherapist" />
 
     </LinearLayout>
+</LinearLayout>
 
-    <EditText
-        android:id="@+id/signUpUserFname"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginLeft="45dp"
-        android:layout_marginRight="45dp"
-        android:layout_marginTop="10dp"
-        android:textSize="40sp"
-        android:hint="@string/First_Name" />
-
-    <EditText
-        android:id="@+id/signUpUserLname"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginLeft="45dp"
-        android:layout_marginRight="45dp"
-        android:layout_marginTop="10dp"
-        android:textSize="40sp"
-        android:hint="@string/Last_Name" />
-
-    <EditText
-        android:id="@+id/signUpUserEmail"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginLeft="45dp"
-        android:layout_marginRight="45dp"
-        android:layout_marginTop="10dp"
-        android:textSize="40sp"
-        android:inputType="textEmailAddress"
-        android:hint="@string/Email"
-        />
-    <EditText
-        android:id="@+id/signUpUserPassword"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginLeft="45dp"
-        android:layout_marginRight="45dp"
-        android:layout_marginTop="10dp"
-        android:textSize="40sp"
-        android:hint="@string/password"
-        android:inputType="textVisiblePassword"/>
-
-    <RadioGroup
-        android:id="@+id/signUpUserRoleRadio"
-        android:layout_width="fill_parent"
+    <LinearLayout
+        android:layout_width="514dp"
         android:layout_height="wrap_content"
         android:orientation="vertical">
 
-    </RadioGroup>
+        <EditText
+            android:id="@+id/signUpUserFname"
+            android:layout_width="425dp"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="45dp"
+            android:layout_marginRight="45dp"
+            android:layout_marginTop="10dp"
+            android:hint="@string/First_Name"
+            android:textSize="40sp" />
+
+        <EditText
+            android:id="@+id/signUpUserLname"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="45dp"
+            android:layout_marginRight="45dp"
+            android:layout_marginTop="10dp"
+            android:hint="@string/Last_Name"
+            android:textSize="40sp" />
+
+        <EditText
+            android:id="@+id/signUpUserEmail"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="45dp"
+            android:layout_marginRight="45dp"
+            android:layout_marginTop="10dp"
+            android:hint="@string/Email"
+            android:inputType="textEmailAddress"
+            android:textSize="40sp" />
+
+        <EditText
+            android:id="@+id/signUpUserPassword"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="45dp"
+            android:layout_marginRight="45dp"
+            android:layout_marginTop="10dp"
+            android:hint="@string/password"
+            android:inputType="textVisiblePassword"
+            android:textSize="40sp" />
+
+        <RadioGroup
+            android:id="@+id/signUpUserRoleRadio"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+        </RadioGroup>
 
 
-    <Button
-        android:id="@+id/buttonCreateUser"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:padding="30dp"
-        android:layout_gravity="center"
-        android:onClick="createNewUserRequest"
-        android:textSize="40sp"
-        android:text="@string/Add_User"
-        android:background="@drawable/bluebutton"
-        android:textColor="@color/colorPrimary2"/>
+        <Button
+            android:id="@+id/buttonCreateUser"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:background="@drawable/bluebutton"
+            android:onClick="createNewUserRequest"
+            android:padding="30dp"
+            android:text="@string/Add_User"
+            android:textColor="@color/colorPrimary2"
+            android:textSize="40sp" />
+    </LinearLayout>
+</LinearLayout>
 </LinearLayout>
