@@ -16,7 +16,7 @@
         android:padding="18dp"
         android:text="@string/welcome_administrator"
         android:textColor="@color/colorPrimary1"
-        android:textSize="54sp" />
+        android:textSize="40sp" />
 
     <LinearLayout
         android:layout_width="match_parent"
