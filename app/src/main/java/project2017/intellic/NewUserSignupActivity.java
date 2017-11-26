@@ -16,6 +16,7 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.google.android.gms.tasks.OnCompleteListener;
@@ -88,9 +89,43 @@ public class NewUserSignupActivity extends AppCompatActivity {
         editTextFName = (EditText) findViewById(R.id.signUpUserFname);
         editTextLName = (EditText) findViewById(R.id.signUpUserLname);
         radioGroup = (RadioGroup) findViewById(R.id.signUpUserRoleRadio);
-
         int selectedId = radioGroup.getCheckedRadioButtonId();
         radioButton = (RadioButton) findViewById(selectedId);
+
+        // validate selections before submission
+        editTextEmail.addTextChangedListener(new TextValidator(editTextEmail) {
+            @Override
+            public void validate(TextView textView, String text) {
+                if (text.length() == 0){
+                    Toast.makeText(NewUserSignupActivity.this, "Email can't be empty", Toast.LENGTH_LONG).show();
+                }
+            }
+        });
+        editTextPassword.addTextChangedListener(new TextValidator(editTextPassword) {
+            @Override
+            public void validate(TextView textView, String text) {
+                if (text.length() == 0){
+                    Toast.makeText(NewUserSignupActivity.this, "Email can't be empty", Toast.LENGTH_LONG).show();
+                }
+            }
+        });
+        editTextFName.addTextChangedListener(new TextValidator(editTextFName) {
+            @Override
+            public void validate(TextView textView, String text) {
+                if (text.length() == 0){
+                    Toast.makeText(NewUserSignupActivity.this, "Email can't be empty", Toast.LENGTH_LONG).show();
+                }
+            }
+        });
+        editTextLName.addTextChangedListener(new TextValidator(editTextLName) {
+            @Override
+            public void validate(TextView textView, String text) {
+                if (text.length() == 0){
+                    Toast.makeText(NewUserSignupActivity.this, "Email can't be empty", Toast.LENGTH_LONG).show();
+                }
+            }
+        });
+
 
         final String email = editTextEmail.getText().toString();
         final String password = editTextPassword.getText().toString();

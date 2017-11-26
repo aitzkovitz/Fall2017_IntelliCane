@@ -74,6 +74,8 @@ public class DeleteDataActivity extends AppCompatActivity {
         final EditText editTextEmailToDelete = (EditText) findViewById(R.id.deleteDataEmail);
         final String email = editTextEmailToDelete.getText().toString();
 
+        //
+
         // define listener for when the operation completes
         final OnTaskCompleted listener = new OnTaskCompleted() {
             @Override

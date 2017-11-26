@@ -7,12 +7,14 @@ import android.support.v4.app.NavUtils;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.util.Pair;
+import android.util.Patterns;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.CheckBox;
 import android.widget.EditText;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.google.android.gms.tasks.OnCompleteListener;
@@ -24,6 +26,8 @@ import com.google.firebase.auth.GetTokenResult;
 import org.json.JSONObject;
 
 import java.util.HashMap;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 /**
  * Created by aaronitzkovitz on 10/18/17.
@@ -88,6 +92,99 @@ public class UpdateUserActivity extends AppCompatActivity {
         }else {
             Toast.makeText(this, "No data found", Toast.LENGTH_SHORT).show();
         }
+
+        /////////// Define validators //////////
+        View.OnFocusChangeListener textField = new View.OnFocusChangeListener() {
+            @Override
+            public void onFocusChange(View view, boolean b) {
+                if (b) {return;}
+                if (((EditText)view).getText().length() == 0){
+                    ((EditText)view).setError("First name can't be empty!");
+                } else {
+                    Pattern p = Pattern.compile("^[A-Za-z]*");
+                    Matcher m = p.matcher(((EditText)view).getText());
+                    if (!m.matches()){
+                        ((EditText) view).setError("Must be letters!");
+                    }
+                }
+            }
+        };
+
+        // define validators for email
+        View.OnFocusChangeListener emailField = new View.OnFocusChangeListener() {
+            @Override
+            public void onFocusChange(View view, boolean b) {
+                // if textview lost focus, return
+                if (b){return;}
+                // if it's empty, send error message
+                if (((EditText)view).getText().length() == 0){
+                    ((EditText)view).setError("First name can't be empty!");
+                } else {
+                    // else check if it matches
+                    if (!Patterns.EMAIL_ADDRESS.matcher(((EditText) view).getText()).matches()) {
+                        ((EditText) view).setError("Must be a valid email address!");
+                    }
+                }
+            }
+        };
+
+        // define validator for phone
+        View.OnFocusChangeListener phoneField = new View.OnFocusChangeListener() {
+            @Override
+            public void onFocusChange(View view, boolean b) {
+                // if textview lost focus, or is empty
+                if (b || ((EditText)view).getText().length() == 0){
+                    return;
+                } else {
+                    // else check if it matches
+                    if (!Patterns.PHONE.matcher(((EditText) view).getText()).matches()) {
+                        ((EditText) view).setError("Must be a valid phone number!");
+                    }
+                }
+            }
+        };
+
+        // define validator for phone
+        View.OnFocusChangeListener URLField = new View.OnFocusChangeListener() {
+            @Override
+            public void onFocusChange(View view, boolean b) {
+                // if textview lost focus, or is empty
+                if (b || ((EditText)view).getText().length() == 0){
+                    return;
+                } else {
+                    // else check if it matches
+                    if (!Patterns.WEB_URL.matcher(((EditText) view).getText()).matches()) {
+                        ((EditText) view).setError("Must be a valid URL!");
+                    }
+                }
+            }
+        };
+
+        // define validator for phone
+        View.OnFocusChangeListener displayNameField = new View.OnFocusChangeListener() {
+            @Override
+            public void onFocusChange(View view, boolean b) {
+                // if textview lost focus, or is empty
+                if (b || ((EditText)view).getText().length() == 0){
+                    return;
+                } else {
+                    Pattern p = Pattern.compile("^[A-Za-z0-9]");
+                    Matcher m = p.matcher(((EditText)view).getText());
+                    if (!m.matches()){
+                        ((EditText) view).setError("Must be letters or numbers!");
+                    }
+                }
+            }
+        };
+
+        // add validators to fields
+        editTextFname.setOnFocusChangeListener(textField);
+        editTextLname.setOnFocusChangeListener(textField);
+        editTextEmail.setOnFocusChangeListener(emailField);
+        editTextPhone.setOnFocusChangeListener(phoneField);
+        editTextPhotoURL.setOnFocusChangeListener(URLField);
+        editTextDisplayName.setOnFocusChangeListener(displayNameField);
+
     }
 
     @Override
