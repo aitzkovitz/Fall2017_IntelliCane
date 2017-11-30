@@ -31,6 +31,14 @@ Once the repository has been cloned to your local machine you will simply need t
 
 This will be a link to the HTML documentation.
 
+## Fall 2017 Contributors
+  
+- **Aaron Itzkovitz**  
+- **Yuxin Zhang**
+- **Karla Robles**  
+- **Damon Hughes** 
+- **Jeremy Bickford**
+
 ## Spring 2017 Contributors
 
 - **Ahmed Alnemer**  
@@ -54,12 +62,4 @@ This will be a link to the HTML documentation.
 - **Nathaniel Burton**
   - Data Visualization Designer
   - Visualization Programmer
-  
-## Fall 2017 Contributors
-  
-- **Aaron Itzkovitz**  
-- **Yuxin Zhang**
-- **Karla Robles**  
-- **Damon Hughes** 
-- **Jeremy Bickford**
 
