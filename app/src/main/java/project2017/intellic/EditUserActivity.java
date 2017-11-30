@@ -7,6 +7,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.util.Pair;
+import android.util.Patterns;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
@@ -15,6 +16,7 @@ import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.fasterxml.jackson.databind.util.JSONPObject;
@@ -33,11 +35,27 @@ import java.util.HashMap;
  */
 
 public class EditUserActivity extends AppCompatActivity{
+
+    private EditText editTextEmailtoEdit;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_edit_user);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        editTextEmailtoEdit = (EditText) findViewById(R.id.EditUserEmail);
+        editTextEmailtoEdit.addTextChangedListener(new TextValidator(editTextEmailtoEdit) {
+            @Override
+            public void validate(TextView textView, String text) {
+                if (text.length() == 0){
+                    textView.setError("Email must not be empty!");
+                } else {
+                    if (!Patterns.EMAIL_ADDRESS.matcher(text).matches()){
+                        textView.setError("Input must be valid email!");
+                    }
+                }
+            }
+        });
     }
 
     @Override
@@ -95,8 +113,7 @@ public class EditUserActivity extends AppCompatActivity{
         };
 
         // get info of user to delete
-        final EditText editTextEmailToDelete = (EditText) findViewById(R.id.EditUserEmail);
-        final String email = editTextEmailToDelete.getText().toString();
+        final String email = editTextEmailtoEdit.getText().toString();
 
         // get current user
         FirebaseAuth mAuth = FirebaseAuth.getInstance();

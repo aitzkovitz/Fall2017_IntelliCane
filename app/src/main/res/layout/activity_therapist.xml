@@ -25,6 +25,7 @@
 
         <ImageButton
             android:id="@+id/imageButton"
+            android:onClick="newPatient"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             app:srcCompat="@drawable/addpatient"
@@ -36,6 +37,7 @@
             android:layout_marginLeft="100dp"/>
         <ImageButton
             android:id="@+id/imageButton3"
+            android:onClick="lookupPatientData"
             android:layout_width="wrap_content"
             android:layout_height="303dp"
             app:srcCompat="@drawable/viewpatientdata"

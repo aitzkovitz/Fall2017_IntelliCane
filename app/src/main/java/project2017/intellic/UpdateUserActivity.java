@@ -99,7 +99,7 @@ public class UpdateUserActivity extends AppCompatActivity {
             public void onFocusChange(View view, boolean b) {
                 if (b) {return;}
                 if (((EditText)view).getText().length() == 0){
-                    ((EditText)view).setError("First name can't be empty!");
+                    ((EditText)view).setError("Can't be empty!");
                 } else {
                     Pattern p = Pattern.compile("^[A-Za-z]*");
                     Matcher m = p.matcher(((EditText)view).getText());
@@ -118,7 +118,7 @@ public class UpdateUserActivity extends AppCompatActivity {
                 if (b){return;}
                 // if it's empty, send error message
                 if (((EditText)view).getText().length() == 0){
-                    ((EditText)view).setError("First name can't be empty!");
+                    ((EditText)view).setError("Email can't be empty!");
                 } else {
                     // else check if it matches
                     if (!Patterns.EMAIL_ADDRESS.matcher(((EditText) view).getText()).matches()) {
@@ -144,7 +144,7 @@ public class UpdateUserActivity extends AppCompatActivity {
             }
         };
 
-        // define validator for phone
+        // define validator for URL
         View.OnFocusChangeListener URLField = new View.OnFocusChangeListener() {
             @Override
             public void onFocusChange(View view, boolean b) {
@@ -160,7 +160,7 @@ public class UpdateUserActivity extends AppCompatActivity {
             }
         };
 
-        // define validator for phone
+        // define validator for DisplayName
         View.OnFocusChangeListener displayNameField = new View.OnFocusChangeListener() {
             @Override
             public void onFocusChange(View view, boolean b) {
@@ -168,7 +168,7 @@ public class UpdateUserActivity extends AppCompatActivity {
                 if (b || ((EditText)view).getText().length() == 0){
                     return;
                 } else {
-                    Pattern p = Pattern.compile("^[A-Za-z0-9]");
+                    Pattern p = Pattern.compile("^[A-Za-z0-9]*");
                     Matcher m = p.matcher(((EditText)view).getText());
                     if (!m.matches()){
                         ((EditText) view).setError("Must be letters or numbers!");

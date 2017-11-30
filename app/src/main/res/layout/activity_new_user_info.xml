@@ -32,12 +32,14 @@
             android:id="@+id/newUserPatientRadio"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:text="Patient"
             android:layout_weight="0.33" />
 
 
         <RadioButton
             android:id="@+id/newUserTherapistRadio"
             android:layout_width="wrap_content"
+            android:text="Therapist"
             android:layout_height="wrap_content"/>
 
 
@@ -113,14 +115,6 @@
         android:hint="@string/password"
         android:inputType="textVisiblePassword"/>
 
-    <RadioGroup
-        android:id="@+id/signUpUserRoleRadio"
-        android:layout_width="fill_parent"
-        android:layout_height="wrap_content"
-        android:orientation="vertical">
-
-    </RadioGroup>
-
 
     <Button
         android:id="@+id/buttonCreateUser"
@@ -128,7 +122,7 @@
         android:layout_height="wrap_content"
         android:padding="30dp"
         android:layout_gravity="center"
-        android:onClick="createNewUserRequest"
+        android:onClick="userSignup"
         android:textSize="40sp"
         android:text="@string/Add_User"
         android:background="@drawable/bluebutton"

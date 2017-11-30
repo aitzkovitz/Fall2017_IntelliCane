@@ -78,7 +78,7 @@ public class PatientSelectActivity extends AppCompatActivity {
         // Reference patient list under current Therapist user
         database = FirebaseDatabase.getInstance();
         DatabaseReference ref = database.getReferenceFromUrl("https://icane-41ce5.firebaseio.com/");
-        DatabaseReference patientRef = ref.child("Users").child("Therapist").child(uid).child("patients");
+        DatabaseReference patientRef = ref.child("Users").child("Therapist").child(uid).child("Patients");
 
         // Listen to track changes in data at database reference
         patientRef.addValueEventListener(new ValueEventListener() {
@@ -87,6 +87,12 @@ public class PatientSelectActivity extends AppCompatActivity {
                 // Create object to hold list of patients
                 Log.v("tag", "test");
                 Map<String,Object> map = (Map<String,Object>)dataSnapshot.getValue();
+
+                if (map == null){
+                    Toast.makeText(PatientSelectActivity.this, "Patient has no session data!", Toast.LENGTH_SHORT).show();
+                    return;
+                }
+
                 ArrayList<String> patients = new ArrayList<String>();
                 for (String key : map.keySet()) {
                     // Use PatientID to get LastName, FirstName

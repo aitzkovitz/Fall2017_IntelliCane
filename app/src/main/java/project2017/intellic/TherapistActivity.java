@@ -62,7 +62,7 @@ public class TherapistActivity extends AppCompatActivity {
         finish();
     }
 
-    // delete user
+    // lookup user data
     public void lookupPatientData(View view) {
         Intent intent = new Intent(TherapistActivity.this, PatientSelectActivity.class);
         startActivity(intent);

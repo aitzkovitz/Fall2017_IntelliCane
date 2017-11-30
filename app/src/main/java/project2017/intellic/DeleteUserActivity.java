@@ -7,6 +7,7 @@ import android.support.v4.app.NavUtils;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.util.Pair;
+import android.util.Patterns;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
@@ -15,6 +16,7 @@ import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.google.android.gms.tasks.OnCompleteListener;
@@ -39,11 +41,26 @@ import bolts.Task;
 // used to delete users
 public class DeleteUserActivity extends AppCompatActivity {
 
+    private EditText editTextEmail;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_delete_user);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        editTextEmail = (EditText) findViewById(R.id.deleteUserEmail);
+        editTextEmail.addTextChangedListener(new TextValidator(editTextEmail) {
+            @Override
+            public void validate(TextView textView, String text) {
+                if (text.length() == 0){
+                    textView.setError("Email must not be empty!");
+                } else {
+                    if (!Patterns.EMAIL_ADDRESS.matcher(text).matches()){
+                        textView.setError("Input must be valid email!");
+                    }
+                }
+            }
+        });
     }
 
     @Override
@@ -101,7 +118,6 @@ public class DeleteUserActivity extends AppCompatActivity {
         };
 
         // get info of user to delete
-        EditText editTextEmail = (EditText) findViewById(R.id.deleteUserEmail);
         final String email = editTextEmail.getText().toString();
 
         // get current user

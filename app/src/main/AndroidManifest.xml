@@ -48,6 +48,13 @@
                 android:value="project2017.intellic.AdminActivity" />
         </activity>
         <activity
+            android:name=".NewPatientActivity"
+            android:parentActivityName=".TherapistActivity">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="project2017.intellic.TherapistActivity" />
+        </activity>
+        <activity
             android:name=".DeleteSessionActivity"
             android:parentActivityName=".DeleteDataActivity">
             <meta-data

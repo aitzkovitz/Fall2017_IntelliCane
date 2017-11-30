@@ -48,6 +48,7 @@ public class AdminRequest extends
     private final String updateUserURL = "https://us-central1-icane-41ce5.cloudfunctions.net/app/admin/updateUser";
     private final String deleteDataURL = "https://us-central1-icane-41ce5.cloudfunctions.net/app/admin/deleteData";
     private final String getSessionsURL = "https://us-central1-icane-41ce5.cloudfunctions.net/app/admin/getSessions";
+    private final String addPatientURL = "https://us-central1-icane-41ce5.cloudfunctions.net/tApp/therapist/addPatient";
     // for logging
     private final String TAG = "post json example";
 
@@ -94,6 +95,8 @@ public class AdminRequest extends
             success = getServerResponse( deleteDataURL );
         } else if(adminAction == "getSessions"){
             success = getServerResponse( getSessionsURL );
+        } else if(adminAction == "addPatient"){
+            success = getServerResponse( addPatientURL );
         } else {
             success = false;
         }

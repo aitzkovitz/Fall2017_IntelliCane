@@ -70,7 +70,7 @@
             android:layout_gravity="center_horizontal"
             android:layout_margin="10dp"
             android:background="@drawable/bluebutton"
-            android:onClick="loginPublic"
+            android:onClick="createNewUser"
             android:text="@string/activity_login_create_account"
             android:textSize="48sp"
             android:padding="30dp"

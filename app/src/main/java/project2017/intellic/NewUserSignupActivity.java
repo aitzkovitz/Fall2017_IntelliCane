@@ -8,6 +8,7 @@ import android.support.annotation.NonNull;
 import android.support.v4.app.NavUtils;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
+import android.util.Patterns;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
@@ -25,6 +26,9 @@ import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 import bolts.Task;
 
@@ -57,14 +61,6 @@ public class NewUserSignupActivity extends AppCompatActivity {
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
             // action with ID action_logout was selected
-            case R.id.action_logout:
-                FirebaseAuth.getInstance().signOut();
-                Toast.makeText(this, "Logging Out", Toast.LENGTH_SHORT)
-                        .show();
-                Intent intent = new Intent(NewUserSignupActivity.this, LoginActivity.class);
-                startActivity(intent);
-                finish();
-                break;
             case android.R.id.home:
                 NavUtils.navigateUpFromSameTask(this);
                 return true;
@@ -79,16 +75,75 @@ public class NewUserSignupActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_new_user_info);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-    }
-
-    public void userSignup(View view) {
-        firebaseAuth = FirebaseAuth.getInstance();
 
         editTextEmail = (EditText) findViewById(R.id.signUpUserEmail);
         editTextPassword = (EditText) findViewById(R.id.signUpUserPassword);
         editTextFName = (EditText) findViewById(R.id.signUpUserFname);
         editTextLName = (EditText) findViewById(R.id.signUpUserLname);
-        radioGroup = (RadioGroup) findViewById(R.id.signUpUserRoleRadio);
+        radioGroup = (RadioGroup) findViewById(R.id.newUserRoleRadio);
+
+        // define validators
+        View.OnFocusChangeListener textField = new View.OnFocusChangeListener() {
+            @Override
+            public void onFocusChange(View view, boolean b) {
+                EditText textBox = (EditText)view;
+                String text = textBox.getText().toString();
+                if (!b){
+                    if (text.length() == 0){
+                        textBox.setError("Can't be empty!");
+                    } else {
+                        Pattern p = Pattern.compile("^[A-Za-z]*");
+                        Matcher m = p.matcher(text);
+                        if (!m.matches()){
+                            textBox.setError("Must be letters!");
+                        }
+                    }
+                }
+            }
+        };
+
+        // define validators for email
+        View.OnFocusChangeListener emailField = new View.OnFocusChangeListener() {
+            @Override
+            public void onFocusChange(View view, boolean b) {
+                EditText textBox = (EditText)view;
+                String text = textBox.getText().toString();
+                if (!b){
+                    if(text.length() == 0){
+                        textBox.setError("Email can't be empty!");
+                    }else {
+                        if(!Patterns.EMAIL_ADDRESS.matcher(((EditText) view).getText()).matches()){
+                            textBox.setError("Input must be valid email!");
+                        }
+                    }
+                }
+            }
+        };
+
+        // define validators for email
+        View.OnFocusChangeListener passwordField = new View.OnFocusChangeListener() {
+            @Override
+            public void onFocusChange(View view, boolean b) {
+                EditText textBox = (EditText)view;
+                String text = textBox.getText().toString();
+                if (!b){
+                    if(text.length() == 0){
+                        textBox.setError("Password can't be empty!");
+                    }else {
+                        if(text.length() < 6){
+                            textBox.setError("Password must be over 6 characters!");
+                        }
+                    }
+                }
+            }
+        };
+
+
+    }
+
+    public void userSignup(View view) {
+        firebaseAuth = FirebaseAuth.getInstance();
+
         int selectedId = radioGroup.getCheckedRadioButtonId();
         radioButton = (RadioButton) findViewById(selectedId);
 
@@ -144,7 +199,7 @@ public class NewUserSignupActivity extends AppCompatActivity {
                                 String uid = user.getUid();
                                 addNewUser(uid, fname, lname, email, role);
                                 if (role.equals("Physical Therapist")) {
-                                    Intent intent = new Intent(NewUserSignupActivity.this, PatientSelectActivity.class);
+                                    Intent intent = new Intent(NewUserSignupActivity.this, TherapistActivity.class);
                                     startActivity(intent);
                                     finish();
                                 }
@@ -155,7 +210,7 @@ public class NewUserSignupActivity extends AppCompatActivity {
                                     startActivity(intent);
                                     finish();
                                 } else {
-                                    Toast.makeText(NewUserSignupActivity.this, "role is not assigned", Toast.LENGTH_LONG).show();
+                                    Toast.makeText(NewUserSignupActivity.this, "No role assigned!", Toast.LENGTH_LONG).show();
                                 }
                             }catch(Exception e){
                                 Log.v("NEWUSERSIGNUP", e.toString());

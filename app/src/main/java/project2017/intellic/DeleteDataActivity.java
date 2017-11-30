@@ -6,11 +6,13 @@ import android.support.v4.app.NavUtils;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.util.Pair;
+import android.util.Patterns;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.EditText;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.google.android.gms.common.api.GoogleApiClient;
@@ -32,12 +34,26 @@ import java.util.Iterator;
 public class DeleteDataActivity extends AppCompatActivity {
     private FirebaseAuth firebaseAuth;
     private GoogleApiClient client;
+    private EditText editTextEmailToDelete;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_delete_data);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        editTextEmailToDelete = (EditText) findViewById(R.id.deleteDataEmail);
+        editTextEmailToDelete.addTextChangedListener(new TextValidator(editTextEmailToDelete) {
+            @Override
+            public void validate(TextView textView, String text) {
+                if (text.length() == 0){
+                    textView.setError("Email must not be empty!");
+                } else {
+                    if (!Patterns.EMAIL_ADDRESS.matcher(text).matches()){
+                        textView.setError("Input must be valid email!");
+                    }
+                }
+            }
+        });
     }
 
     @Override
@@ -71,10 +87,7 @@ public class DeleteDataActivity extends AppCompatActivity {
     public void deleteData(View view){
 
         // get info of user to delete
-        final EditText editTextEmailToDelete = (EditText) findViewById(R.id.deleteDataEmail);
         final String email = editTextEmailToDelete.getText().toString();
-
-        //
 
         // define listener for when the operation completes
         final OnTaskCompleted listener = new OnTaskCompleted() {

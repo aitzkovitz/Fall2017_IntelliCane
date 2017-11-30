@@ -7,6 +7,7 @@ import android.support.v4.app.NavUtils;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.util.Pair;
+import android.util.Patterns;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
@@ -25,6 +26,9 @@ import com.google.firebase.auth.GetTokenResult;
 
 import org.json.JSONObject;
 
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
+
 /**
  * Created by aaronitzkovitz on 10/28/17.
  */
@@ -35,12 +39,90 @@ public class NewPatientActivity extends AppCompatActivity {
     private FirebaseAuth firebaseAuth;
     String uid = "";
     private GoogleApiClient client;
+    EditText editTextEmail;
+    EditText editTextFName;
+    EditText editTextLName;
+    EditText editTextPhone;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_new_patient_info);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+
+        // get text views
+        editTextEmail = (EditText) findViewById(R.id.newPatientEmail );
+        editTextFName = (EditText) findViewById(R.id.newPatientFname );
+        editTextLName = (EditText) findViewById(R.id.newPatientLname );
+        editTextPhone = (EditText) findViewById(R.id.newPatientPhone ); // not required
+
+        // add validators
+        editTextEmail.setOnFocusChangeListener(new View.OnFocusChangeListener() {
+            @Override
+            public void onFocusChange(View view, boolean b) {
+                EditText textBox = (EditText) view;
+                String text = textBox.getText().toString();
+                if (!b){
+                    if (text.length() == 0){
+                        textBox.setError("Email can't be empty!");
+                    } else {
+                        if (!Patterns.EMAIL_ADDRESS.matcher(text).matches()) {
+                            textBox.setError("Must be a valid email!");
+                        }
+                    }
+                }
+            }
+        });
+
+        editTextFName.setOnFocusChangeListener(new View.OnFocusChangeListener() {
+            @Override
+            public void onFocusChange(View view, boolean b) {
+                EditText textBox = (EditText) view;
+                String text = textBox.getText().toString();
+                if (!b){
+                    if (text.length() == 0){
+                        textBox.setError("First name can't be empty!");
+                    } else {
+                        Pattern p = Pattern.compile("^[A-Za-z]*");
+                        Matcher m = p.matcher(text);
+                        if (!m.matches()){
+                            textBox.setError("Must be a valid first name!");
+                        }
+                    }
+                }
+            }
+        });
+
+        editTextLName.setOnFocusChangeListener(new View.OnFocusChangeListener() {
+            @Override
+            public void onFocusChange(View view, boolean b) {
+                EditText textBox = (EditText) view;
+                String text = textBox.getText().toString();
+                if (!b){
+                    if (text.length() == 0){
+                        textBox.setError("Last name can't be empty!");
+                    } else {
+                        Pattern p = Pattern.compile("^[A-Za-z]*");
+                        Matcher m = p.matcher(text);
+                        if (!m.matches()){
+                            textBox.setError("Must be a valid last name!");
+                        }
+                    }
+                }
+            }
+        });
+
+        editTextPhone.setOnFocusChangeListener(new View.OnFocusChangeListener() {
+            @Override
+            public void onFocusChange(View view, boolean b) {
+                EditText textBox = (EditText) view;
+                String text = textBox.getText().toString();
+                if (!b && text.length() != 0 && !Patterns.PHONE.matcher(text).matches()){
+                    textBox.setError("Must be a valid phone number!");
+                }
+            }
+        });
+
     }
 
     @Override
@@ -78,15 +160,11 @@ public class NewPatientActivity extends AppCompatActivity {
 
         FirebaseAuth mAuth = FirebaseAuth.getInstance();
 
-        EditText editTextEmail = (EditText) findViewById(R.id.newPatientEmail );
-        EditText editTextFName = (EditText) findViewById(R.id.newPatientFname );
-        EditText editTextLName = (EditText) findViewById(R.id.newPatientLname );
-        EditText editTextPhone = (EditText) findViewById(R.id.newPatientPhone );
-
         final String email = editTextEmail.getText().toString();
         final String fname = editTextFName.getText().toString();
         final String lname = editTextLName.getText().toString();
         final String phone = editTextPhone.getText().toString();
+        final String uid = mAuth.getCurrentUser().getUid();
 
         // TBI: use cookies instead of requesting a token to send each time
         FirebaseUser currUser = mAuth.getCurrentUser();
@@ -128,6 +206,7 @@ public class NewPatientActivity extends AppCompatActivity {
                                         new Pair<String, String>("email", email),
                                         new Pair<String, String>("fname", fname),
                                         new Pair<String, String>("lname", lname),
+                                        new Pair<String, String>("uid", uid),
                                         new Pair<String, String>("phone", phone)
                                 );
                                 adminRequest.addToken(tok);

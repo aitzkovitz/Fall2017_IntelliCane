@@ -14,6 +14,7 @@ import android.text.Editable;
 import android.text.TextWatcher;
 import android.util.Log;
 import android.util.Pair;
+import android.util.Patterns;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
@@ -35,10 +36,19 @@ import com.google.firebase.database.FirebaseDatabase;
 
 import org.json.JSONObject;
 
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
+
 public class NewUserActivity extends AppCompatActivity {
     private FirebaseAuth firebaseAuth;
     String uid = "";
     private GoogleApiClient client;
+    private EditText editTextEmail;
+    private EditText editTextFName;
+    private EditText editTextLName;
+    private EditText editTextPhone;
+    private EditText editTextPhotoURL;
+    private EditText editTextDisplayName;
 
 
     @Override
@@ -46,6 +56,107 @@ public class NewUserActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_new_user);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        editTextEmail = (EditText) findViewById(R.id.newUserEmail );
+        editTextFName = (EditText) findViewById(R.id.newUserfName );
+        editTextLName = (EditText) findViewById(R.id.newUserlName );
+        editTextPhone = (EditText) findViewById(R.id.newUserPhone );
+        editTextPhotoURL = (EditText) findViewById(R.id.newUserPhotoURL );
+        editTextDisplayName = (EditText) findViewById(R.id.newUserDisplayName );
+
+        // define validators
+        View.OnFocusChangeListener textField = new View.OnFocusChangeListener() {
+            @Override
+            public void onFocusChange(View view, boolean b) {
+                EditText textBox = (EditText)view;
+                String text = textBox.getText().toString();
+                if (!b){
+                    if (text.length() == 0){
+                        textBox.setError("Can't be empty!");
+                    } else {
+                        Pattern p = Pattern.compile("^[A-Za-z]*");
+                        Matcher m = p.matcher(text);
+                        if (!m.matches()){
+                            textBox.setError("Must be letters!");
+                        }
+                    }
+                }
+            }
+        };
+
+        // define validators for email
+        View.OnFocusChangeListener emailField = new View.OnFocusChangeListener() {
+            @Override
+            public void onFocusChange(View view, boolean b) {
+                EditText textBox = (EditText)view;
+                String text = textBox.getText().toString();
+                if (!b){
+                    if(text.length() == 0){
+                        textBox.setError("Email can't be empty!");
+                    }else {
+                        if(!Patterns.EMAIL_ADDRESS.matcher(((EditText) view).getText()).matches()){
+                            textBox.setError("Input must be valid email!");
+                        }
+                    }
+                }
+            }
+        };
+
+        // define validator for
+        View.OnFocusChangeListener phoneField = new View.OnFocusChangeListener() {
+            @Override
+            public void onFocusChange(View view, boolean b) {
+                // if textview lost focus, or is empty
+                if (b || ((EditText)view).getText().length() == 0){
+                    return;
+                } else {
+                    // else check if it matches
+                    if (!Patterns.PHONE.matcher(((EditText) view).getText()).matches()) {
+                        ((EditText) view).setError("Must be a valid phone number!");
+                    }
+                }
+            }
+        };
+
+        // define validator for URL
+        View.OnFocusChangeListener URLField = new View.OnFocusChangeListener() {
+            @Override
+            public void onFocusChange(View view, boolean b) {
+                // if textview lost focus, or is empty
+                if (b || ((EditText)view).getText().length() == 0){
+                    return;
+                } else {
+                    // else check if it matches
+                    if (!Patterns.WEB_URL.matcher(((EditText) view).getText()).matches()) {
+                        ((EditText) view).setError("Must be a valid URL!");
+                    }
+                }
+            }
+        };
+
+        // define validator for DisplayName
+        View.OnFocusChangeListener displayNameField = new View.OnFocusChangeListener() {
+            @Override
+            public void onFocusChange(View view, boolean b) {
+                // if textview lost focus, or is empty
+                if (b || ((EditText)view).getText().length() == 0){
+                    return;
+                } else {
+                    Pattern p = Pattern.compile("^[A-Za-z0-9]*");
+                    Matcher m = p.matcher(((EditText)view).getText());
+                    if (!m.matches()){
+                        ((EditText) view).setError("Must be letters or numbers!");
+                    }
+                }
+            }
+        };
+
+        // add listeners
+        editTextEmail.setOnFocusChangeListener(emailField);
+        editTextFName.setOnFocusChangeListener(textField);
+        editTextLName.setOnFocusChangeListener(textField);
+        editTextPhone.setOnFocusChangeListener(phoneField);
+        editTextPhotoURL.setOnFocusChangeListener(URLField);
+        editTextPhotoURL.setOnFocusChangeListener(URLField);
     }
 
     @Override
@@ -82,13 +193,6 @@ public class NewUserActivity extends AppCompatActivity {
         RadioButton radioButton;
 
         FirebaseAuth mAuth = FirebaseAuth.getInstance();
-
-        EditText editTextEmail = (EditText) findViewById(R.id.newUserEmail );
-        EditText editTextFName = (EditText) findViewById(R.id.newUserfName );
-        EditText editTextLName = (EditText) findViewById(R.id.newUserlName );
-        EditText editTextPhone = (EditText) findViewById(R.id.newUserPhone );
-        EditText editTextPhotoURL = (EditText) findViewById(R.id.newUserPhotoURL );
-        EditText editTextDisplayName = (EditText) findViewById(R.id.newUserDisplayName );
         radioGroup = (RadioGroup) findViewById(R.id.newUserRoleRadio );
 
         int selectedId = radioGroup.getCheckedRadioButtonId();
