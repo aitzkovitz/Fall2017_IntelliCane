@@ -35,6 +35,9 @@ import java.util.List;
  * Created by aaronitzkovitz on 11/11/17.
  */
 
+/*
+This class is used by admins to select and delete sessions.
+ */
 public class DeleteSessionActivity extends AppCompatActivity {
 
     private ListView sessionListView;

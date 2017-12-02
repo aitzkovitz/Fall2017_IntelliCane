@@ -34,6 +34,9 @@ import java.util.HashMap;
  * Created by aaronitzkovitz on 10/18/17.
  */
 
+/*
+This class is used to select users to edit.
+ */
 public class EditUserActivity extends AppCompatActivity{
 
     private EditText editTextEmailtoEdit;

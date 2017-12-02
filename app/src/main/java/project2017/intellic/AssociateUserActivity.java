@@ -24,6 +24,9 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 
+/*
+This class is used by admins to associate patients with therapists.
+ */
 public class AssociateUserActivity extends AppCompatActivity {
 
     private FirebaseDatabase database;

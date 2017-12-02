@@ -23,6 +23,10 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 
+
+/*
+This activity is used by admins to associate session data with patients.
+ */
 public class AssociateSessionActivity extends AppCompatActivity {
 
     private FirebaseDatabase database;

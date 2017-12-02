@@ -36,6 +36,9 @@ import bolts.Task;
  * Created by aaronitzkovitz on 10/14/17.
  */
 
+/*
+This class is used by new users to create an account from the login screen.
+ */
 public class NewUserSignupActivity extends AppCompatActivity {
 
     private EditText editTextEmail;

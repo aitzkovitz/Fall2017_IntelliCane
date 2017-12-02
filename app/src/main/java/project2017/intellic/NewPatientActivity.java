@@ -33,7 +33,9 @@ import java.util.regex.Pattern;
  * Created by aaronitzkovitz on 10/28/17.
  */
 
-// therapists are directed here to create their own patients
+/*
+This class is used by therapist users to create their own patients.
+ */
 public class NewPatientActivity extends AppCompatActivity {
 
     private FirebaseAuth firebaseAuth;

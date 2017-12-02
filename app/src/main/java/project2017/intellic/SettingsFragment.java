@@ -7,6 +7,7 @@ import android.preference.PreferenceFragment;
  * Created by aaronitzkovitz on 11/8/17.
  */
 
+// To Be Implemented: should be accesible offline
 public class SettingsFragment extends PreferenceFragment {
 
     @Override

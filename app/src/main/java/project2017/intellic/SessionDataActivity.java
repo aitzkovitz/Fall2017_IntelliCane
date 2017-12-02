@@ -52,6 +52,9 @@ import static java.lang.Math.PI;
 import static java.lang.Math.sqrt;
 import static java.lang.Math.toIntExact;
 
+/*
+This class is used for the data page, where selected sessions can be visualized.
+ */
 public class SessionDataActivity extends AppCompatActivity {
 
     private FirebaseDatabase database;

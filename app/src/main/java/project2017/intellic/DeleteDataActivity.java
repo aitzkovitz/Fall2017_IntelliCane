@@ -31,6 +31,9 @@ import java.util.Iterator;
  * Created by aaronitzkovitz on 10/28/17.
  */
 
+/*
+This class is used by admins to select a user whose sessions will be deleted.
+ */
 public class DeleteDataActivity extends AppCompatActivity {
     private FirebaseAuth firebaseAuth;
     private GoogleApiClient client;
@@ -94,8 +97,6 @@ public class DeleteDataActivity extends AppCompatActivity {
             @Override
             public void onTaskCompleted(JSONObject res, int code) {
                 try {
-                    Log.v("CODE RES", res.toString());
-                    Log.v("LISTENER", res.toString());
                     if (code != 200) {
                         Toast.makeText(DeleteDataActivity.this, res.getString("status"), Toast.LENGTH_SHORT).show();
                         return;
@@ -105,7 +106,6 @@ public class DeleteDataActivity extends AppCompatActivity {
 
                         while (keys.hasNext()) {
                             sessions.add((String) keys.next());
-                            //Log.v("DELETE TEST, SESSION: ", (String) keys.next());
                         }
 
                         Intent intent = new Intent(DeleteDataActivity.this, DeleteSessionActivity.class);

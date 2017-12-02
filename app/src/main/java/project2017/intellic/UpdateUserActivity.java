@@ -34,7 +34,9 @@ import java.util.regex.Pattern;
  */
 
 
-// TBI: add activity to manifest!
+/*
+   Class used by admins to edit users.
+ */
 public class UpdateUserActivity extends AppCompatActivity {
 
     // auth info

@@ -36,6 +36,10 @@ import javax.net.ssl.HttpsURLConnection;
  * Created by aaronitzkovitz on 10/13/17.
  */
 
+/*
+This class is used by all 6 admin activities to request and send data to the
+admin API endpoints hosted on Firebase (Cloud functions).
+ */
 public class AdminRequest extends
         AsyncTask<String, Void, Boolean> {
 

@@ -18,7 +18,9 @@ import android.widget.Toast;
 
 import com.google.firebase.auth.FirebaseAuth;
 
-
+/*
+This activity is shown when an admin logs in. Provides 6 different options.
+ */
 public class AdminActivity extends AppCompatActivity {
 
 

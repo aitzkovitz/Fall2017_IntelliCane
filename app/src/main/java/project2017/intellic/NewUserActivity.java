@@ -39,6 +39,9 @@ import org.json.JSONObject;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
+/*
+This class is used by admins to create users.
+ */
 public class NewUserActivity extends AppCompatActivity {
     private FirebaseAuth firebaseAuth;
     String uid = "";

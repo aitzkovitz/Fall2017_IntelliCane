@@ -38,7 +38,9 @@ import com.google.firebase.database.DatabaseError;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-
+/*
+First activity user is presented with after logging in.
+ */
 public class LoginActivity extends AppCompatActivity {
 
     private EditText editTextEmail;

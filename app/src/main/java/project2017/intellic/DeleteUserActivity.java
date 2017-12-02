@@ -37,8 +37,9 @@ import bolts.Task;
  * Created by aaronitzkovitz on 10/17/17.
  */
 
-// TBI: add to manifest!
-// used to delete users
+/*
+This class is used by admins to delete users. (Deletes them from auth and database)
+ */
 public class DeleteUserActivity extends AppCompatActivity {
 
     private EditText editTextEmail;

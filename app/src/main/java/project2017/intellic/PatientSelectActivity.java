@@ -25,7 +25,9 @@ import com.google.firebase.database.ValueEventListener;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
-
+/*
+This class is used by admins to select patients.
+ */
 public class PatientSelectActivity extends AppCompatActivity {
 
     private ListView patientListView;

@@ -25,7 +25,9 @@ import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
 import java.util.Map;
-
+/*
+This class is used by therapists to select a certain patients session data.
+ */
 public class SessionSelectActivity extends AppCompatActivity {
 
     private ListView sessionListView;
